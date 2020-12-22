@@ -4,7 +4,6 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 // Initalize Firebase.
-// These details will need to be replaced with the project specific env vars at the start of each new cohort.
 var firebaseConfig = {
   apiKey: "AIzaSyCJm5g2o5BWepS8NaomcE95w3r1isLuUyU",
   authDomain: "tcl-17-shopping-list.firebaseapp.com",
