@@ -18,42 +18,42 @@ Each week, the team of 4 developers will split into 2 pairs of 2 developers each
 
 Pairings will go as follows:
 
-#### Week 1, {start date - end date}
+#### Week 1, January 3 - 9
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+1. Brittany & Rachel
+2. Dee & Viet
 
-#### Week 2, {start date - end date}
+#### Week 2, January 10 - 16
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+1. Viet & Brittany
+2. Rachel & Dee
 
-#### Week 3, {start date - end date}
+#### Week 3, January 17 - 23
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+1. Dee & Brittany
+2. Rachel & Viet
 
-#### Week 4, {start date - end date}
+#### Week 4, January 24 - 30
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+1. Brittany & Rachel
+2. Dee & Viet
 
-#### Week 5, {start date - end date}
+#### Week 5, January 31 - February 6
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+1. Viet & Brittany
+2. Rachel & Dee
 
-#### Week 6, {start date - end date}
+#### Week 6, February 7 - 13
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+1. Dee & Brittany
+2. Rachel & Viet
 
-#### Week 7, {start date - end date}
+#### Week 7, February 14 - 20
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+1. Brittany & Rachel
+2. Dee & Viet
 
-#### Week 8, {start date - end date}
+#### Week 8, February 21 - 27
 
-1. {Name} & {Name}
-2. {Name} & {Name}
+1. Viet & Brittany
+2. Rachel & Dee
