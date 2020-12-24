@@ -4,4 +4,6 @@
 
 ## Mentors
 
+- [Lauren Beatty](https://github.com/laurenmbeatty) 🐶
+
 ## Code of Conduct Contacts
