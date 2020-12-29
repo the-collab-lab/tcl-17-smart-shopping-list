@@ -6,7 +6,6 @@
 - [Brittany Lindgren](https://github.com/LINDGRENBA) 🐳
 - [Dee Downs](https://github.com/DeeDowns) 👾
 - [Rachel Rohrbach](https://github.com/rachelrohrbach) 🐝
-- [Julia Undeutsch](https://github.com/saliainred) :bowtie:
 
 ## Mentors
 
