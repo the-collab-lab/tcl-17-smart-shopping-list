@@ -24,3 +24,7 @@ function App() {
 }
 
 export default App;
+
+// • The following have been added as project dependencies: firebase & react-firebase-hooks
+// • Make a change in the Firestore database and it shows up in the app
+// • Make a change in the app and it shows up in the Firestore database
