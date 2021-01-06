@@ -23,8 +23,7 @@ const Navigation = () => {
         onClick={toggleBold}
         style={{ fontWeight: listFontWeight }}
       >
-        {' '}
-        List{' '}
+        List
       </Link>
       <Link
         to="/add-item"
@@ -32,8 +31,7 @@ const Navigation = () => {
         onClick={toggleBold}
         style={{ fontWeight: addFontWeight }}
       >
-        {' '}
-        Add an Item{' '}
+        Add an Item
       </Link>
     </nav>
   );
