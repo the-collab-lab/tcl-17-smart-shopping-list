@@ -5,13 +5,11 @@ import Test from './components/Test';
 import Navigation from './components/Navigation';
 import AddItem from './components/AddItem';
 import List from './components/List';
+import Welcome from './components/Welcome';
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
-      <Test />
-
       <Switch>
         <Route path="/list">
           <List />
@@ -20,7 +18,14 @@ function App() {
         <Route path="/add-item">
           <AddItem />
         </Route>
+
+        <Route path="/">
+          <Welcome />
+        </Route>
       </Switch>
+
+      <Test />
+      <Navigation />
     </div>
   );
 }
