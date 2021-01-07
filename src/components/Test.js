@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { fb } from '../lib/firebase';
+import { db } from '../lib/firebase';
 
 const Test = () => {
-  const db = fb.firestore();
-
   const [tests, setTests] = useState([]);
 
   const handleClick = (event) => {
