@@ -28,7 +28,7 @@ const Test = () => {
   }, [db]);
 
   return (
-    <div>
+    <React.Fragment>
       <h1>Test</h1>
       <button type="button" onClick={handleClick}>
         Click Me!
@@ -38,7 +38,7 @@ const Test = () => {
           <li key={test.id}>{test.testMessage}</li>
         ))}
       </ul>
-    </div>
+    </React.Fragment>
   );
 };
 
