@@ -36,8 +36,7 @@ nav a {
   }
 }
 
-.list-link,
-.add-link {
-  background-color: grey;
+.active-link {
+  background-color: lightgrey;
   font-weight: bold;
 }
