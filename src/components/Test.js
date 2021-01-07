@@ -4,7 +4,7 @@ import { fb } from '../lib/firebase';
 const Test = () => {
   const db = fb.firestore();
 
-  const [test, setTest] = useState([]);
+  const [tests, setTests] = useState([]);
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -19,10 +19,9 @@ const Test = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      setTest(allTests);
+      setTests(allTests);
     });
     return () => {
-      console.log('cleanup');
       unsubscribe();
     };
   }, [db]);
@@ -34,7 +33,7 @@ const Test = () => {
         Click Me!
       </button>
       <ul>
-        {test.map((test) => (
+        {tests.map((test) => (
           <li key={test.id}>{test.testMessage}</li>
         ))}
       </ul>
