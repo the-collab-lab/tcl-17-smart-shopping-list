@@ -22,7 +22,7 @@ const Test = () => {
     return () => {
       unsubscribe();
     };
-  }, [db]);
+  }, []);
 
   return (
     <React.Fragment>
