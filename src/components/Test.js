@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { db } from '../lib/firebase';
 import useFirestore from '../hooks/useFirestore';
 
 const Test = () => {
-  // const [tests, setTests] = useState([]);
   const { docs } = useFirestore('tests');
 
   const handleClick = (event) => {
@@ -12,19 +11,6 @@ const Test = () => {
       testMessage: 'Hello World!',
     });
   };
-
-  // useEffect(() => {
-  //   const unsubscribe = db.collection('tests').onSnapshot((snapshot) => {
-  //     const allTests = snapshot.docs.map((doc) => ({
-  //       id: doc.id,
-  //       ...doc.data(),
-  //     }));
-  //     setTests(allTests);
-  //   });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
 
   return (
     <React.Fragment>
