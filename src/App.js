@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 import Navigation from './components/Navigation';
 import AddItem from './components/AddItem';
@@ -8,9 +8,12 @@ import Welcome from './components/Welcome';
 import getToken from './lib/tokens';
 
 function App() {
+  const [token, setToken] = useState('');
+
   const handleClick = () => {
     const token = getToken();
     localStorage.setItem('userToken', token);
+    setToken(token);
   };
 
   return (
@@ -25,7 +28,7 @@ function App() {
         </Route>
 
         <Route path="/">
-          <Welcome onClick={handleClick} />
+          {token ? <Redirect to="/list" /> : <Welcome onClick={handleClick} />}
         </Route>
       </Switch>
 
@@ -46,6 +49,6 @@ export default App;
 // AC:
 
 // For users who do not already have a token/list, a button or link exists on the home screen that allows them to create a new list X
-// Clicking the button/link generates a new token and saves it to localStorage
-// Once the token has been created and saved, the user is redirected to the "list" view
+// Clicking the button/link generates a new token and saves it to localStorage X
+// Once the token has been created and saved, the user is redirected to the "list" view X
 // For users who do have a token already saved in localStorage, they should be shown/redirected to the "list" view
