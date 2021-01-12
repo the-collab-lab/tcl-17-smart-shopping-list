@@ -5,8 +5,14 @@ import Navigation from './components/Navigation';
 import AddItem from './components/AddItem';
 import List from './components/List';
 import Welcome from './components/Welcome';
+import getToken from './lib/tokens';
 
 function App() {
+  const handleClick = () => {
+    const token = getToken();
+    localStorage.setItem('userToken', token);
+  };
+
   return (
     <div className="App">
       <Switch>
@@ -19,7 +25,7 @@ function App() {
         </Route>
 
         <Route path="/">
-          <Welcome />
+          <Welcome onClick={handleClick} />
         </Route>
       </Switch>
 

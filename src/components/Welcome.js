@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Welcome = () => {
+const Welcome = (props) => {
   return (
     <div>
       <h1>Welcome</h1>
-      <button>Create a New List</button>
+      <button onClick={props.onClick}>Create a New List</button>
     </div>
   );
 };
