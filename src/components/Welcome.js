@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Welcome = (props) => {
-  /* De-structure props */
-  const { onClick } = props;
+const Welcome = ({ onClick }) => {
   return (
     <div>
       <h1>Welcome</h1>
