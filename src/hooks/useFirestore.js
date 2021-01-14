@@ -18,7 +18,7 @@ const useFirestore = (collection) => {
         unsubscribe();
       };
     });
-  }, [collection]);
+  }, [collection, docs.length]);
   return { docs };
 };
 
