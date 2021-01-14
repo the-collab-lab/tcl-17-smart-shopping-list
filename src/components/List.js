@@ -3,7 +3,6 @@ import useFirestore from '../hooks/useFirestore';
 
 const List = () => {
   const { docs } = useFirestore('user token');
-  console.log(docs);
   return (
     <div>
       <h1>List</h1>
