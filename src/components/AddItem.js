@@ -12,6 +12,8 @@ const AddItem = () => {
   const token = 'user token';
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormState);
+  const [error, setError] = useState('');
+  console.log(error);
 
   const handleFormChange = (event) => {
     event.preventDefault();
@@ -23,9 +25,14 @@ const AddItem = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    db.collection(token).add(formData);
-    history.push('/list');
-    setFormData(initialFormState);
+    if (!formData.itemName) {
+      setError(`${event.target.name} field cannot be empty`);
+    } else {
+      db.collection(token).add(formData);
+      history.push('/list');
+      setFormData(initialFormState);
+      setError('');
+    }
   };
 
   return (
@@ -42,6 +49,7 @@ const AddItem = () => {
             value={formData.itemName}
             onChange={handleFormChange}
           />
+          {error && <span>{error}</span>}
         </label>
 
         <fieldset className="fieldset">
