@@ -6,8 +6,6 @@ import AddItem from './components/AddItem';
 import List from './components/List';
 import Welcome from './components/Welcome';
 import getToken from './lib/tokens';
-// import TestWelcome from './components/TestWelcome';
-// import CreateNewList from './components/CreateNewList';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken') || '');
@@ -21,16 +19,19 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/list">{token ? <List /> : <Redirect to="/" />}</Route>
+        <Route path="/list">
+          {/* Go to list view if token exists otherwise redirected to home */}
+          {token ? <List /> : <Redirect to="/" />}
+        </Route>
 
         <Route path="/add-item">
+          {/* Go to add item view if token exists otherwise redirected to home */}
           {token ? <AddItem /> : <Redirect to="/" />}
         </Route>
 
         <Route path="/">
+          {/* Redirect to list view if token exists otherwise render Welcome */}
           {token ? <Redirect to="/list" /> : <Welcome onClick={handleClick} />}
-          {/* <TestWelcome />
-          {token ? <Redirect to="/list" /> : <CreateNewList onClick={handleClick} />} */}
         </Route>
       </Switch>
 

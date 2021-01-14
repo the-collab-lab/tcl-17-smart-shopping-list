@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Welcome = (props) => {
+  /* De-structure props */
   const { onClick } = props;
   return (
     <div>
@@ -10,7 +11,7 @@ const Welcome = (props) => {
     </div>
   );
 };
-
+/* Checks that onClick is a function and is required as a prop */
 Welcome.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
