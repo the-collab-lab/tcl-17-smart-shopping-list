@@ -1,8 +1,8 @@
 import React from 'react';
 import useFirestore from '../hooks/useFirestore';
 
-const List = () => {
-  const { docs } = useFirestore('user token');
+const List = ({ token }) => {
+  const { docs } = useFirestore(token);
   return (
     <div>
       <h1>List</h1>
