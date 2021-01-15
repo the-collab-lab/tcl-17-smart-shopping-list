@@ -42,7 +42,7 @@ const AddItem = ({ token }) => {
             type="text"
             placeholder="add your item here"
             name="itemName"
-            required={true}
+            required
             value={formData.itemName}
             onChange={handleFormChange}
           />
