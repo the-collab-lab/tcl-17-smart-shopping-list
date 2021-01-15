@@ -8,6 +8,7 @@ import List from './components/List';
 import Welcome from './components/Welcome';
 
 function App() {
+  const token = 'user token';
   return (
     <div className="App">
       <Switch>
@@ -16,7 +17,7 @@ function App() {
         </Route>
 
         <Route path="/add-item">
-          <AddItem />
+          <AddItem token={token} />
         </Route>
 
         <Route path="/">
@@ -24,7 +25,7 @@ function App() {
         </Route>
       </Switch>
 
-      <Test />
+      {/* <Test /> */}
       <Navigation />
     </div>
   );
