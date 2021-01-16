@@ -21,12 +21,12 @@ function App() {
       <Switch>
         <Route path="/list">
           {/* Go to list view if token exists otherwise redirected to home */}
-          {token ? <List /> : <Redirect to="/" />}
+          {token ? <List token={token} /> : <Redirect to="/" />}
         </Route>
 
         <Route path="/add-item">
           {/* Go to add item view if token exists otherwise redirected to home */}
-          {token ? <AddItem /> : <Redirect to="/" />}
+          {token ? <AddItem token={token} /> : <Redirect to="/" />}
         </Route>
 
         <Route path="/">

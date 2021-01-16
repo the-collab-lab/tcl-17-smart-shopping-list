@@ -11,11 +11,12 @@ const useFirestore = (collection) => {
         documents.push({ ...doc.data(), id: doc.id });
       });
       setDocs(documents);
-      return () => {
-        unsubscribe();
-      };
     });
+    return () => {
+      unsubscribe();
+    };
   }, [collection]);
+
   return { docs };
 };
 
