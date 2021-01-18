@@ -88,3 +88,9 @@ const AddItem = ({ token }) => {
 };
 
 export default AddItem;
+
+// As a user, I want to be alerted when I’m entering an item that is the same as something already on my list so I can avoid duplicate items.
+// AC:
+// Show an error message if the user tries to submit a new item that has the exact same name as an existing item
+// Show an error message if the user tries to submit a new item that has the same name as an existing item, where capitalization has been normalized and punctuation has been removed
+// The user’s original input should be what gets saved in the database
