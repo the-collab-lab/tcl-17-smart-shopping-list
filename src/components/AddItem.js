@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
+import Duplicate from './Duplicate';
 
 const initialFormState = {
   itemName: '',
@@ -11,6 +12,7 @@ const initialFormState = {
 const AddItem = ({ token }) => {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormState);
+  const [hidden, setHidden] = useState(false);
 
   const handleFormChange = (event) => {
     event.target.type === 'radio'
@@ -24,8 +26,24 @@ const AddItem = ({ token }) => {
         });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const itemNameInput = formData.itemName;
+
+    // check to see if the itemName already exists in the user's list - convert input to lowercase and remove any punctuation & white space
+    const cleanInput = itemNameInput.toLowerCase().replace(/[^\w\s]|/g, '');
+
+    // query the collection and filter for match - if match exists send the user an error message "this item already exists in your list..." & don't allow them to submit it
+    const queryCollection = db.collection(token);
+    const snapshot = await queryCollection
+      .where('itemName', '==', cleanInput)
+      .get();
+    if (!snapshot.empty) {
+      setHidden(true);
+      return;
+    }
+
+    // else add the user's inputted item to the database
     db.collection(token).add(formData);
     setFormData(initialFormState);
     history.push('/list');
@@ -46,6 +64,7 @@ const AddItem = ({ token }) => {
             value={formData.itemName}
             onChange={handleFormChange}
           />
+          {hidden ? <Duplicate /> : ''}
         </label>
 
         <fieldset className="fieldset">
@@ -88,9 +107,3 @@ const AddItem = ({ token }) => {
 };
 
 export default AddItem;
-
-// As a user, I want to be alerted when I’m entering an item that is the same as something already on my list so I can avoid duplicate items.
-// AC:
-// Show an error message if the user tries to submit a new item that has the exact same name as an existing item
-// Show an error message if the user tries to submit a new item that has the same name as an existing item, where capitalization has been normalized and punctuation has been removed
-// The user’s original input should be what gets saved in the database
