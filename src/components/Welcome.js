@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TokenForm from './TokenForm';
 
 const Welcome = ({ onClick }) => {
   return (
     <div>
       <h1>Welcome</h1>
       <button onClick={onClick}>Create a New List</button>
+      <TokenForm />
     </div>
   );
 };
