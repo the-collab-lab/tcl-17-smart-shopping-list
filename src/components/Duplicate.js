@@ -3,7 +3,9 @@ import React from 'react';
 const Duplicate = () => {
   return (
     <div>
-      <p style={{ color: 'red' }}>That item is already in your list</p>
+      <p style={{ color: 'red' }}>
+        ❌ <b>That item is already in your list</b>
+      </p>
     </div>
   );
 };
