@@ -35,7 +35,11 @@ function App() {
 
         <Route path="/">
           {/* Redirect to list view if token exists otherwise render Welcome */}
-          {token ? <Redirect to="/list" /> : <Welcome onClick={handleClick} />}
+          {token ? (
+            <Redirect to="/list" />
+          ) : (
+            <Welcome onClick={handleClick} setToken={setToken} />
+          )}
         </Route>
       </Switch>
 
