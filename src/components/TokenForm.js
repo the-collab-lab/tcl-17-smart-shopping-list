@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import Error from './Error';
 
-const TokenForm = () => {
+const TokenForm = ({ setToken }) => {
   const [tokenInput, setTokenInput] = useState('');
   const [hidden, setHidden] = useState(true);
-  const history = useHistory();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -15,14 +13,11 @@ const TokenForm = () => {
       .where('tokenName', '==', tokenInput)
       .get();
     if (tokenWeAreCheckingFor.empty) {
-      console.log('no token');
       setHidden(false);
-      // error message
     } else {
-      console.log('you found it ', tokenWeAreCheckingFor);
       localStorage.setItem('userToken', tokenInput);
       setHidden(true);
-      // history.push('/list')
+      setToken(tokenInput);
     }
   };
 
