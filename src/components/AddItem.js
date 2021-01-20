@@ -5,6 +5,7 @@ import Duplicate from './Duplicate';
 
 const initialFormState = {
   itemName: '',
+  cleanedUpItemName: '',
   timeFrame: 7,
   lastPurchased: null,
 };
@@ -36,15 +37,17 @@ const AddItem = ({ token }) => {
     // query the collection and filter for match - if match exists send the user an error message "this item already exists in your list..." & don't allow them to submit it
     const queryCollection = db.collection(token);
     const snapshot = await queryCollection
-      .where('itemName', '==', cleanInput)
+      .where('cleanedUpItemName', '==', cleanInput)
       .get();
     if (!snapshot.empty) {
       setHidden(true);
       return;
     }
-
     // else add the user's inputted item to the database
-    db.collection(token).add(formData);
+    db.collection(token).add({
+      ...formData,
+      cleanedUpItemName: cleanInput,
+    });
     setFormData(initialFormState);
     history.push('/list');
   };
