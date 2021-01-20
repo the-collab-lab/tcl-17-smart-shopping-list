@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
-import Duplicate from './Duplicate';
+import Error from './Error';
 
 const initialFormState = {
   itemName: '',
@@ -32,7 +32,7 @@ const AddItem = ({ token }) => {
     const itemNameInput = formData.itemName;
 
     // check to see if the itemName already exists in the user's list - convert input to lowercase and remove any punctuation & white space
-    const cleanInput = itemNameInput.toLowerCase().replace(/[^\w\s]|/g, '');
+    const cleanInput = itemNameInput.toLowerCase().replace(/^[\w\s]|/g, '');
 
     // query the collection and filter for match - if match exists send the user an error message "this item already exists in your list..." & don't allow them to submit it
     const queryCollection = db.collection(token);
@@ -67,7 +67,9 @@ const AddItem = ({ token }) => {
             value={formData.itemName}
             onChange={handleFormChange}
           />
-          {hidden ? <Duplicate /> : ''}
+          {hidden ? (
+            <Error errorMessage="That item is already in your list" />
+          ) : null}
         </label>
 
         <fieldset className="fieldset">
