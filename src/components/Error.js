@@ -4,7 +4,10 @@ const Error = ({ errorMessage }) => {
   return (
     <div>
       <p style={{ color: 'red' }}>
-        ❌ <b>{errorMessage}</b>
+        <span role="img" aria-label="red X">
+          ❌
+        </span>{' '}
+        <b>{errorMessage}</b>
       </p>
     </div>
   );
