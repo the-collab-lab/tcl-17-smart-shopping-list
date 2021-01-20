@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../lib/firebase';
+import Error from './Error';
 
 const TokenForm = () => {
   const [tokenInput, setTokenInput] = useState('');
+  const [hidden, setHidden] = useState(true);
   const history = useHistory();
 
   const handleFormSubmit = async (event) => {
@@ -15,10 +16,12 @@ const TokenForm = () => {
       .get();
     if (tokenWeAreCheckingFor.empty) {
       console.log('no token');
+      setHidden(false);
       // error message
     } else {
       console.log('you found it ', tokenWeAreCheckingFor);
       localStorage.setItem('userToken', tokenInput);
+      setHidden(true);
       // history.push('/list')
     }
   };
@@ -43,6 +46,11 @@ const TokenForm = () => {
           </label>
           <button type="submit">Join an existing list</button>
         </form>
+        {hidden ? (
+          ''
+        ) : (
+          <Error errorMessage="Hmmm... we couldn't find that list. Please try again or create a new list." />
+        )}
       </div>
     </React.Fragment>
   );
