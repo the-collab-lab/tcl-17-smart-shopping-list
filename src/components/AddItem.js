@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
+import Error from './Error';
 
 const initialFormState = {
   itemName: '',
+  cleanedUpItemName: '',
   timeFrame: 7,
   lastPurchased: null,
 };
@@ -11,6 +13,7 @@ const initialFormState = {
 const AddItem = ({ token }) => {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormState);
+  const [hidden, setHidden] = useState(false);
 
   const handleFormChange = (event) => {
     event.target.type === 'radio'
@@ -24,9 +27,27 @@ const AddItem = ({ token }) => {
         });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    db.collection(token).add(formData);
+    const itemNameInput = formData.itemName;
+
+    // check to see if the itemName already exists in the user's list - convert input to lowercase and remove any punctuation & white space
+    const cleanInput = itemNameInput.toLowerCase().replace(/[\W_]*|/g, '');
+
+    // query the collection and filter for match - if match exists send the user an error message "this item already exists in your list..." & don't allow them to submit it
+    const queryCollection = db.collection(token);
+    const snapshot = await queryCollection
+      .where('cleanedUpItemName', '==', cleanInput)
+      .get();
+    if (!snapshot.empty) {
+      setHidden(true);
+      return;
+    }
+    // else add the user's inputted item to the database
+    db.collection(token).add({
+      ...formData,
+      cleanedUpItemName: cleanInput,
+    });
     setFormData(initialFormState);
     history.push('/list');
   };
@@ -46,6 +67,9 @@ const AddItem = ({ token }) => {
             value={formData.itemName}
             onChange={handleFormChange}
           />
+          {hidden ? (
+            <Error errorMessage="That item is already in your list" />
+          ) : null}
         </label>
 
         <fieldset className="fieldset">
