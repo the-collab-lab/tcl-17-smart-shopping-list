@@ -4,7 +4,7 @@ import Error from './Error';
 
 const TokenForm = ({ setToken }) => {
   const [tokenInput, setTokenInput] = useState('');
-  const [hidden, setHidden] = useState(true);
+  const [error, setError] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -13,10 +13,10 @@ const TokenForm = ({ setToken }) => {
       .where('tokenName', '==', tokenInput)
       .get();
     if (tokenWeAreCheckingFor.empty) {
-      setHidden(false);
+      setError(true);
     } else {
       localStorage.setItem('userToken', tokenInput);
-      setHidden(true);
+      setError(false);
       setToken(tokenInput);
     }
   };
@@ -35,15 +35,14 @@ const TokenForm = ({ setToken }) => {
               value={tokenInput}
               onChange={(event) => {
                 setTokenInput(event.target.value);
+                setError(false);
               }}
               required
             />
           </label>
           <button type="submit">Join an existing list</button>
         </form>
-        {hidden ? (
-          ''
-        ) : (
+        {error && (
           <Error errorMessage="Hmmm... we couldn't find that list. Please try again or create a new list." />
         )}
       </div>
