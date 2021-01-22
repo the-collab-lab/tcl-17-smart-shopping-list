@@ -16,6 +16,7 @@ const AddItem = ({ token }) => {
   const [error, setError] = useState(false);
 
   const handleFormChange = (event) => {
+    setError(false);
     event.target.type === 'radio'
       ? setFormData({
           ...formData,
@@ -29,6 +30,7 @@ const AddItem = ({ token }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError(false);
     const itemNameInput = formData.itemName;
 
     // check to see if the itemName already exists in the user's list - convert input to lowercase and remove any punctuation & white space
