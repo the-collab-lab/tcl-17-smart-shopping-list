@@ -6,6 +6,7 @@ import AddItem from './components/AddItem';
 import List from './components/List';
 import Welcome from './components/Welcome';
 import getToken from './lib/tokens';
+import { db } from './lib/firebase';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken') || '');
@@ -13,6 +14,9 @@ function App() {
   const handleClick = () => {
     const token = getToken();
     localStorage.setItem('userToken', token);
+    db.collection('userTokens').add({
+      tokenName: token,
+    });
     setToken(token);
   };
 
@@ -31,7 +35,11 @@ function App() {
 
         <Route path="/">
           {/* Redirect to list view if token exists otherwise render Welcome */}
-          {token ? <Redirect to="/list" /> : <Welcome onClick={handleClick} />}
+          {token ? (
+            <Redirect to="/list" />
+          ) : (
+            <Welcome onClick={handleClick} setToken={setToken} />
+          )}
         </Route>
       </Switch>
 
