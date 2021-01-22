@@ -10,7 +10,7 @@ const initialFormState = {
   lastPurchased: null,
 };
 
-const AddItem = ({ token }) => {
+const AddItem = ({ token, props }) => {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormState);
   const [error, setError] = useState(false);
@@ -26,6 +26,14 @@ const AddItem = ({ token }) => {
           ...formData,
           [event.target.name]: event.target.value,
         });
+  };
+
+  const handleClick = (event) => {
+    setFormData({
+      [event.target.name]: event.target.value,
+    });
+    setError(false);
+    setFormData(initialFormState);
   };
 
   const handleSubmit = async (event) => {
@@ -68,6 +76,7 @@ const AddItem = ({ token }) => {
             required
             value={formData.itemName}
             onChange={handleFormChange}
+            onClick={handleClick}
           />
           {error && <Error errorMessage="That item is already in your list" />}
         </label>
