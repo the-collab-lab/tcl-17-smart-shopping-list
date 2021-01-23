@@ -10,7 +10,7 @@ const initialFormState = {
   lastPurchased: null,
 };
 
-const AddItem = ({ token, props }) => {
+const AddItem = ({ token }) => {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormState);
   const [error, setError] = useState(false);
