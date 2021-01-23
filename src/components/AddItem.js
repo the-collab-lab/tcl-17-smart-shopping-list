@@ -28,17 +28,8 @@ const AddItem = ({ token, props }) => {
         });
   };
 
-  const handleClick = (event) => {
-    setFormData({
-      [event.target.name]: event.target.value,
-    });
-    setError(false);
-    setFormData(initialFormState);
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(false);
     const itemNameInput = formData.itemName;
 
     // check to see if the itemName already exists in the user's list - convert input to lowercase and remove any punctuation & white space
@@ -76,7 +67,6 @@ const AddItem = ({ token, props }) => {
             required
             value={formData.itemName}
             onChange={handleFormChange}
-            onClick={handleClick}
           />
           {error && <Error errorMessage="That item is already in your list" />}
         </label>
