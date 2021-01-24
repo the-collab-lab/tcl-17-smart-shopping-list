@@ -13,9 +13,10 @@ const initialFormState = {
 const AddItem = ({ token }) => {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormState);
-  const [hidden, setHidden] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleFormChange = (event) => {
+    setError(false);
     event.target.type === 'radio'
       ? setFormData({
           ...formData,
@@ -40,7 +41,7 @@ const AddItem = ({ token }) => {
       .where('cleanedUpItemName', '==', cleanInput)
       .get();
     if (!snapshot.empty) {
-      setHidden(true);
+      setError(true);
       return;
     }
     // else add the user's inputted item to the database
@@ -67,9 +68,7 @@ const AddItem = ({ token }) => {
             value={formData.itemName}
             onChange={handleFormChange}
           />
-          {hidden ? (
-            <Error errorMessage="That item is already in your list" />
-          ) : null}
+          {error && <Error errorMessage="That item is already in your list" />}
         </label>
 
         <fieldset className="fieldset">
