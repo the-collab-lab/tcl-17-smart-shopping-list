@@ -12,3 +12,7 @@ const List = ({ token }) => {
 };
 
 export default List;
+
+//Issue 7 AC:
+// The list view, when there are no items to display, should show a prompt (e.g., a button) for the user to add their first item
+// When the user clicks on the add item Button, they should be routed to the Add Item page.
