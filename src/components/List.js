@@ -9,7 +9,6 @@ const List = ({ token }) => {
   return (
     <div>
       <h1>List</h1>
-      {/* check if list is empty - if empty display propmt, else show user's list */}
       {docs.length === 0 && (
         <button onClick={() => history.push('/add-item')}>Add an Item</button>
       )}
