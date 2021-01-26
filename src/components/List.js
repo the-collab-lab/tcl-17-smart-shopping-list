@@ -1,11 +1,18 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import useFirestore from '../hooks/useFirestore';
 
 const List = ({ token }) => {
   const { docs } = useFirestore(token);
+  const history = useHistory();
+
   return (
     <div>
       <h1>List</h1>
+      {/* check if list is empty - if empty display propmt, else show user's list */}
+      {docs.length === 0 && (
+        <button onClick={() => history.push('/add-item')}>Add an Item</button>
+      )}
       <ul>{docs && docs.map((doc) => <li key={doc.id}>{doc.itemName}</li>)}</ul>
     </div>
   );
