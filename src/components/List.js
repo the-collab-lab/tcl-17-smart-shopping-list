@@ -9,9 +9,11 @@ const List = ({ token }) => {
   return (
     <div>
       <h1>List</h1>
-      {docs.length === 0 && <p>Your shopping list is currently empty.</p>}
       {docs.length === 0 && (
-        <button onClick={() => history.push('/add-item')}>Add an Item</button>
+        <div>
+          <p>Your shopping list is currently empty.</p>
+          <button onClick={() => history.push('/add-item')}>Add an Item</button>
+        </div>
       )}
       <ul>{docs && docs.map((doc) => <li key={doc.id}>{doc.itemName}</li>)}</ul>
     </div>
