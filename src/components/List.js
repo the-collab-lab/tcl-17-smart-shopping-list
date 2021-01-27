@@ -7,15 +7,13 @@ const List = ({ token }) => {
   const handleCheckbox = async (event) => {
     const currentDate = new Date();
     const nextDay = new Date();
-    // localStorage.nextDay = nextDay.setDate(nextDay.getDate() + 1)
-    console.log(event.target);
-    const queryCollection = await db
-      .collection(token)
-      .doc(event.target.id)
-      .get();
-    // const snapshot = await queryCollection.get()
-    queryCollection.data();
-    console.log(queryCollection.data());
+    // nextDay.setDate(nextDay.getDate() + 1)
+    // console.log(event.target);
+    const queryCollection = await db.collection(token).doc(event.target.id);
+    queryCollection.update({
+      lastPurchased: currentDate,
+      nextDay: nextDay,
+    });
   };
   return (
     <div>
