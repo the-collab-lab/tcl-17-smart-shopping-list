@@ -1,36 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
 
 const List = ({ token }) => {
   const { docs } = useFirestore(token);
-  const [checked, setChecked] = useState();
-  // console.log(checked)
+  const checkPurchasedDate = (purchasedDate) => {
+    const today = new Date();
+    // If today < purchased date, returns false to uncheck the box
+    let daySincePurchased = purchasedDate.toDate();
+    // Add one day to the last purchased date
+    // console.log(daySincePurchased);
+    daySincePurchased.setDate(daySincePurchased.getDate() + 1);
+    console.log(daySincePurchased);
+    // nextDay.setDate(testDate.getDate() + 1);
+    // console.log("Today", today.toString());
+    // console.log("Purchased Date", purchasedDate.toDate());
+    // console.log("Puchased date + 1 day", nextDay);
+    // console.log(Date.parse(today.toString()) >= Date.parse(daySincePurchased.toDate()))
+    // If today > daySincePurchased at least 24 hours have passed, return false to uncheck box
+    if (
+      Date.parse(today.toString()) >= Date.parse(daySincePurchased.toString())
+    ) {
+      return false;
+    } else {
+      return true;
+    }
 
-  const isChecked = async (id) => {
-    const queryCollection = await db.collection(token).doc(id).get();
-    const nextDay = new Date();
-    if (queryCollection.data().lastPurchased !== null) {
-      const lastPurchased = queryCollection.data().lastPurchased.toDate();
-      nextDay.setDate(lastPurchased.getDate() + 1);
-    }
-    const now = new Date();
-    if (now > nextDay) {
-      console.log('More than 24 hours have passed');
-      setChecked(false);
-    }
-    console.log('Less than 24 hours have passed');
+    // return Date.parse(today.toString()) < Date.parse(purchasedDate.toDate())
+    // nextDay.setDate(lastPurchased.getDate() + 1);
+    // console.log(today.getDate() - purchasedDate <= 1)
   };
 
   const handleCheckbox = async (event) => {
     const currentDate = new Date();
-    const nextDay = new Date();
     const queryCollection = await db.collection(token).doc(event.target.id);
     queryCollection.update({
       lastPurchased: currentDate,
     });
-    // setChecked(true)
-    // isChecked(event.target.id)
   };
   return (
     <div>
@@ -43,9 +49,8 @@ const List = ({ token }) => {
                 type="checkbox"
                 name={doc.itemName}
                 id={doc.id}
-                onClick={handleCheckbox}
-                // onChange={isChecked(doc.id)}
-                // checked={checked}
+                onChange={handleCheckbox}
+                checked={checkPurchasedDate(doc.lastPurchased)}
               />
               {doc.itemName}
             </li>
