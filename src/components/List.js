@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
 
 const List = ({ token }) => {
   const { docs } = useFirestore(token);
+
   const checkPurchasedDate = (purchasedDate) => {
+    if (purchasedDate === null) {
+      return false;
+    }
     const today = new Date();
     let daySincePurchased = purchasedDate.toDate();
-    // console.log(daySincePurchased);
+
     daySincePurchased.setDate(daySincePurchased.getDate() + 1); // Add one day to the last purchased date
-    console.log(daySincePurchased);
-    // nextDay.setDate(testDate.getDate() + 1);
-    // console.log("Today", today.toString());
-    // console.log("Purchased Date", purchasedDate.toDate());
-    // console.log("Puchased date + 1 day", nextDay);
-    // console.log(Date.parse(today.toString()) >= Date.parse(daySincePurchased.toDate()))
 
     // If today > daySincePurchased at least 24 hours have passed, return false to uncheck box
     if (
@@ -24,10 +22,6 @@ const List = ({ token }) => {
     } else {
       return true;
     }
-
-    // return Date.parse(today.toString()) < Date.parse(purchasedDate.toDate())
-    // nextDay.setDate(lastPurchased.getDate() + 1);
-    // console.log(today.getDate() - purchasedDate <= 1)
   };
 
   const handleCheckbox = async (event) => {
