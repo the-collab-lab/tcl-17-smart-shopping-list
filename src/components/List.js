@@ -10,10 +10,10 @@ const List = ({ token }) => {
     <div>
       <h1>List</h1>
       {docs.length === 0 && (
-        <div>
+        <section>
           <p>Your shopping list is currently empty.</p>
           <button onClick={() => history.push('/add-item')}>Add an Item</button>
-        </div>
+        </section>
       )}
       <ul>{docs && docs.map((doc) => <li key={doc.id}>{doc.itemName}</li>)}</ul>
     </div>
@@ -21,7 +21,3 @@ const List = ({ token }) => {
 };
 
 export default List;
-
-//Issue 7 AC:
-// The list view, when there are no items to display, should show a prompt (e.g., a button) for the user to add their first item
-// When the user clicks on the add item Button, they should be routed to the Add Item page.
