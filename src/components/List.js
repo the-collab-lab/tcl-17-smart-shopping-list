@@ -8,10 +8,10 @@ const List = ({ token }) => {
     <div>
       <h1>List</h1>
       {docs.length === 0 && (
-        <div>
+        <section>
           <p>Your shopping list is currently empty.</p>
           <a href="/add-item">Add an Item</a>
-        </div>
+        </section>
       )}
       <ul>{docs && docs.map((doc) => <li key={doc.id}>{doc.itemName}</li>)}</ul>
     </div>
