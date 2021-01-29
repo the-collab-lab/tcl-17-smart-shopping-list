@@ -13,7 +13,13 @@ const List = ({ token }) => {
           <a href="/add-item">Add an Item</a>
         </section>
       )}
-      <ul>{docs && docs.map((doc) => <li key={doc.id}>{doc.itemName}</li>)}</ul>
+      <ul>
+        {docs ? (
+          docs.map((doc) => <li key={doc.id}>{doc.itemName}</li>)
+        ) : (
+          <li>Loading...</li>
+        )}
+      </ul>
     </div>
   );
 };
