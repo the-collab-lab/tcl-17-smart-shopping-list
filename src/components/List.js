@@ -14,7 +14,7 @@ const List = ({ token }) => {
         </section>
       )}
       <ul>{docs && docs.map((doc) => <li key={doc.id}>{doc.itemName}</li>)}</ul>
-      {loading && <h1>Loading...</h1>}
+      {loading && <h3>Loading...</h3>}
     </div>
   );
 };
