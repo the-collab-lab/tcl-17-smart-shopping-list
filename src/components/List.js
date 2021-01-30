@@ -10,18 +10,16 @@ const List = ({ token }) => {
       return false;
     }
     const today = new Date();
-    let daySincePurchased = purchasedDate.toDate();
+    const daySincePurchased = purchasedDate.toDate();
 
     daySincePurchased.setDate(daySincePurchased.getDate() + 1); // Add one day to the last purchased date
 
     // If today > daySincePurchased at least 24 hours have passed, return false to uncheck box
-    if (
-      Date.parse(today.toString()) >= Date.parse(daySincePurchased.toString())
-    ) {
+    if (today >= daySincePurchased) {
       return false;
-    } else {
-      return true;
     }
+
+    return true;
   };
 
   const handleCheckbox = async (event) => {
