@@ -11,21 +11,12 @@ const List = ({ token }) => {
     }
     // changed to using Date.now(), time given in milliseconds
     const today = Date.now();
-    /* Passing today as milliseconds to new Date(), gives us a readable date format
-       Console logging so we can see this is the case */
-    console.log(new Date(today));
     // 24 hours in milliseconds
     const addOneDay = 86400000;
-    // Set to 5 seconds after purchase for testing, should read purchasedDate + addOneDay
-    const oneDayAfterPurchase = purchasedDate + 5000;
-
-    // The line below is no longer necessary
-    // daySincePurchased.setDate(daySincePurchased.getDate() + 1); // Add one day to the last purchased date
+    // Add 24 hours to purchased
+    const oneDayAfterPurchase = purchasedDate + addOneDay;
 
     // If today > oneDayAfterPurchase at least 24 hours have passed, return false to uncheck box
-    /* I simplified the condition after Chris pointed out that both were Date objects
-    and we didn't need the toString. I then figured we didn't need Date.parse since
-    we're working with Date objects */
     if (today >= oneDayAfterPurchase) {
       return false;
     }
