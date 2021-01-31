@@ -1,9 +1,10 @@
 import React from 'react';
 import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
+import Error from './Error';
 
 const List = ({ token }) => {
-  const { docs } = useFirestore(token);
+  const { docs, errorMessage } = useFirestore(token);
 
   const checkPurchasedDate = (purchasedDate) => {
     if (purchasedDate === null) {
@@ -34,6 +35,16 @@ const List = ({ token }) => {
   return (
     <div>
       <h1>List</h1>
+
+      {docs.length === 0 && (
+        <section>
+          <p>Your shopping list is currently empty.</p>
+          <a href="/add-item">Add an Item</a>
+        </section>
+      )}
+
+      {errorMessage && <Error errorMessage={errorMessage} />}
+
       <ul style={{ listStyleType: 'none' }}>
         {docs &&
           docs.map((doc) => (
