@@ -17,7 +17,6 @@ const useFirestore = (collection) => {
         setDocs(documents);
       });
     } catch (error) {
-      console.log(error);
       setErrorMessage(error);
     }
 
