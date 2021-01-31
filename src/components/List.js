@@ -2,7 +2,7 @@ import React from 'react';
 import useFirestore from '../hooks/useFirestore';
 
 const List = ({ token }) => {
-  const { docs, loading } = useFirestore(token);
+  const { docs } = useFirestore(token);
 
   return (
     <div>
@@ -14,7 +14,6 @@ const List = ({ token }) => {
         </section>
       )}
       <ul>{docs && docs.map((doc) => <li key={doc.id}>{doc.itemName}</li>)}</ul>
-      {loading && <h3>Loading...</h3>}
     </div>
   );
 };
