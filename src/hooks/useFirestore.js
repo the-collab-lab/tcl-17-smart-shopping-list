@@ -3,24 +3,27 @@ import { db } from '../lib/firebase';
 
 const useFirestore = (collection) => {
   const [docs, setDocs] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = db.collection(collection).onSnapshot((snapshot) => {
-      let documents = [];
-      snapshot.forEach((doc) => {
-        documents.push({ ...doc.data(), id: doc.id });
+    let unsubscribe;
+    try {
+      unsubscribe = db.collection(collection).onSnapshot((snapshot) => {
+        let documents = [];
+        snapshot.forEach((doc) => {
+          documents.push({ ...doc.data(), id: doc.id });
+        });
+        setDocs(documents);
       });
-      setLoading(true);
-      setDocs(documents);
-      setLoading(false);
-    });
+    } catch (error) {
+      console.log(error);
+    }
+
     return () => {
       unsubscribe();
     };
   }, [collection]);
 
-  return { docs, loading };
+  return { docs };
 };
 
 export default useFirestore;
