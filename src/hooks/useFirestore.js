@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { db } from '../lib/firebase';
+//todo - add Loading screen
 
 const useFirestore = (collection) => {
   const [docs, setDocs] = useState([]);
