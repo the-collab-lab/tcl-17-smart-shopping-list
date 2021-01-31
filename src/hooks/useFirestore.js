@@ -3,6 +3,9 @@ import { db } from '../lib/firebase';
 
 const useFirestore = (collection) => {
   const [docs, setDocs] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(
+    "Something's terribly wrong!",
+  );
 
   useEffect(() => {
     let unsubscribe;
@@ -15,7 +18,7 @@ const useFirestore = (collection) => {
         setDocs(documents);
       });
     } catch (error) {
-      console.log(error);
+      setErrorMessage(error);
     }
 
     return () => {
@@ -23,7 +26,7 @@ const useFirestore = (collection) => {
     };
   }, [collection]);
 
-  return { docs };
+  return { docs, errorMessage };
 };
 
 export default useFirestore;
