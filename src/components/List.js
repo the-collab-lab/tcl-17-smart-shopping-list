@@ -1,10 +1,20 @@
-import React from 'react';
+import { doc } from 'prettier';
+import React, { useState } from 'react';
 import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
 import Error from './Error';
 
 const List = ({ token }) => {
   const { docs, errorMessage } = useFirestore(token);
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleSearchChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleClear = () => {
+    setSearchInput('');
+  };
 
   const checkPurchasedDate = (purchasedDate) => {
     if (purchasedDate === null) {
@@ -35,6 +45,19 @@ const List = ({ token }) => {
   return (
     <div>
       <h1>List</h1>
+      <form>
+        <label for="search-bar">Filter Items</label>
+        <br />
+        <input
+          type="text"
+          name="search-bar"
+          id="search-bar"
+          placeholder="Start typing here..."
+          value={searchInput}
+          onChange={handleSearchChange}
+        />
+        <input type="reset" onClick={handleClear} />
+      </form>
 
       {docs.length === 0 && (
         <section>
@@ -47,18 +70,22 @@ const List = ({ token }) => {
 
       <ul style={{ listStyleType: 'none' }}>
         {docs &&
-          docs.map((doc) => (
-            <li key={doc.id}>
-              <input
-                type="checkbox"
-                name={doc.itemName}
-                id={doc.id}
-                onChange={handleCheckbox}
-                checked={checkPurchasedDate(doc.lastPurchased)}
-              />
-              {doc.itemName}
-            </li>
-          ))}
+          docs
+            .filter((doc) =>
+              doc.itemName.toLowerCase().includes(searchInput.toLowerCase()),
+            )
+            .map((doc) => (
+              <li key={doc.id}>
+                <input
+                  type="checkbox"
+                  name={doc.itemName}
+                  id={doc.id}
+                  onChange={handleCheckbox}
+                  checked={checkPurchasedDate(doc.lastPurchased)}
+                />
+                {doc.itemName}
+              </li>
+            ))}
       </ul>
     </div>
   );
