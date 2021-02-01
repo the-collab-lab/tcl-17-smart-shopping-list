@@ -1,4 +1,3 @@
-import { doc } from 'prettier';
 import React, { useState } from 'react';
 import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
@@ -45,25 +44,26 @@ const List = ({ token }) => {
   return (
     <div>
       <h1>List</h1>
-      <form>
-        <label for="search-bar">Filter Items</label>
-        <br />
-        <input
-          type="text"
-          name="search-bar"
-          id="search-bar"
-          placeholder="Start typing here..."
-          value={searchInput}
-          onChange={handleSearchChange}
-        />
-        <input type="reset" onClick={handleClear} />
-      </form>
 
-      {docs.length === 0 && (
+      {docs.length === 0 ? (
         <section>
           <p>Your shopping list is currently empty.</p>
           <a href="/add-item">Add an Item</a>
         </section>
+      ) : (
+        <form>
+          <label for="search-bar">Filter Items</label>
+          <br />
+          <input
+            type="text"
+            name="search-bar"
+            id="search-bar"
+            placeholder="Start typing here..."
+            value={searchInput}
+            onChange={handleSearchChange}
+          />
+          <input type="reset" onClick={handleClear} />
+        </form>
       )}
 
       {errorMessage && <Error errorMessage={errorMessage} />}
