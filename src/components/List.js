@@ -65,3 +65,11 @@ const List = ({ token }) => {
 };
 
 export default List;
+
+/*
+Display a text field above the top of the shopping list
+As the user types into the field, the list should narrow to display only items that contain the text the user entered in the filter field
+When the field has text in it, the user should be able to tap a UI element (e.g., with an "X" button next to the field) to clear the field
+The filter text should match any part of the item name (i.e. it should not only match from the start of the string)
+
+*/
