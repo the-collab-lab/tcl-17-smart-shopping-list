@@ -51,8 +51,8 @@ const List = ({ token }) => {
           <a href="/add-item">Add an Item</a>
         </section>
       ) : (
-        <form>
-          <label for="search-bar">Filter Items</label>
+        <div>
+          <label htmlFor="search-bar">Filter Items</label>
           <br />
           <input
             type="text"
@@ -63,7 +63,7 @@ const List = ({ token }) => {
             onChange={handleSearchChange}
           />
           <input type="reset" onClick={handleClear} />
-        </form>
+        </div>
       )}
 
       {errorMessage && <Error errorMessage={errorMessage} />}
@@ -72,7 +72,9 @@ const List = ({ token }) => {
         {docs &&
           docs
             .filter((doc) =>
-              doc.itemName.toLowerCase().includes(searchInput.toLowerCase()),
+              doc.itemName
+                .toLowerCase()
+                .includes(searchInput.toLowerCase().trim()),
             )
             .map((doc) => (
               <li key={doc.id}>
