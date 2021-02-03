@@ -30,16 +30,19 @@ const List = ({ token }) => {
   const handleCheckbox = async (event) => {
     const currentDate = Date.now(); // time given in milliseconds
     const queryCollection = await db.collection(token).doc(event.target.id);
-    // targetDoc is our current snapshot of the doc
-    const targetDoc = docs.filter((doc) => doc.id === queryCollection.id);
-    const previouslyPurchasedDate = targetDoc[0].lastPurchased;
+    // filteredListItem is our current snapshot of the doc
+    const filteredListItem = docs.filter(
+      (doc) => doc.id === queryCollection.id,
+    );
+    const listItem = filteredListItem[0];
+    const previouslyPurchasedDate = listItem.lastPurchased;
     const latestInterval = currentDate - previouslyPurchasedDate;
     // If item has not been purchased set to 1, else increment by 1
-    const numberOfPurchases = !targetDoc[0].numberOfPurchases
+    const numberOfPurchases = !listItem.numberOfPurchases
       ? 1
-      : (targetDoc[0].numberOfPurchases += 1);
+      : (listItem.numberOfPurchases += 1);
     const estimate = calculateEstimate(
-      targetDoc[0].timeFrame,
+      listItem.timeFrame,
       latestInterval,
       numberOfPurchases,
     );
@@ -91,6 +94,7 @@ const List = ({ token }) => {
                 id={doc.id}
                 onChange={handleCheckbox}
                 checked={checkPurchasedDate(doc.lastPurchased)}
+                disabled={checkPurchasedDate(doc.lastPurchased)}
               />
               {doc.itemName}
             </li>
