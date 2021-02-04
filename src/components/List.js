@@ -36,13 +36,10 @@ const List = ({ token }) => {
   const handleCheckbox = async (event) => {
     const currentDate = Date.now(); // time given in milliseconds
     const queryCollection = await db.collection(token).doc(event.target.id);
-    // filteredListItem is our current snapshot of the doc
+    // listItem is our current snapshot of the doc
     const listItem = docs.filter((doc) => doc.id === queryCollection.id)[0];
     const previouslyPurchasedDate = listItem.lastPurchased;
-    // const oneWeekAgo = getTime(new Date(2021, 0, 26, 11, 30, 30)); // DELETE
-    // console.log(oneWeekAgo);
     const latestInterval = currentDate - previouslyPurchasedDate;
-    // const latestInterval = currentDate - oneWeekAgo; // DELETE
     // If item has not been purchased set to 1, else increment by 1
     const numberOfPurchases = !listItem.numberOfPurchases
       ? 1
@@ -71,29 +68,31 @@ const List = ({ token }) => {
     // ------------------------------------------------------------------------------------
     // END OF DEMO
 
-    if (previouslyPurchasedDate) {
-      // start here - gives the number of days till next purchase
-      const nextPurchaseDate = addMilliseconds(
-        previouslyPurchasedDate,
-        timeUntilNextPurchase,
-      );
-      // actual next purchase date base on oneWeekAgo value
-      const durationOfTime = formatDistance(
-        new Date(previouslyPurchasedDate),
-        new Date(nextPurchaseDate),
-      );
-      console.log('next purchase date: ', nextPurchaseDate);
-      console.log('duration of time: ', durationOfTime);
-      // end here
+    // FOR PR REVIEW PURPOSES ONLY
+    // ------------------------------------------------------------------------------------
+    // start here - gives the number of days till next purchase
+    const nextPurchaseDate = addMilliseconds(
+      previouslyPurchasedDate,
+      timeUntilNextPurchase,
+    );
+    // actual next purchase date base on oneWeekAgo value
+    const durationOfTime = formatDistance(
+      new Date(previouslyPurchasedDate),
+      new Date(nextPurchaseDate),
+    );
+    // For PR review only
+    console.log('next purchase date: ', nextPurchaseDate);
+    console.log('duration of time: ', durationOfTime);
+    // ------------------------------------------------------------------------------------
+    // FOR PR REVIEW END HERE
 
-      queryCollection.update({
-        lastPurchased: currentDate,
-        timeUntilNextPurchase: timeUntilNextPurchase,
-        numberOfPurchases: numberOfPurchases,
-        durationOfTime: durationOfTime,
-        nextPurchaseDate: nextPurchaseDate,
-      });
-    }
+    queryCollection.update({
+      lastPurchased: currentDate,
+      timeUntilNextPurchase: timeUntilNextPurchase,
+      numberOfPurchases: numberOfPurchases,
+      durationOfTime: durationOfTime, // For PR review purposes only
+      nextPurchaseDate: nextPurchaseDate, // For PR review purposes only
+    });
   };
 
   return (
@@ -119,14 +118,11 @@ const List = ({ token }) => {
                 id={doc.id}
                 onChange={handleCheckbox}
                 checked={checkPurchasedDate(doc.lastPurchased)}
-                // disabled={checkPurchasedDate(doc.lastPurchased)} - PUT BACK
+                //disabled={checkPurchasedDate(doc.lastPurchased)} // Commented out for PR purposes only
               />
               {doc.itemName}
               <p>Time until next purchase {doc.durationOfTime}</p>
-              {/* <p>Next date of Purchase{" "}{new Date(doc.nextPurchaseDate)}</p> */}
             </li>
-            // {doc.durationOfTime}
-            // {doc.nextPurchaseDate}
           ))}
       </ul>
     </div>
