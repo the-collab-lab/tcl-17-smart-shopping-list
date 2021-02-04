@@ -37,10 +37,7 @@ const List = ({ token }) => {
     const currentDate = Date.now(); // time given in milliseconds
     const queryCollection = await db.collection(token).doc(event.target.id);
     // filteredListItem is our current snapshot of the doc
-    const filteredListItem = docs.filter(
-      (doc) => doc.id === queryCollection.id,
-    );
-    const listItem = filteredListItem[0];
+    const listItem = docs.filter((doc) => doc.id === queryCollection.id)[0];
     const previouslyPurchasedDate = listItem.lastPurchased;
     // const oneWeekAgo = getTime(new Date(2021, 0, 26, 11, 30, 30)); // DELETE
     // console.log(oneWeekAgo);
