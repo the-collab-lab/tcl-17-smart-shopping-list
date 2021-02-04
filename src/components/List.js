@@ -3,7 +3,13 @@ import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
 import Error from './Error';
 import calculateEstimate from './../lib/estimates';
-// import { formatDistance, formatDuration, addMilliseconds, toDate, getTime } from 'date-fns';
+import {
+  formatDistance,
+  formatDuration,
+  addMilliseconds,
+  toDate,
+  getTime,
+} from 'date-fns';
 
 const List = ({ token }) => {
   const { docs, errorMessage } = useFirestore(token);
@@ -36,12 +42,15 @@ const List = ({ token }) => {
     );
     const listItem = filteredListItem[0];
     const previouslyPurchasedDate = listItem.lastPurchased;
+    // const oneWeekAgo = getTime(new Date(2021, 0, 26, 11, 30, 30)); // DELETE
+    // console.log(oneWeekAgo);
     const latestInterval = currentDate - previouslyPurchasedDate;
+    // const latestInterval = currentDate - oneWeekAgo; // DELETE
     // If item has not been purchased set to 1, else increment by 1
     const numberOfPurchases = !listItem.numberOfPurchases
       ? 1
-      : (listItem.numberOfPurchases += 1);
-    const estimate = calculateEstimate(
+      : listItem.numberOfPurchases + 1;
+    const timeUntilNextPurchase = calculateEstimate(
       listItem.timeFrame,
       latestInterval,
       numberOfPurchases,
@@ -65,12 +74,31 @@ const List = ({ token }) => {
     // ------------------------------------------------------------------------------------
     // END OF DEMO
 
-    queryCollection.update({
-      lastPurchased: currentDate,
-      estimatedNextPurchase: estimate,
-      numberOfPurchases: numberOfPurchases,
-    });
+    if (previouslyPurchasedDate) {
+      // start here - gives the number of days till next purchase
+      const nextPurchaseDate = addMilliseconds(
+        previouslyPurchasedDate,
+        timeUntilNextPurchase,
+      );
+      // actual next purchase date base on oneWeekAgo value
+      const durationOfTime = formatDistance(
+        new Date(previouslyPurchasedDate),
+        new Date(nextPurchaseDate),
+      );
+      console.log('next purchase date: ', nextPurchaseDate);
+      console.log('duration of time: ', durationOfTime);
+      // end here
+
+      queryCollection.update({
+        lastPurchased: currentDate,
+        timeUntilNextPurchase: timeUntilNextPurchase,
+        numberOfPurchases: numberOfPurchases,
+        durationOfTime: durationOfTime,
+        nextPurchaseDate: nextPurchaseDate,
+      });
+    }
   };
+
   return (
     <div>
       <h1>List</h1>
@@ -94,10 +122,14 @@ const List = ({ token }) => {
                 id={doc.id}
                 onChange={handleCheckbox}
                 checked={checkPurchasedDate(doc.lastPurchased)}
-                disabled={checkPurchasedDate(doc.lastPurchased)}
+                // disabled={checkPurchasedDate(doc.lastPurchased)} - PUT BACK
               />
               {doc.itemName}
+              <p>Time until next purchase {doc.durationOfTime}</p>
+              {/* <p>Next date of Purchase{" "}{new Date(doc.nextPurchaseDate)}</p> */}
             </li>
+            // {doc.durationOfTime}
+            // {doc.nextPurchaseDate}
           ))}
       </ul>
     </div>
