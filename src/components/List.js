@@ -55,10 +55,10 @@ const List = ({ token }) => {
     // const oneWeekAgo = getTime(new Date(2021, 0, 26, 11, 30, 30));
     // oneWeekAgo simulates the last date of purchase for the item
     // console.log("Date a week ago: ", toDate(new Date(oneWeekAgo)));
-    // const demoLatestInterval = currentDate - oneWeekAgo;
+    // const demoLatestInterval = differenceInDays(currentDate, oneWeekAgo);
     // const exampleNumberOfPurchases = 7;
     // const demoEstimate = calculateEstimate(
-    //   targetDoc[0].timeFrame,
+    //   listItem.timeFrame,
     //   demoLatestInterval,
     //   exampleNumberOfPurchases,
     // );
