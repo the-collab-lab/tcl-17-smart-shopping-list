@@ -130,7 +130,11 @@ const List = ({ token }) => {
                 //disabled={checkPurchasedDate(doc.lastPurchased)} // Commented out for PR purposes only
               />
               {doc.itemName}
-              <p>Time until next purchase {doc.durationOfTime}</p>
+              {doc.numberOfPurchases > 0 ? (
+                <p>Time until next purchase {doc.durationOfTime}</p>
+              ) : (
+                <p>You haven't purchased {doc.itemName} yet</p>
+              )}
             </li>
           ))}
       </ul>
