@@ -3,14 +3,7 @@ import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
 import Error from './Error';
 import calculateEstimate from './../lib/estimates';
-import {
-  formatDistance,
-  formatDuration,
-  addMilliseconds,
-  toDate,
-  getTime,
-  differenceInDays,
-} from 'date-fns';
+import { differenceInDays } from 'date-fns';
 
 const List = ({ token }) => {
   const { docs, errorMessage } = useFirestore(token);
@@ -47,7 +40,7 @@ const List = ({ token }) => {
     const latestInterval =
       differenceInDays(currentDate, previouslyPurchasedDate) ||
       listItem.timeFrame;
-    console.log('Latest interval: ', latestInterval);
+
     // If item has not been purchased set to 1, else increment by 1
     const numberOfPurchases = (listItem.numberOfPurchases || 0) + 1;
     const daysUntilNextPurchase = calculateEstimate(
@@ -55,7 +48,6 @@ const List = ({ token }) => {
       latestInterval,
       numberOfPurchases,
     );
-    console.log('Time until next purchase: ', daysUntilNextPurchase);
 
     // FOR THE DEMO
     // ------------------------------------------------------------------------------------
@@ -75,40 +67,6 @@ const List = ({ token }) => {
     // ------------------------------------------------------------------------------------
     // END OF DEMO
 
-    // FOR PR REVIEW PURPOSES ONLY
-    // ------------------------------------------------------------------------------------
-    // if (previouslyPurchasedDate) {
-    //   // start here - gives the number of days till next purchase
-    //   const nextPurchaseDate = addMilliseconds(
-    //     previouslyPurchasedDate,
-    //     daysUntilNextPurchase,
-    //   );
-    //   // actual next purchase date base on oneWeekAgo value
-    //   const durationOfTime = formatDistance(
-    //     new Date(previouslyPurchasedDate),
-    //     new Date(nextPurchaseDate),
-    //   );
-    //   // For PR review only
-    //   // console.log('next purchase date: ', nextPurchaseDate);
-    //   // console.log('duration of time: ', durationOfTime);
-
-    //   queryCollection.update({
-    //     lastPurchased: currentDate,
-    //     daysUntilNextPurchase: daysUntilNextPurchase,
-    //     numberOfPurchases: numberOfPurchases,
-    //     durationOfTime: durationOfTime, // For PR review purposes only
-    //     nextPurchaseDate: nextPurchaseDate, // For PR review purposes only
-    //   });
-    // } else {
-    //   // This else block is used for review purposes only
-    //   queryCollection.update({
-    //     lastPurchased: currentDate,
-    //     daysUntilNextPurchase: daysUntilNextPurchase,
-    //     numberOfPurchases: numberOfPurchases,
-    //   });
-    // }
-    // ------------------------------------------------------------------------------------
-    // FOR PR REVIEW END HERE
     queryCollection.update({
       lastPurchased: currentDate,
       daysUntilNextPurchase: daysUntilNextPurchase,
@@ -143,7 +101,9 @@ const List = ({ token }) => {
               />
               {doc.itemName}
               {doc.numberOfPurchases > 0 ? (
-                <p>Time until next purchase {doc.daysUntilNextPurchase} days</p>
+                <p>
+                  Time until next purchase: {doc.daysUntilNextPurchase} days
+                </p>
               ) : (
                 <p>You haven't purchased {doc.itemName} yet.</p>
               )}
