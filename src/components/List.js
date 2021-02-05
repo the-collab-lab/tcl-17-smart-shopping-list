@@ -71,15 +71,16 @@ const List = ({ token }) => {
       <ul style={{ listStyleType: 'none' }}>
         {docs &&
           docs
-            .filter((doc) =>
-              doc.itemName
-                .toLowerCase()
-                .includes(searchInput.toLowerCase().trim()),
+            ?.filter((doc) =>
+              doc?.itemName
+                ?.toLowerCase()
+                ?.includes(searchInput.toLowerCase().trim()),
             )
-            .map((doc) => (
+            ?.map((doc) => (
               <li key={doc.id}>
                 <input
                   type="checkbox"
+                  aria-label="purchased-checkbox"
                   name={doc.itemName}
                   id={doc.id}
                   onChange={handleCheckbox}
