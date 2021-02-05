@@ -9,6 +9,7 @@ import {
   addMilliseconds,
   toDate,
   getTime,
+  differenceInDays,
 } from 'date-fns';
 
 const List = ({ token }) => {
@@ -39,15 +40,19 @@ const List = ({ token }) => {
     // listItem is our current snapshot of the doc
     const listItem = docs.filter((doc) => doc.id === queryCollection.id)[0];
     const previouslyPurchasedDate = listItem.lastPurchased;
-    const latestInterval = currentDate - previouslyPurchasedDate;
-
+    // latestInterval is the number of full day periods between two dates
+    const latestInterval = differenceInDays(
+      currentDate,
+      previouslyPurchasedDate,
+    );
     // If item has not been purchased set to 1, else increment by 1
     const numberOfPurchases = (listItem.numberOfPurchases || 0) + 1;
-    const timeUntilNextPurchase = calculateEstimate(
+    const daysUntilNextPurchase = calculateEstimate(
       listItem.timeFrame,
       latestInterval,
       numberOfPurchases,
     );
+    console.log('Time until next purchase: ', daysUntilNextPurchase);
 
     // FOR THE DEMO
     // ------------------------------------------------------------------------------------
@@ -73,7 +78,7 @@ const List = ({ token }) => {
       // start here - gives the number of days till next purchase
       const nextPurchaseDate = addMilliseconds(
         previouslyPurchasedDate,
-        timeUntilNextPurchase,
+        daysUntilNextPurchase,
       );
       // actual next purchase date base on oneWeekAgo value
       const durationOfTime = formatDistance(
@@ -81,12 +86,12 @@ const List = ({ token }) => {
         new Date(nextPurchaseDate),
       );
       // For PR review only
-      console.log('next purchase date: ', nextPurchaseDate);
-      console.log('duration of time: ', durationOfTime);
+      // console.log('next purchase date: ', nextPurchaseDate);
+      // console.log('duration of time: ', durationOfTime);
 
       queryCollection.update({
         lastPurchased: currentDate,
-        timeUntilNextPurchase: timeUntilNextPurchase,
+        daysUntilNextPurchase: daysUntilNextPurchase,
         numberOfPurchases: numberOfPurchases,
         durationOfTime: durationOfTime, // For PR review purposes only
         nextPurchaseDate: nextPurchaseDate, // For PR review purposes only
@@ -95,7 +100,7 @@ const List = ({ token }) => {
       // This else block is used for review purposes only
       queryCollection.update({
         lastPurchased: currentDate,
-        timeUntilNextPurchase: timeUntilNextPurchase,
+        daysUntilNextPurchase: daysUntilNextPurchase,
         numberOfPurchases: numberOfPurchases,
       });
     }
