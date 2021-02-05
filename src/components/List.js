@@ -40,10 +40,9 @@ const List = ({ token }) => {
     const listItem = docs.filter((doc) => doc.id === queryCollection.id)[0];
     const previouslyPurchasedDate = listItem.lastPurchased;
     const latestInterval = currentDate - previouslyPurchasedDate;
+
     // If item has not been purchased set to 1, else increment by 1
-    const numberOfPurchases = !listItem.numberOfPurchases
-      ? 1
-      : listItem.numberOfPurchases + 1;
+    const numberOfPurchases = (listItem.numberOfPurchases || 0) + 1;
     const timeUntilNextPurchase = calculateEstimate(
       listItem.timeFrame,
       latestInterval,
