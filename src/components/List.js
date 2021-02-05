@@ -40,11 +40,14 @@ const List = ({ token }) => {
     // listItem is our current snapshot of the doc
     const listItem = docs.filter((doc) => doc.id === queryCollection.id)[0];
     const previouslyPurchasedDate = listItem.lastPurchased;
-    // latestInterval is the number of full day periods between two dates
-    const latestInterval = differenceInDays(
-      currentDate,
-      previouslyPurchasedDate,
-    );
+
+    /* latestInterval is the number of full days between the two dates
+     * or the timeFrame if the function returns NaN
+     */
+    const latestInterval =
+      differenceInDays(currentDate, previouslyPurchasedDate) ||
+      listItem.timeFrame;
+    console.log('Latest interval: ', latestInterval);
     // If item has not been purchased set to 1, else increment by 1
     const numberOfPurchases = (listItem.numberOfPurchases || 0) + 1;
     const daysUntilNextPurchase = calculateEstimate(
@@ -74,38 +77,43 @@ const List = ({ token }) => {
 
     // FOR PR REVIEW PURPOSES ONLY
     // ------------------------------------------------------------------------------------
-    if (previouslyPurchasedDate) {
-      // start here - gives the number of days till next purchase
-      const nextPurchaseDate = addMilliseconds(
-        previouslyPurchasedDate,
-        daysUntilNextPurchase,
-      );
-      // actual next purchase date base on oneWeekAgo value
-      const durationOfTime = formatDistance(
-        new Date(previouslyPurchasedDate),
-        new Date(nextPurchaseDate),
-      );
-      // For PR review only
-      // console.log('next purchase date: ', nextPurchaseDate);
-      // console.log('duration of time: ', durationOfTime);
+    // if (previouslyPurchasedDate) {
+    //   // start here - gives the number of days till next purchase
+    //   const nextPurchaseDate = addMilliseconds(
+    //     previouslyPurchasedDate,
+    //     daysUntilNextPurchase,
+    //   );
+    //   // actual next purchase date base on oneWeekAgo value
+    //   const durationOfTime = formatDistance(
+    //     new Date(previouslyPurchasedDate),
+    //     new Date(nextPurchaseDate),
+    //   );
+    //   // For PR review only
+    //   // console.log('next purchase date: ', nextPurchaseDate);
+    //   // console.log('duration of time: ', durationOfTime);
 
-      queryCollection.update({
-        lastPurchased: currentDate,
-        daysUntilNextPurchase: daysUntilNextPurchase,
-        numberOfPurchases: numberOfPurchases,
-        durationOfTime: durationOfTime, // For PR review purposes only
-        nextPurchaseDate: nextPurchaseDate, // For PR review purposes only
-      });
-    } else {
-      // This else block is used for review purposes only
-      queryCollection.update({
-        lastPurchased: currentDate,
-        daysUntilNextPurchase: daysUntilNextPurchase,
-        numberOfPurchases: numberOfPurchases,
-      });
-    }
+    //   queryCollection.update({
+    //     lastPurchased: currentDate,
+    //     daysUntilNextPurchase: daysUntilNextPurchase,
+    //     numberOfPurchases: numberOfPurchases,
+    //     durationOfTime: durationOfTime, // For PR review purposes only
+    //     nextPurchaseDate: nextPurchaseDate, // For PR review purposes only
+    //   });
+    // } else {
+    //   // This else block is used for review purposes only
+    //   queryCollection.update({
+    //     lastPurchased: currentDate,
+    //     daysUntilNextPurchase: daysUntilNextPurchase,
+    //     numberOfPurchases: numberOfPurchases,
+    //   });
+    // }
     // ------------------------------------------------------------------------------------
     // FOR PR REVIEW END HERE
+    queryCollection.update({
+      lastPurchased: currentDate,
+      daysUntilNextPurchase: daysUntilNextPurchase,
+      numberOfPurchases: numberOfPurchases,
+    });
   };
 
   return (
@@ -135,9 +143,9 @@ const List = ({ token }) => {
               />
               {doc.itemName}
               {doc.numberOfPurchases > 0 ? (
-                <p>Time until next purchase {doc.durationOfTime}</p>
+                <p>Time until next purchase {doc.daysUntilNextPurchase} days</p>
               ) : (
-                <p>You haven't purchased {doc.itemName} yet</p>
+                <p>You haven't purchased {doc.itemName} yet.</p>
               )}
             </li>
           ))}
