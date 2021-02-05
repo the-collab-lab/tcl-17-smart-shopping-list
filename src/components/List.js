@@ -3,13 +3,6 @@ import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
 import Error from './Error';
 import calculateEstimate from './../lib/estimates';
-import {
-  formatDistance,
-  formatDuration,
-  addMilliseconds,
-  toDate,
-  getTime,
-} from 'date-fns';
 
 const List = ({ token }) => {
   const { docs, errorMessage } = useFirestore(token);
@@ -34,74 +27,33 @@ const List = ({ token }) => {
   };
 
   const handleCheckbox = async (event) => {
+    const id = event.target.id
     const currentDate = Date.now(); // time given in milliseconds
-    const queryCollection = await db.collection(token).doc(event.target.id);
     // listItem is our current snapshot of the doc
-    const listItem = docs.filter((doc) => doc.id === queryCollection.id)[0];
+    const listItem = docs.filter((doc) => doc.id === id)[0];
+
     const previouslyPurchasedDate = listItem.lastPurchased;
-    const latestInterval = currentDate - previouslyPurchasedDate;
+
+    // Get diff in milliseconds then convert to number of days (round it, too so it's a whole number)
+    // If no previous purchase date, use the timeFrame the user originally put in
+    const latestInterval = previouslyPurchasedDate ? Math.round((currentDate - previouslyPurchasedDate)/86400000) : listItem.timeFrame;
+
     // If item has not been purchased set to 1, else increment by 1
     const numberOfPurchases = !listItem.numberOfPurchases
       ? 1
       : listItem.numberOfPurchases + 1;
+
     const timeUntilNextPurchase = calculateEstimate(
-      listItem.timeFrame,
+      listItem.timeUntilNextPurchase || listItem.timeFrame, // use time frame if there is no previously recorded timeUntilNextPurchase
       latestInterval,
       numberOfPurchases,
     );
 
-    // FOR THE DEMO
-    // ------------------------------------------------------------------------------------
-    // update day of demo
-    // const oneWeekAgo = getTime(new Date(2021, 0, 26, 11, 30, 30));
-    // oneWeekAgo simulates the last date of purchase for the item
-    // console.log("Date a week ago: ", toDate(new Date(oneWeekAgo)));
-    // const demoLatestInterval = currentDate - oneWeekAgo;
-    // const exampleNumberOfPurchases = 7;
-    // const demoEstimate = calculateEstimate(
-    //   targetDoc[0].timeFrame,
-    //   demoLatestInterval,
-    //   exampleNumberOfPurchases,
-    // );
-    // demo estimate tells how long from purchase date until we're expected to buy it again
-    // console.log('Demo estimate :', addMilliseconds(previouslyPurchasedDate, demoEstimate));
-    // ------------------------------------------------------------------------------------
-    // END OF DEMO
-
-    // FOR PR REVIEW PURPOSES ONLY
-    // ------------------------------------------------------------------------------------
-    if (previouslyPurchasedDate) {
-      // start here - gives the number of days till next purchase
-      const nextPurchaseDate = addMilliseconds(
-        previouslyPurchasedDate,
-        timeUntilNextPurchase,
-      );
-      // actual next purchase date base on oneWeekAgo value
-      const durationOfTime = formatDistance(
-        new Date(previouslyPurchasedDate),
-        new Date(nextPurchaseDate),
-      );
-      // For PR review only
-      console.log('next purchase date: ', nextPurchaseDate);
-      console.log('duration of time: ', durationOfTime);
-
-      queryCollection.update({
+      db.collection(token).doc(event.target.id).update({
         lastPurchased: currentDate,
         timeUntilNextPurchase: timeUntilNextPurchase,
-        numberOfPurchases: numberOfPurchases,
-        durationOfTime: durationOfTime, // For PR review purposes only
-        nextPurchaseDate: nextPurchaseDate, // For PR review purposes only
+        numberOfPurchases: numberOfPurchases
       });
-    } else {
-      // This else block is used for review purposes only
-      queryCollection.update({
-        lastPurchased: currentDate,
-        timeUntilNextPurchase: timeUntilNextPurchase,
-        numberOfPurchases: numberOfPurchases,
-      });
-    }
-    // ------------------------------------------------------------------------------------
-    // FOR PR REVIEW END HERE
   };
 
   return (
@@ -127,11 +79,11 @@ const List = ({ token }) => {
                 id={doc.id}
                 onChange={handleCheckbox}
                 checked={checkPurchasedDate(doc.lastPurchased)}
-                //disabled={checkPurchasedDate(doc.lastPurchased)} // Commented out for PR purposes only
+                disabled={checkPurchasedDate(doc.lastPurchased)} // Commented out for PR purposes only
               />
               {doc.itemName}
               {doc.numberOfPurchases > 0 ? (
-                <p>Time until next purchase {doc.durationOfTime}</p>
+                <p>Days until next purchase {doc.timeUntilNextPurchase}</p>
               ) : (
                 <p>You haven't purchased {doc.itemName} yet</p>
               )}
