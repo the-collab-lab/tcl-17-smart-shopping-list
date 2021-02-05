@@ -70,29 +70,38 @@ const List = ({ token }) => {
 
     // FOR PR REVIEW PURPOSES ONLY
     // ------------------------------------------------------------------------------------
-    // start here - gives the number of days till next purchase
-    const nextPurchaseDate = addMilliseconds(
-      previouslyPurchasedDate,
-      timeUntilNextPurchase,
-    );
-    // actual next purchase date base on oneWeekAgo value
-    const durationOfTime = formatDistance(
-      new Date(previouslyPurchasedDate),
-      new Date(nextPurchaseDate),
-    );
-    // For PR review only
-    console.log('next purchase date: ', nextPurchaseDate);
-    console.log('duration of time: ', durationOfTime);
+    if (previouslyPurchasedDate) {
+      // start here - gives the number of days till next purchase
+      const nextPurchaseDate = addMilliseconds(
+        previouslyPurchasedDate,
+        timeUntilNextPurchase,
+      );
+      // actual next purchase date base on oneWeekAgo value
+      const durationOfTime = formatDistance(
+        new Date(previouslyPurchasedDate),
+        new Date(nextPurchaseDate),
+      );
+      // For PR review only
+      console.log('next purchase date: ', nextPurchaseDate);
+      console.log('duration of time: ', durationOfTime);
+
+      queryCollection.update({
+        lastPurchased: currentDate,
+        timeUntilNextPurchase: timeUntilNextPurchase,
+        numberOfPurchases: numberOfPurchases,
+        durationOfTime: durationOfTime, // For PR review purposes only
+        nextPurchaseDate: nextPurchaseDate, // For PR review purposes only
+      });
+    } else {
+      // This else block is used for review purposes only
+      queryCollection.update({
+        lastPurchased: currentDate,
+        timeUntilNextPurchase: timeUntilNextPurchase,
+        numberOfPurchases: numberOfPurchases,
+      });
+    }
     // ------------------------------------------------------------------------------------
     // FOR PR REVIEW END HERE
-
-    queryCollection.update({
-      lastPurchased: currentDate,
-      timeUntilNextPurchase: timeUntilNextPurchase,
-      numberOfPurchases: numberOfPurchases,
-      durationOfTime: durationOfTime, // For PR review purposes only
-      nextPurchaseDate: nextPurchaseDate, // For PR review purposes only
-    });
   };
 
   return (
