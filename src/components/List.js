@@ -62,7 +62,11 @@ const List = ({ token }) => {
             value={searchInput}
             onChange={handleSearchChange}
           />
-          <input type="reset" onClick={handleClear} />
+          <input
+            type="reset"
+            onClick={handleClear}
+            data-testid="reset-button"
+          />
         </div>
       )}
 

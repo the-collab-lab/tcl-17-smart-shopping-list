@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "date-fns": "^2.16.1",
     "firebase": "^8.2.1",
     "husky": "^4.3.6",
     "lint-staged": "^10.5.3",
@@ -17,7 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "CI= react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
@@ -45,5 +46,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^11.2.5",
+    "jest-environment-jsdom-sixteen": "^1.0.3"
   }
 }
