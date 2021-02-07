@@ -92,9 +92,11 @@ const List = ({ token }) => {
     /* Added 1 here since we're working with full days
      * if user taps a checkbox and the timeFrame was 7 days, 6 would have been displayed
      */
-    const daysUntilNextPurchase =
-      differenceInDays(nextPurchasedDate, Date.now()) + 1;
-    return daysUntilNextPurchase > 0 ? daysUntilNextPurchase : 0;
+    const daysUntilNextPurchase = differenceInDays(
+      nextPurchasedDate,
+      Date.now(),
+    );
+    return daysUntilNextPurchase > 0 ? daysUntilNextPurchase + 1 : 0;
   };
 
   return (
