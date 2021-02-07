@@ -139,6 +139,7 @@ const List = ({ token }) => {
                 <li key={doc.id}>
                   <input
                     type="checkbox"
+                    aria-label="purchased-checkbox"
                     name={doc.itemName}
                     id={doc.id}
                     onChange={handleCheckbox}
