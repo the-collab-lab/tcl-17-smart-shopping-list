@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
 import Error from './Error';
@@ -7,6 +7,15 @@ import { differenceInDays, addDays } from 'date-fns';
 
 const List = ({ token }) => {
   const { docs, errorMessage } = useFirestore(token);
+  const [searchInput, setSearchInput] = useState('');
+
+  const handleSearchChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleClear = () => {
+    setSearchInput('');
+  };
 
   const checkPurchasedDate = (purchasedDate) => {
     if (purchasedDate === null) {
@@ -92,40 +101,60 @@ const List = ({ token }) => {
     <div>
       <h1>List</h1>
 
-      {docs.length === 0 && (
+      {docs.length === 0 ? (
         <section>
           <p>Your shopping list is currently empty.</p>
           <a href="/add-item">Add an Item</a>
         </section>
+      ) : (
+        <div>
+          <label htmlFor="search-bar">Filter Items</label>
+          <br />
+          <input
+            type="text"
+            name="search-bar"
+            id="search-bar"
+            placeholder="Start typing here..."
+            value={searchInput}
+            onChange={handleSearchChange}
+          />
+          <input type="reset" onClick={handleClear} />
+        </div>
       )}
 
       {errorMessage && <Error errorMessage={errorMessage} />}
 
       <ul style={{ listStyleType: 'none' }}>
         {docs &&
-          docs.map((doc) => {
-            return (
-              <li key={doc.id}>
-                <input
-                  type="checkbox"
-                  name={doc.itemName}
-                  id={doc.id}
-                  onChange={handleCheckbox}
-                  checked={checkPurchasedDate(doc.lastPurchased)}
-                  //disabled={checkPurchasedDate(doc.lastPurchased)} // Commented out for PR purposes only
-                />
-                {doc.itemName}
-                {doc.numberOfPurchases > 0 ? (
-                  <p>
-                    Time until next purchase: {getDaysUntilNextPurchase(doc)}{' '}
-                    days
-                  </p>
-                ) : (
-                  <p>You haven't purchased {doc.itemName} yet.</p>
-                )}
-              </li>
-            );
-          })}
+          docs
+            ?.filter((doc) =>
+              doc?.itemName
+                ?.toLowerCase()
+                ?.includes(searchInput.toLowerCase().trim()),
+            )
+            ?.map((doc) => {
+              return (
+                <li key={doc.id}>
+                  <input
+                    type="checkbox"
+                    name={doc.itemName}
+                    id={doc.id}
+                    onChange={handleCheckbox}
+                    checked={checkPurchasedDate(doc.lastPurchased)}
+                    //disabled={checkPurchasedDate(doc.lastPurchased)} // Commented out for PR purposes only
+                  />
+                  {doc.itemName}
+                  {doc.numberOfPurchases > 0 ? (
+                    <p>
+                      Time until next purchase: {getDaysUntilNextPurchase(doc)}{' '}
+                      days
+                    </p>
+                  ) : (
+                    <p>You haven't purchased {doc.itemName} yet.</p>
+                  )}
+                </li>
+              );
+            })}
       </ul>
     </div>
   );
