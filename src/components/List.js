@@ -92,9 +92,11 @@ const List = ({ token }) => {
     /* Added 1 here since we're working with full days
      * if user taps a checkbox and the timeFrame was 7 days, 6 would have been displayed
      */
-    const daysUntilNextPurchase =
-      differenceInDays(nextPurchasedDate, Date.now()) + 1;
-    return daysUntilNextPurchase > 0 ? daysUntilNextPurchase : 0;
+    const daysUntilNextPurchase = differenceInDays(
+      nextPurchasedDate,
+      Date.now(),
+    );
+    return daysUntilNextPurchase > 0 ? daysUntilNextPurchase + 1 : 0;
   };
 
   return (
@@ -132,29 +134,30 @@ const List = ({ token }) => {
                 ?.toLowerCase()
                 ?.includes(searchInput.toLowerCase().trim()),
             )
-            ?.map((doc) => (
-              <li key={doc.id}>
-                <input
-                  type="checkbox"
-                  aria-label="purchased-checkbox"
-                  name={doc.itemName}
-                  id={doc.id}
-                  onChange={handleCheckbox}
-                  checked={checkPurchasedDate(doc.lastPurchased)}
-                  //disabled={checkPurchasedDate(doc.lastPurchased)} // Commented out for PR purposes only
-                />
-                {doc.itemName}
-                {doc.numberOfPurchases > 0 ? (
-                  <p>
-                    Time until next purchase: {getDaysUntilNextPurchase(doc)}{' '}
-                    days
-                  </p>
-                ) : (
-                  <p>You haven't purchased {doc.itemName} yet.</p>
-                )}
-              </li>
-            );
-          })}
+            ?.map((doc) => {
+              return (
+                <li key={doc.id}>
+                  <input
+                    type="checkbox"
+                    aria-label="purchased-checkbox"
+                    name={doc.itemName}
+                    id={doc.id}
+                    onChange={handleCheckbox}
+                    checked={checkPurchasedDate(doc.lastPurchased)}
+                    //disabled={checkPurchasedDate(doc.lastPurchased)} // Commented out for PR purposes only
+                  />
+                  {doc.itemName}
+                  {doc.numberOfPurchases > 0 ? (
+                    <p>
+                      Time until next purchase: {getDaysUntilNextPurchase(doc)}{' '}
+                      days
+                    </p>
+                  ) : (
+                    <p>You haven't purchased {doc.itemName} yet.</p>
+                  )}
+                </li>
+              );
+            })}
       </ul>
     </div>
   );
