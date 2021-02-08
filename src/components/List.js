@@ -58,24 +58,6 @@ const List = ({ token }) => {
       numberOfPurchases,
     );
 
-    // FOR THE DEMO
-    // ------------------------------------------------------------------------------------
-    // update day of demo
-    // const oneWeekAgo = getTime(new Date(2021, 0, 26, 11, 30, 30));
-    // oneWeekAgo simulates the last date of purchase for the item
-    // console.log("Date a week ago: ", toDate(new Date(oneWeekAgo)));
-    // const demoLatestInterval = differenceInDays(currentDate, oneWeekAgo);
-    // const exampleNumberOfPurchases = 7;
-    // const demoEstimate = calculateEstimate(
-    //   listItem.timeFrame,
-    //   demoLatestInterval,
-    //   exampleNumberOfPurchases,
-    // );
-    // demo estimate tells how long from purchase date until we're expected to buy it again
-    // console.log('Demo estimate :', addMilliseconds(previouslyPurchasedDate, demoEstimate));
-    // ------------------------------------------------------------------------------------
-    // END OF DEMO
-
     queryCollection.update({
       lastPurchased: currentDate,
       timeFrame: daysUntilNextPurchase,
@@ -92,11 +74,9 @@ const List = ({ token }) => {
     /* Added 1 here since we're working with full days
      * if user taps a checkbox and the timeFrame was 7 days, 6 would have been displayed
      */
-    const daysUntilNextPurchase = differenceInDays(
-      nextPurchasedDate,
-      Date.now(),
-    );
-    return daysUntilNextPurchase > 0 ? daysUntilNextPurchase + 1 : 0;
+    const daysUntilNextPurchase =
+      differenceInDays(nextPurchasedDate, Date.now()) + 1;
+    return daysUntilNextPurchase > 0 ? daysUntilNextPurchase : 0;
   };
 
   return (
@@ -144,7 +124,7 @@ const List = ({ token }) => {
                     id={doc.id}
                     onChange={handleCheckbox}
                     checked={checkPurchasedDate(doc.lastPurchased)}
-                    //disabled={checkPurchasedDate(doc.lastPurchased)} // Commented out for PR purposes only
+                    disabled={checkPurchasedDate(doc.lastPurchased)}
                   />
                   {doc.itemName}
                   {doc.numberOfPurchases > 0 ? (
