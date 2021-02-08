@@ -4,7 +4,7 @@ import { db } from '../lib/firebase';
 import Error from './Error';
 import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
-import './List.css';
+// import './List.css';
 
 const List = ({ token }) => {
   const { docs, errorMessage } = useFirestore(token);
