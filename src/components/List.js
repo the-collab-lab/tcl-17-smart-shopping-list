@@ -126,7 +126,7 @@ const List = ({ token }) => {
                     id={doc.id}
                     onChange={handleCheckbox}
                     checked={checkPurchasedDate(doc.lastPurchased)}
-                    //disabled={checkPurchasedDate(doc.lastPurchased)} // Commented out for PR purposes only
+                    disabled={checkPurchasedDate(doc.lastPurchased)}
                   />
                   {doc.itemName}
                   {doc.numberOfPurchases > 0 ? (
