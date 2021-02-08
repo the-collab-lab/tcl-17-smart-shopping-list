@@ -58,24 +58,6 @@ const List = ({ token }) => {
       numberOfPurchases,
     );
 
-    // FOR THE DEMO
-    // ------------------------------------------------------------------------------------
-    // update day of demo
-    // const oneWeekAgo = getTime(new Date(2021, 0, 26, 11, 30, 30));
-    // oneWeekAgo simulates the last date of purchase for the item
-    // console.log("Date a week ago: ", toDate(new Date(oneWeekAgo)));
-    // const demoLatestInterval = differenceInDays(currentDate, oneWeekAgo);
-    // const exampleNumberOfPurchases = 7;
-    // const demoEstimate = calculateEstimate(
-    //   listItem.timeFrame,
-    //   demoLatestInterval,
-    //   exampleNumberOfPurchases,
-    // );
-    // demo estimate tells how long from purchase date until we're expected to buy it again
-    // console.log('Demo estimate :', addMilliseconds(previouslyPurchasedDate, demoEstimate));
-    // ------------------------------------------------------------------------------------
-    // END OF DEMO
-
     queryCollection.update({
       lastPurchased: currentDate,
       timeFrame: daysUntilNextPurchase,
