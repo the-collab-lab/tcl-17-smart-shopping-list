@@ -8,7 +8,7 @@ import { mockDocs } from './fixtures';
 jest.mock('../../lib/firebase');
 
 describe('<List />', () => {
-  it("displays 'Your shopping list is currently empty' to the user with a link to the Add Item page, when there are no items in a user's shopping list", () => {
+  it("when there are no items in a user's shopping list, displays 'Your shopping list is currently empty' to the user with a link to the Add Item page", () => {
     db.collection = mockFirebaseCollection();
 
     const { queryByText } = render(<List token="Sam I am" />);
@@ -17,7 +17,7 @@ describe('<List />', () => {
     expect(queryByText('Add an Item')).toBeTruthy();
   });
 
-  it('displays a search field and a list of items in a users shopping list when there are previously added items returned from the database', () => {
+  it("displays a search field and a list of items in a user's shopping list when there are previously added items returned from the database", () => {
     db.collection = mockFirebaseCollection({
       docs: mockDocs,
     });
@@ -50,7 +50,7 @@ describe('<List />', () => {
     expect(queryByText('Apples')).toBeFalsy();
   });
 
-  it('clears the value of the input field when the reset button is clicked', () => {
+  it('clears the value of the input field when the user clicks the reset button', () => {
     db.collection = mockFirebaseCollection({
       docs: mockDocs,
     });
