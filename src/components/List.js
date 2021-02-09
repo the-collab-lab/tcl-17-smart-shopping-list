@@ -8,6 +8,7 @@ import { differenceInDays, addDays } from 'date-fns';
 const List = ({ token }) => {
   const { docs, errorMessage } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
+  const [deleteError, setDeleteError] = useState('');
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
@@ -88,7 +89,7 @@ const List = ({ token }) => {
       try {
         db.collection(token).doc(item.id).delete();
       } catch (error) {
-        // <Error errorMessage={error}
+        setDeleteError(`Problem deleting ${item.itemName}`);
         console.log(error);
       }
     }
@@ -120,6 +121,7 @@ const List = ({ token }) => {
       )}
 
       {errorMessage && <Error errorMessage={errorMessage} />}
+      {deleteError && <Error errorMessage={deleteError} />}
 
       <ul style={{ listStyleType: 'none' }}>
         {docs &&
@@ -160,7 +162,3 @@ const List = ({ token }) => {
 };
 
 export default List;
-
-// User is able to delete an item from the shopping list
-// Before deleting, prompt the user to confirm that they really want to delete the item to prevent accidental deletions
-// Deletion should cause the associated record(s) in the database to be deleted
