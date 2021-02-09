@@ -80,14 +80,13 @@ const List = ({ token }) => {
   };
 
   // Confirm that the user would like to delete this item
-  const confirmDelete = () => {
+  const confirmDelete = async (item) => {
+    const res = await db.collection(token).doc(item.id);
     const confirmed = window.confirm(
       'Are you sure you want to delete this item?',
     );
     if (confirmed) {
-      console.log('delete it');
-    } else {
-      console.log("don't delete it");
+      res.delete();
     }
   };
 
@@ -139,7 +138,7 @@ const List = ({ token }) => {
                     disabled={checkPurchasedDate(doc.lastPurchased)}
                   />
                   {doc.itemName}
-                  <button onClick={() => confirmDelete()}>Delete</button>
+                  <button onClick={() => confirmDelete(doc)}>Delete</button>
                   {doc.numberOfPurchases > 0 ? (
                     <p>
                       Time until next purchase: {getDaysUntilNextPurchase(doc)}{' '}
