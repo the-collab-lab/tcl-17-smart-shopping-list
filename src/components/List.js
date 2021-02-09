@@ -144,3 +144,7 @@ const List = ({ token }) => {
 };
 
 export default List;
+
+// User is able to delete an item from the shopping list
+// Before deleting, prompt the user to confirm that they really want to delete the item to prevent accidental deletions
+// Deletion should cause the associated record(s) in the database to be deleted
