@@ -4,13 +4,12 @@ import { db } from '../lib/firebase';
 import Error from './Error';
 import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
-// import './List.css';
+import './List.css';
 
 const List = ({ token }) => {
   const { docs, errorMessage } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
 
-  // const sortedList = Array.from(docs);
   const sortedList = docs.sort((a, b) => {
     if (a.timeFrame < b.timeFrame) {
       return -1;
@@ -27,12 +26,6 @@ const List = ({ token }) => {
     }
     return 0;
   });
-  console.log(sortedList);
-  // const o = {id: doc.itemName}
-  //  console.log(doc.id);
-  //   console.log(doc.itemName);
-
-  // console.log(sortedList);
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
@@ -104,18 +97,18 @@ const List = ({ token }) => {
     return daysUntilNextPurchase > 0 ? daysUntilNextPurchase : 0;
   };
 
-  // const backgroundColor = (timeFrame) => {
-  //   console.log(timeFrame);
-  //   if (timeFrame < 7) {
-  //     return "soon";
-  //   }
-  //   if (timeFrame >= 7 && timeFrame < 30) {
-  //     return "kind-too-soon";
-  //   }
-  //   if (timeFrame >= 30) {
-  //     return "not-too-soon"
-  //   }
-  // }
+  const backgroundColor = (sortedList) => {
+    const daysUntilNextPurchase = getDaysUntilNextPurchase(sortedList);
+    if (!sortedList.numberOfPurchases || sortedList.numberOfPurchases < 2) {
+      return 'inactive';
+    } else if (daysUntilNextPurchase < 7) {
+      return 'soon';
+    } else if (daysUntilNextPurchase >= 7 && daysUntilNextPurchase < 30) {
+      return 'kind-of-soon';
+    } else if (daysUntilNextPurchase >= 30) {
+      return 'not-too-soon';
+    }
+  };
 
   return (
     <div>
@@ -154,10 +147,7 @@ const List = ({ token }) => {
             )
             ?.map((sortedList) => {
               return (
-                <li
-                  key={sortedList.id}
-                  // className={backgroundColor(sortedList.timeFrame)}
-                >
+                <li key={sortedList.id} className={backgroundColor(sortedList)}>
                   <input
                     type="checkbox"
                     aria-label="purchased-checkbox"
@@ -185,17 +175,3 @@ const List = ({ token }) => {
 };
 
 export default List;
-
-// Issue 12:
-// Possible item states are as follows:
-
-// Need to buy soon (fewer than 7 days)
-// Need to buy kind of soon (between 7 & 30 days)
-// Need to buy not soon (more than 30 days)
-// Inactive (when there’s only 1 purchase in the database or the purchase is really out of date [the time that has elapsed since the last purchase is 2x what was estimated])
-
-// Items in the list are shown as visually distinct (e.g., with a different background color on the list item) according to how soon the item is expected to be bought again: Soon, Kind of soon, Not soon, Inactive
-// Items should be sorted by the estimated number of days until next purchase
-// AC:
-// Items with the same number of estimated days until next purchase should be sorted alphabetically
-// Items in the different states should be described distinctly when read by a screen reader
