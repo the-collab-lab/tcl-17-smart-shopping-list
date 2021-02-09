@@ -97,10 +97,7 @@ const List = ({ token }) => {
         return 1;
       }
     }
-    if (a.numberOfPurchases < 2 || b.numberOfPurchases < 2) {
-      return b - a;
-    }
-    return 1;
+    return 0;
   });
 
   const backgroundColor = (sortedList) => {
