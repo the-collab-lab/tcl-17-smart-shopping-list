@@ -10,23 +10,6 @@ const List = ({ token }) => {
   const { docs, errorMessage } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
 
-  const sortedList = docs.sort((a, b) => {
-    if (a.timeFrame < b.timeFrame) {
-      return -1;
-    }
-    if (a.timeFrame > b.timeFrame) {
-      return 1;
-    }
-    if (a.timeFrame === b.timeFrame) {
-      if (a.itemName < b.itemName) {
-        return -1;
-      } else {
-        return 1;
-      }
-    }
-    return 0;
-  });
-
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
   };
@@ -97,6 +80,29 @@ const List = ({ token }) => {
     return daysUntilNextPurchase > 0 ? daysUntilNextPurchase : 0;
   };
 
+  const sortedList = docs.sort((a, b) => {
+    const aDaysUntilNextPurchase = getDaysUntilNextPurchase(a);
+    const bDaysUntilNextPurchase = getDaysUntilNextPurchase(b);
+
+    if (aDaysUntilNextPurchase < bDaysUntilNextPurchase) {
+      return -1;
+    }
+    if (aDaysUntilNextPurchase > bDaysUntilNextPurchase) {
+      return 1;
+    }
+    if (aDaysUntilNextPurchase === bDaysUntilNextPurchase) {
+      if (a.itemName < b.itemName) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+    if (a.numberOfPurchases < 2 || b.numberOfPurchases < 2) {
+      return b - a;
+    }
+    return 1;
+  });
+
   const backgroundColor = (sortedList) => {
     const daysUntilNextPurchase = getDaysUntilNextPurchase(sortedList);
     if (!sortedList.numberOfPurchases || sortedList.numberOfPurchases < 2) {
@@ -147,7 +153,11 @@ const List = ({ token }) => {
             )
             ?.map((sortedList) => {
               return (
-                <li key={sortedList.id} className={backgroundColor(sortedList)}>
+                <li
+                  key={sortedList.id}
+                  className={backgroundColor(sortedList)}
+                  aria-label={backgroundColor(sortedList)}
+                >
                   <input
                     type="checkbox"
                     aria-label="purchased-checkbox"
@@ -161,7 +171,8 @@ const List = ({ token }) => {
                   {sortedList.numberOfPurchases > 0 ? (
                     <p>
                       Time until next purchase:{' '}
-                      {getDaysUntilNextPurchase(sortedList)} days
+                      {getDaysUntilNextPurchase(sortedList)} days. Purchased{' '}
+                      {sortedList.numberOfPurchases} times.
                     </p>
                   ) : (
                     <p>You haven't purchased {sortedList.itemName} yet.</p>
