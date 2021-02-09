@@ -80,16 +80,17 @@ const List = ({ token }) => {
   };
 
   // Confirm that the user would like to delete this item
-  const confirmDelete = async (item) => {
-    const res = await db.collection(token).doc(item.id);
+  const confirmDelete = (item) => {
     const confirmed = window.confirm(
       'Are you sure you want to delete this item?',
     );
     if (confirmed) {
-      const didItemDelete = res.delete();
-      didItemDelete
-        ? console.log('Item was deleted')
-        : console.log('There was a problem');
+      try {
+        db.collection(token).doc(item.id).delete();
+      } catch (error) {
+        // <Error errorMessage={error}
+        console.log(error);
+      }
     }
   };
 
