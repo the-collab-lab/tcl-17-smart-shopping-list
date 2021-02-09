@@ -86,7 +86,10 @@ const List = ({ token }) => {
       'Are you sure you want to delete this item?',
     );
     if (confirmed) {
-      res.delete();
+      const didItemDelete = res.delete();
+      didItemDelete
+        ? console.log('Item was deleted')
+        : console.log('There was a problem');
     }
   };
 
