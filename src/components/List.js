@@ -79,6 +79,18 @@ const List = ({ token }) => {
     return daysUntilNextPurchase > 0 ? daysUntilNextPurchase : 0;
   };
 
+  // Confirm that the user would like to delete this item
+  const confirmDelete = () => {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this item?',
+    );
+    if (confirmed) {
+      console.log('delete it');
+    } else {
+      console.log("don't delete it");
+    }
+  };
+
   return (
     <div>
       <h1>List</h1>
@@ -127,6 +139,7 @@ const List = ({ token }) => {
                     disabled={checkPurchasedDate(doc.lastPurchased)}
                   />
                   {doc.itemName}
+                  <button onClick={() => confirmDelete()}>Delete</button>
                   {doc.numberOfPurchases > 0 ? (
                     <p>
                       Time until next purchase: {getDaysUntilNextPurchase(doc)}{' '}
