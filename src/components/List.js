@@ -104,7 +104,7 @@ const List = ({ token }) => {
         return 1;
       }
     }
-    return 1;
+    return 0;
   });
 
   function isInactive(item) {
