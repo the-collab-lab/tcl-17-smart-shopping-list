@@ -84,6 +84,13 @@ const List = ({ token }) => {
     const aDaysUntilNextPurchase = getDaysUntilNextPurchase(a);
     const bDaysUntilNextPurchase = getDaysUntilNextPurchase(b);
 
+    if (!isInactive(a) && isInactive(b)) {
+      return -1;
+    }
+    if (isInactive(a) && !isInactive(b)) {
+      return 1;
+    }
+
     if (aDaysUntilNextPurchase < bDaysUntilNextPurchase) {
       return -1;
     }
@@ -97,15 +104,19 @@ const List = ({ token }) => {
         return 1;
       }
     }
-    if (a.numberOfPurchases < 2 || b.numberOfPurchases < 2) {
-      return b - a;
-    }
     return 1;
   });
 
-  const backgroundColor = (sortedList) => {
-    const daysUntilNextPurchase = getDaysUntilNextPurchase(sortedList);
-    if (!sortedList.numberOfPurchases || sortedList.numberOfPurchases < 2) {
+  function isInactive(item) {
+    if (!item.numberOfPurchases || item.numberOfPurchases < 2) {
+      return true;
+    }
+    return false;
+  }
+
+  const backgroundColor = (item) => {
+    const daysUntilNextPurchase = getDaysUntilNextPurchase(item);
+    if (isInactive(item)) {
       return 'inactive';
     } else if (daysUntilNextPurchase < 7) {
       return 'soon';
@@ -144,38 +155,37 @@ const List = ({ token }) => {
       {errorMessage && <Error errorMessage={errorMessage} />}
 
       <ul style={{ listStyleType: 'none' }}>
-        {docs &&
-          docs
-            ?.filter((doc) =>
-              doc?.itemName
+        {sortedList &&
+          sortedList
+            ?.filter((item) =>
+              item?.itemName
                 ?.toLowerCase()
                 ?.includes(searchInput.toLowerCase().trim()),
             )
-            ?.map((sortedList) => {
+            ?.map((item) => {
               return (
                 <li
-                  key={sortedList.id}
-                  className={backgroundColor(sortedList)}
-                  aria-label={backgroundColor(sortedList)}
+                  key={item.id}
+                  className={backgroundColor(item)}
+                  aria-label={backgroundColor(item)}
                 >
                   <input
                     type="checkbox"
                     aria-label="purchased-checkbox"
-                    name={sortedList.itemName}
-                    id={sortedList.id}
+                    name={item.itemName}
+                    id={item.id}
                     onChange={handleCheckbox}
-                    checked={checkPurchasedDate(sortedList.lastPurchased)}
-                    disabled={checkPurchasedDate(sortedList.lastPurchased)}
+                    checked={checkPurchasedDate(item.lastPurchased)}
+                    disabled={checkPurchasedDate(item.lastPurchased)}
                   />
-                  {sortedList.itemName}
-                  {sortedList.numberOfPurchases > 0 ? (
+                  {item.itemName}
+                  {item.numberOfPurchases > 0 ? (
                     <p>
-                      Time until next purchase:{' '}
-                      {getDaysUntilNextPurchase(sortedList)} days. Purchased{' '}
-                      {sortedList.numberOfPurchases} times.
+                      Time until next purchase: {getDaysUntilNextPurchase(item)}{' '}
+                      days. Purchased {item.numberOfPurchases} times.
                     </p>
                   ) : (
-                    <p>You haven't purchased {sortedList.itemName} yet.</p>
+                    <p>You haven't purchased {item.itemName} yet.</p>
                   )}
                 </li>
               );
