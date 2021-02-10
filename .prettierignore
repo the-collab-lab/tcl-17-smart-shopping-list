@@ -1,3 +1,5 @@
-# Ignore token.js file
+# Ignore artifacts
+build
 
+# Ignore token file
 token.js
