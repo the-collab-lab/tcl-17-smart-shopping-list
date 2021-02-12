@@ -8,7 +8,6 @@ import { differenceInDays, addDays } from 'date-fns';
 const List = ({ token }) => {
   const { docs, errorMessage } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
-  const [deleteError, setDeleteError] = useState('');
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
@@ -83,14 +82,16 @@ const List = ({ token }) => {
   // Confirm that the user would like to delete this item
   const confirmDelete = (item) => {
     const confirmed = window.confirm(
-      'Are you sure you want to delete this item?',
+      `Are you sure you want to delete ${item.itemName}?`,
     );
     if (confirmed) {
       try {
         db.collection(token).doc(item.id).delete();
+        // testing purposes only
+        // throw new Error (`Problem deleting ${item.itemName}`)
       } catch (error) {
-        setDeleteError(`Problem deleting ${item.itemName}`);
-        console.log(error);
+        console.error(error);
+        alert(`Problem deleting ${item.itemName}`);
       }
     }
   };
@@ -121,7 +122,6 @@ const List = ({ token }) => {
       )}
 
       {errorMessage && <Error errorMessage={errorMessage} />}
-      {deleteError && <Error errorMessage={deleteError} />}
 
       <ul style={{ listStyleType: 'none' }}>
         {docs &&
