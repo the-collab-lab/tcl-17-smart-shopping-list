@@ -6,7 +6,7 @@ import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
 
 const List = ({ token }) => {
-  const { docs, errorMessage } = useFirestore(token);
+  const { docs, errorMessage, deleteDoc } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
 
   const handleSearchChange = (event) => {
@@ -85,14 +85,7 @@ const List = ({ token }) => {
       `Are you sure you want to delete ${item.itemName}?`,
     );
     if (confirmed) {
-      try {
-        db.collection(token).doc(item.id).delete();
-        // testing purposes only
-        // throw new Error (`Problem deleting ${item.itemName}`)
-      } catch (error) {
-        console.error(error);
-        alert(`Problem deleting ${item.itemName}`);
-      }
+      deleteDoc(item);
     }
   };
 
@@ -143,7 +136,7 @@ const List = ({ token }) => {
                     checked={checkPurchasedDate(doc.lastPurchased)}
                     disabled={checkPurchasedDate(doc.lastPurchased)}
                   />
-                  {doc.itemName}
+                  {doc.itemName}{' '}
                   <button onClick={() => confirmDelete(doc)}>Delete</button>
                   {doc.numberOfPurchases > 0 ? (
                     <p>
