@@ -25,7 +25,21 @@ const useFirestore = (collection) => {
     };
   }, [collection]);
 
-  return { docs, errorMessage };
+  const deleteDoc = (item) => {
+    try {
+      db.collection(collection).doc(item.id).delete();
+      // testing purposes only
+      // throw new Error(`Problem deleting ${item.itemName}`)
+    } catch (error) {
+      console.error(error.message);
+      setErrorMessage(`Problem deleting ${item.itemName}`);
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
+    }
+  };
+
+  return { docs, errorMessage, deleteDoc };
 };
 
 export default useFirestore;
