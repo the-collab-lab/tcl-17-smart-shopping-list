@@ -84,27 +84,19 @@ const List = ({ token }) => {
     const aDaysUntilNextPurchase = getDaysUntilNextPurchase(a);
     const bDaysUntilNextPurchase = getDaysUntilNextPurchase(b);
 
-    if (!isInactive(a) && isInactive(b)) {
-      return -1;
-    }
-    if (isInactive(a) && !isInactive(b)) {
-      return 1;
-    }
-
-    if (aDaysUntilNextPurchase < bDaysUntilNextPurchase) {
-      return -1;
-    }
-    if (aDaysUntilNextPurchase > bDaysUntilNextPurchase) {
-      return 1;
-    }
-    if (aDaysUntilNextPurchase === bDaysUntilNextPurchase) {
-      if (a.itemName < b.itemName) {
+    switch (true) {
+      case !isInactive(a) && isInactive(b):
         return -1;
-      } else {
+      case isInactive(a) && !isInactive(b):
         return 1;
-      }
+
+      case aDaysUntilNextPurchase < bDaysUntilNextPurchase:
+        return -1;
+      case aDaysUntilNextPurchase > bDaysUntilNextPurchase:
+        return 1;
+      default:
+        return a.itemName < b.itemName ? -1 : 1;
     }
-    return 0;
   });
 
   function isInactive(item) {
@@ -116,15 +108,11 @@ const List = ({ token }) => {
 
   const backgroundColor = (item) => {
     const daysUntilNextPurchase = getDaysUntilNextPurchase(item);
-    if (isInactive(item)) {
-      return 'inactive';
-    } else if (daysUntilNextPurchase < 7) {
-      return 'soon';
-    } else if (daysUntilNextPurchase >= 7 && daysUntilNextPurchase < 30) {
+    if (isInactive(item)) return 'inactive';
+    if (daysUntilNextPurchase < 7) return 'soon';
+    if (daysUntilNextPurchase >= 7 && daysUntilNextPurchase < 30)
       return 'kind-of-soon';
-    } else if (daysUntilNextPurchase >= 30) {
-      return 'not-too-soon';
-    }
+    if (daysUntilNextPurchase >= 30) return 'not-too-soon';
   };
 
   return (
@@ -167,7 +155,9 @@ const List = ({ token }) => {
                 <li
                   key={item.id}
                   className={backgroundColor(item)}
-                  aria-label={backgroundColor(item)}
+                  aria-label={`${
+                    item.itemName
+                  } ready to purchase ${backgroundColor(item)}`}
                 >
                   <input
                     type="checkbox"
