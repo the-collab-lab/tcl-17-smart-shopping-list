@@ -155,7 +155,9 @@ const List = ({ token }) => {
                 <li
                   key={item.id}
                   className={backgroundColor(item)}
-                  aria-label={backgroundColor(item)}
+                  aria-label={`${
+                    item.itemName
+                  } ready to purchase ${backgroundColor(item)}`}
                 >
                   <input
                     type="checkbox"
