@@ -7,7 +7,7 @@ import { differenceInDays, addDays } from 'date-fns';
 import './List.css';
 
 const List = ({ token }) => {
-  const { docs, errorMessage } = useFirestore(token);
+  const { docs, errorMessage, deleteDoc } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
 
   const handleSearchChange = (event) => {
@@ -78,6 +78,16 @@ const List = ({ token }) => {
     const daysUntilNextPurchase =
       differenceInDays(nextPurchasedDate, Date.now()) + 1;
     return daysUntilNextPurchase > 0 ? daysUntilNextPurchase : 0;
+  };
+
+  // Confirm that the user would like to delete this item
+  const confirmDelete = (item) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${item.itemName}?`,
+    );
+    if (confirmed) {
+      deleteDoc(item);
+    }
   };
 
   const sortedList = docs.sort((a, b) => {
@@ -168,7 +178,8 @@ const List = ({ token }) => {
                     checked={checkPurchasedDate(item.lastPurchased)}
                     disabled={checkPurchasedDate(item.lastPurchased)}
                   />
-                  {item.itemName}
+                  {item.itemName}{' '}
+                  <button onClick={() => confirmDelete(item)}>Delete</button>
                   {item.numberOfPurchases > 0 ? (
                     <p>
                       Time until next purchase: {getDaysUntilNextPurchase(item)}{' '}
