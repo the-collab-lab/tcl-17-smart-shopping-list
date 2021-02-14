@@ -4,6 +4,7 @@ import { db } from '../lib/firebase';
 import Error from './Error';
 import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
+import './List.css';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc } = useFirestore(token);
@@ -89,6 +90,41 @@ const List = ({ token }) => {
     }
   };
 
+  const sortedList = docs.sort((a, b) => {
+    const aDaysUntilNextPurchase = getDaysUntilNextPurchase(a);
+    const bDaysUntilNextPurchase = getDaysUntilNextPurchase(b);
+
+    switch (true) {
+      case !isInactive(a) && isInactive(b):
+        return -1;
+      case isInactive(a) && !isInactive(b):
+        return 1;
+
+      case aDaysUntilNextPurchase < bDaysUntilNextPurchase:
+        return -1;
+      case aDaysUntilNextPurchase > bDaysUntilNextPurchase:
+        return 1;
+      default:
+        return a.itemName < b.itemName ? -1 : 1;
+    }
+  });
+
+  function isInactive(item) {
+    if (!item.numberOfPurchases || item.numberOfPurchases < 2) {
+      return true;
+    }
+    return false;
+  }
+
+  const backgroundColor = (item) => {
+    const daysUntilNextPurchase = getDaysUntilNextPurchase(item);
+    if (isInactive(item)) return 'inactive';
+    if (daysUntilNextPurchase < 7) return 'soon';
+    if (daysUntilNextPurchase >= 7 && daysUntilNextPurchase < 30)
+      return 'kind-of-soon';
+    if (daysUntilNextPurchase >= 30) return 'not-too-soon';
+  };
+
   return (
     <div>
       <h1>List</h1>
@@ -117,34 +153,40 @@ const List = ({ token }) => {
       {errorMessage && <Error errorMessage={errorMessage} />}
 
       <ul style={{ listStyleType: 'none' }}>
-        {docs &&
-          docs
-            ?.filter((doc) =>
-              doc?.itemName
+        {sortedList &&
+          sortedList
+            ?.filter((item) =>
+              item?.itemName
                 ?.toLowerCase()
                 ?.includes(searchInput.toLowerCase().trim()),
             )
-            ?.map((doc) => {
+            ?.map((item) => {
               return (
-                <li key={doc.id}>
+                <li
+                  key={item.id}
+                  className={backgroundColor(item)}
+                  aria-label={`${
+                    item.itemName
+                  } ready to purchase ${backgroundColor(item)}`}
+                >
                   <input
                     type="checkbox"
                     aria-label="purchased-checkbox"
-                    name={doc.itemName}
-                    id={doc.id}
+                    name={item.itemName}
+                    id={item.id}
                     onChange={handleCheckbox}
-                    checked={checkPurchasedDate(doc.lastPurchased)}
-                    disabled={checkPurchasedDate(doc.lastPurchased)}
+                    checked={checkPurchasedDate(item.lastPurchased)}
+                    disabled={checkPurchasedDate(item.lastPurchased)}
                   />
-                  {doc.itemName}{' '}
-                  <button onClick={() => confirmDelete(doc)}>Delete</button>
-                  {doc.numberOfPurchases > 0 ? (
+                  {item.itemName}{' '}
+                  <button onClick={() => confirmDelete(item)}>Delete</button>
+                  {item.numberOfPurchases > 0 ? (
                     <p>
-                      Time until next purchase: {getDaysUntilNextPurchase(doc)}{' '}
-                      days
+                      Time until next purchase: {getDaysUntilNextPurchase(item)}{' '}
+                      days. Purchased {item.numberOfPurchases} times.
                     </p>
                   ) : (
-                    <p>You haven't purchased {doc.itemName} yet.</p>
+                    <p>You haven't purchased {item.itemName} yet.</p>
                   )}
                 </li>
               );
