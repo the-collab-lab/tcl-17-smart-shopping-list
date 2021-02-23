@@ -7,7 +7,7 @@ import { differenceInDays, addDays } from 'date-fns';
 import './List.css';
 
 const List = ({ token }) => {
-  const { docs, errorMessage, deleteDoc } = useFirestore(token);
+  const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
 
   const handleSearchChange = (event) => {
@@ -129,69 +129,78 @@ const List = ({ token }) => {
     <div>
       <h1>List</h1>
 
-      {docs.length === 0 ? (
-        <section>
-          <p>Your shopping list is currently empty.</p>
-          <a href="/add-item">Add an Item</a>
-        </section>
+      {loading ? (
+        <h1>Loading...</h1>
       ) : (
-        <div>
-          <label htmlFor="search-bar">Filter Items</label>
-          <br />
-          <input
-            type="text"
-            name="search-bar"
-            id="search-bar"
-            placeholder="Start typing here..."
-            value={searchInput}
-            onChange={handleSearchChange}
-          />
-          <input type="reset" onClick={handleClear} />
-        </div>
+        <React.Fragment>
+          {docs.length === 0 ? (
+            <section>
+              <p>Your shopping list is currently empty.</p>
+              <a href="/add-item">Add an Item</a>
+            </section>
+          ) : (
+            <div>
+              <label htmlFor="search-bar">Filter Items</label>
+              <br />
+              <input
+                type="text"
+                name="search-bar"
+                id="search-bar"
+                placeholder="Start typing here..."
+                value={searchInput}
+                onChange={handleSearchChange}
+              />
+              <input type="reset" onClick={handleClear} />
+            </div>
+          )}
+
+          {errorMessage && <Error errorMessage={errorMessage} />}
+
+          <ul style={{ listStyleType: 'none' }}>
+            {sortedList &&
+              sortedList
+                ?.filter((item) =>
+                  item?.itemName
+                    ?.toLowerCase()
+                    ?.includes(searchInput.toLowerCase().trim()),
+                )
+                ?.map((item) => {
+                  return (
+                    <li
+                      key={item.id}
+                      className={backgroundColor(item)}
+                      aria-label={`${
+                        item.itemName
+                      } ready to purchase ${backgroundColor(item)}`}
+                    >
+                      <input
+                        type="checkbox"
+                        aria-label="purchased-checkbox"
+                        name={item.itemName}
+                        id={item.id}
+                        onChange={handleCheckbox}
+                        checked={checkPurchasedDate(item.lastPurchased)}
+                        disabled={checkPurchasedDate(item.lastPurchased)}
+                      />
+                      {item.itemName}{' '}
+                      <button onClick={() => confirmDelete(item)}>
+                        Delete
+                      </button>
+                      {item.numberOfPurchases > 0 ? (
+                        <p>
+                          Time until next purchase:{' '}
+                          {getDaysUntilNextPurchase(item)} days. Purchased{' '}
+                          {item.numberOfPurchases} times.
+                        </p>
+                      ) : (
+                        <p>You haven't purchased {item.itemName} yet.</p>
+                      )}
+                    </li>
+                  );
+                })}
+          </ul>
+        </React.Fragment>
       )}
-
-      {errorMessage && <Error errorMessage={errorMessage} />}
-
-      <ul style={{ listStyleType: 'none' }}>
-        {sortedList &&
-          sortedList
-            ?.filter((item) =>
-              item?.itemName
-                ?.toLowerCase()
-                ?.includes(searchInput.toLowerCase().trim()),
-            )
-            ?.map((item) => {
-              return (
-                <li
-                  key={item.id}
-                  className={backgroundColor(item)}
-                  aria-label={`${
-                    item.itemName
-                  } ready to purchase ${backgroundColor(item)}`}
-                >
-                  <input
-                    type="checkbox"
-                    aria-label="purchased-checkbox"
-                    name={item.itemName}
-                    id={item.id}
-                    onChange={handleCheckbox}
-                    checked={checkPurchasedDate(item.lastPurchased)}
-                    disabled={checkPurchasedDate(item.lastPurchased)}
-                  />
-                  {item.itemName}{' '}
-                  <button onClick={() => confirmDelete(item)}>Delete</button>
-                  {item.numberOfPurchases > 0 ? (
-                    <p>
-                      Time until next purchase: {getDaysUntilNextPurchase(item)}{' '}
-                      days. Purchased {item.numberOfPurchases} times.
-                    </p>
-                  ) : (
-                    <p>You haven't purchased {item.itemName} yet.</p>
-                  )}
-                </li>
-              );
-            })}
-      </ul>
     </div>
   );
 };

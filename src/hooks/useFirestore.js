@@ -5,18 +5,22 @@ import { db } from '../lib/firebase';
 const useFirestore = (collection) => {
   const [docs, setDocs] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let unsubscribe;
     try {
+      setLoading(true);
       unsubscribe = db.collection(collection).onSnapshot((snapshot) => {
         let documents = [];
         snapshot.forEach((doc) => {
           documents.push({ ...doc.data(), id: doc.id });
         });
         setDocs(documents);
+        setLoading(false);
       });
     } catch (error) {
+      setLoading(false);
       setErrorMessage(error);
     }
 
@@ -37,7 +41,7 @@ const useFirestore = (collection) => {
     }
   };
 
-  return { docs, errorMessage, deleteDoc };
+  return { docs, errorMessage, deleteDoc, loading };
 };
 
 export default useFirestore;
