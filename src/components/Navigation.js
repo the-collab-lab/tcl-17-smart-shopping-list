@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 const Navigation = () => {
   return (
@@ -8,7 +9,7 @@ const Navigation = () => {
         <div className="list-link-text">List</div>
       </NavLink>
       <NavLink to="/add-item" activeClassName="active-link">
-        Add Item
+        Add Item <AddShoppingCartIcon />
       </NavLink>
     </nav>
   );
