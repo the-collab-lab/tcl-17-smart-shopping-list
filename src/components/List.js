@@ -5,6 +5,9 @@ import Error from './Error';
 import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
 import './List.css';
+import Checkbox from '@material-ui/core/Checkbox';
+import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
+import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc } = useFirestore(token);
@@ -169,8 +172,10 @@ const List = ({ token }) => {
                     item.itemName
                   } ready to purchase ${backgroundColor(item)}`}
                 >
-                  <input
+                  <Checkbox
                     type="checkbox"
+                    icon={<CircleUnchecked />}
+                    checkedIcon={<CircleCheckedFilled />}
                     aria-label="purchased-checkbox"
                     name={item.itemName}
                     id={item.id}
