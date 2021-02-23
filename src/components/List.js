@@ -5,6 +5,7 @@ import Error from './Error';
 import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
 import './List.css';
+import DeleteForever from '@material-ui/icons/DeleteForever';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
@@ -183,9 +184,9 @@ const List = ({ token }) => {
                         disabled={checkPurchasedDate(item.lastPurchased)}
                       />
                       {item.itemName}{' '}
-                      <button onClick={() => confirmDelete(item)}>
+                      <DeleteForever onClick={() => confirmDelete(item)}>
                         Delete
-                      </button>
+                      </DeleteForever>
                       {item.numberOfPurchases > 0 ? (
                         <p>
                           Time until next purchase:{' '}
