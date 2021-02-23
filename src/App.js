@@ -49,6 +49,3 @@ function App() {
 }
 
 export default App;
-
-// Install Material UI core to use core library
-// Install Material UI icons to use icons
