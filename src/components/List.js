@@ -128,7 +128,7 @@ const List = ({ token }) => {
   return (
     <div>
       <h1>List</h1>
-
+      <i class="fas fa-envelope"></i>
       {loading ? (
         <h1>Loading...</h1>
       ) : (
