@@ -20,6 +20,16 @@ function App() {
     setToken(token);
   };
 
+  const confirmDeleteUserToken = () => {
+    const confirmed = window.confirm(
+      `Are you sure you want to create a new list or join a different list?`,
+    );
+    if (confirmed) {
+      localStorage.removeItem('userToken');
+      setToken('');
+    }
+  };
+
   return (
     <div className="App">
       <Switch>
@@ -43,7 +53,7 @@ function App() {
         </Route>
       </Switch>
 
-      <Navigation />
+      <Navigation confirmDeleteUserToken={confirmDeleteUserToken} />
     </div>
   );
 }
