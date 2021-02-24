@@ -8,7 +8,9 @@ const Navigation = () => {
         <div className="list-link-text">List</div>
       </NavLink>
       <NavLink to="/add-item" activeClassName="active-link">
-        Add Item
+        <span>
+          Add Item <i class="fas fa-cart-plus"></i>
+        </span>
       </NavLink>
     </nav>
   );
