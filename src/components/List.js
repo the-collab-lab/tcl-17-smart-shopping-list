@@ -138,7 +138,9 @@ const List = ({ token }) => {
   return (
     <div>
       <h1>List</h1>
-
+      {/* <Typography variant="h1" component="h2">
+        List
+      </Typography> */}
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -183,33 +185,37 @@ const List = ({ token }) => {
                         item.itemName
                       } ready to purchase ${backgroundColor(item)}`}
                     >
-                      <Checkbox
-                        type="checkbox"
-                        icon={
-                          <CircleUnchecked
-                            style={{
-                              color: checkboxColor[backgroundColor(item)],
-                            }}
+                      <div className="flex-container">
+                        <div>
+                          <Checkbox
+                            type="checkbox"
+                            icon={
+                              <CircleUnchecked
+                                style={{
+                                  color: checkboxColor[backgroundColor(item)],
+                                }}
+                              />
+                            }
+                            checkedIcon={
+                              <CircleCheckedFilled
+                                style={{
+                                  color: checkboxColor[backgroundColor(item)],
+                                }}
+                              />
+                            }
+                            aria-label="purchased-checkbox"
+                            name={item.itemName}
+                            id={item.id}
+                            onChange={handleCheckbox}
+                            checked={checkPurchasedDate(item.lastPurchased)}
+                            disabled={checkPurchasedDate(item.lastPurchased)}
                           />
-                        }
-                        checkedIcon={
-                          <CircleCheckedFilled
-                            style={{
-                              color: checkboxColor[backgroundColor(item)],
-                            }}
-                          />
-                        }
-                        aria-label="purchased-checkbox"
-                        name={item.itemName}
-                        id={item.id}
-                        onChange={handleCheckbox}
-                        checked={checkPurchasedDate(item.lastPurchased)}
-                        disabled={checkPurchasedDate(item.lastPurchased)}
-                      />
-                      {item.itemName}{' '}
-                      <button onClick={() => confirmDelete(item)}>
-                        Delete
-                      </button>
+                          {item.itemName}{' '}
+                        </div>
+                        <button onClick={() => confirmDelete(item)}>
+                          Delete
+                        </button>
+                      </div>
                       {item.numberOfPurchases > 0 ? (
                         <p>
                           Time until next purchase:{' '}
