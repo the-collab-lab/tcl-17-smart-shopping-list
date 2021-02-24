@@ -128,6 +128,13 @@ const List = ({ token }) => {
     if (daysUntilNextPurchase >= 30) return 'not-too-soon';
   };
 
+  const checkboxColor = {
+    inactive: 'lightgrey',
+    soon: 'red',
+    'kind-of-soon': 'orange',
+    'not-too-soon': 'yellow',
+  };
+
   return (
     <div>
       <h1>List</h1>
@@ -174,8 +181,16 @@ const List = ({ token }) => {
                 >
                   <Checkbox
                     type="checkbox"
-                    icon={<CircleUnchecked />}
-                    checkedIcon={<CircleCheckedFilled />}
+                    icon={
+                      <CircleUnchecked
+                        style={{ color: checkboxColor[backgroundColor(item)] }}
+                      />
+                    }
+                    checkedIcon={
+                      <CircleCheckedFilled
+                        style={{ color: checkboxColor[backgroundColor(item)] }}
+                      />
+                    }
                     aria-label="purchased-checkbox"
                     name={item.itemName}
                     id={item.id}
