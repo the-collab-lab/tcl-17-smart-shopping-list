@@ -5,6 +5,9 @@ import Error from './Error';
 import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
 import './List.css';
+import Checkbox from '@material-ui/core/Checkbox';
+import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
+import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
@@ -125,6 +128,13 @@ const List = ({ token }) => {
     if (daysUntilNextPurchase >= 30) return 'not-too-soon';
   };
 
+  const checkboxColor = {
+    inactive: 'lightgrey',
+    soon: 'red',
+    'kind-of-soon': 'orange',
+    'not-too-soon': 'yellow',
+  };
+
   return (
     <div>
       <h1>List</h1>
@@ -173,8 +183,22 @@ const List = ({ token }) => {
                         item.itemName
                       } ready to purchase ${backgroundColor(item)}`}
                     >
-                      <input
+                      <Checkbox
                         type="checkbox"
+                        icon={
+                          <CircleUnchecked
+                            style={{
+                              color: checkboxColor[backgroundColor(item)],
+                            }}
+                          />
+                        }
+                        checkedIcon={
+                          <CircleCheckedFilled
+                            style={{
+                              color: checkboxColor[backgroundColor(item)],
+                            }}
+                          />
+                        }
                         aria-label="purchased-checkbox"
                         name={item.itemName}
                         id={item.id}
