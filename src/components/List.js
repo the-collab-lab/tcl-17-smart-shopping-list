@@ -184,7 +184,9 @@ const List = ({ token }) => {
                       />
                       {item.itemName}{' '}
                       <button onClick={() => confirmDelete(item)}>
-                        Delete
+                        <span>
+                          <i class="fas fa-trash-alt"></i>
+                        </span>
                       </button>
                       {item.numberOfPurchases > 0 ? (
                         <p>
