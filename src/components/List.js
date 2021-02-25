@@ -150,17 +150,25 @@ const List = ({ token }) => {
             </section>
           ) : (
             <div>
-              <label htmlFor="search-bar">Filter Items</label>
-              <br />
-              <input
-                type="text"
-                name="search-bar"
-                id="search-bar"
-                placeholder="Start typing here..."
-                value={searchInput}
-                onChange={handleSearchChange}
-              />
-              <input type="reset" onClick={handleClear} />
+              <div>
+                <a href="/add-item">
+                  Add an Item <i class="fas fa-cart-plus"></i>
+                </a>
+              </div>
+              ,
+              <div>
+                <label htmlFor="search-bar">Filter Items</label>
+                <br />
+                <input
+                  type="text"
+                  name="search-bar"
+                  id="search-bar"
+                  placeholder="Start typing here..."
+                  value={searchInput}
+                  onChange={handleSearchChange}
+                />
+                <input type="reset" onClick={handleClear} />
+              </div>
             </div>
           )}
 
