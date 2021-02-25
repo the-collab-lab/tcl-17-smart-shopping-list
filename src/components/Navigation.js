@@ -3,12 +3,14 @@ import { NavLink } from 'react-router-dom';
 import homeIcon from './../img/groceries.svg';
 import './../styles/Navigation.css';
 
-const Navigation = () => {
+const Navigation = ({ confirmDeleteUserToken }) => {
   return (
     <nav>
-      <NavLink to="/" activeClassName="active-link">
+      <NavLink exact to="/" activeClassName="active-link">
         <img className="homeIcon" src={homeIcon} alt="logo and home link" />
-        <span>Home</span>
+        <span className="home-link-text" onClick={confirmDeleteUserToken}>
+          Home
+        </span>
       </NavLink>
       <NavLink to="/list" activeClassName="active-link">
         <i class="fas fa-list-ul fa-2x"></i>
