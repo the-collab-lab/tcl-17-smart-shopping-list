@@ -57,7 +57,6 @@ const AddItem = ({ token }) => {
     <div>
       <h1>Add Item</h1>
       <form onSubmit={handleSubmit}>
-        <h2>Add your item</h2>
         <label>
           Item Name
           <input
@@ -104,7 +103,11 @@ const AddItem = ({ token }) => {
           <label htmlFor="not-soon">Not Soon</label>
           <br />
         </fieldset>
-        <button type="submit">Add Item</button>
+        <button type="submit">
+          <span>
+            Add Item<i class="fas fa-cart-plus"></i>
+          </span>
+        </button>
       </form>
     </div>
   );
