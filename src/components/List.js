@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
 import Error from './Error';
@@ -8,10 +9,12 @@ import './List.css';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
+import Button from '@material-ui/core/Button';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
+  const history = useHistory();
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
@@ -135,6 +138,10 @@ const List = ({ token }) => {
     'not-too-soon': 'yellow',
   };
 
+  const handleClick = () => {
+    history.push('/add-item');
+  };
+
   return (
     <div>
       <h1>List</h1>
@@ -149,7 +156,15 @@ const List = ({ token }) => {
               <a href="/add-item">Add an Item</a>
             </section>
           ) : (
-            <div>
+            <div className="top-container">
+              <Button
+                startIcon={<i className="fas fa-cart-plus"></i>}
+                onClick={handleClick}
+                className="add-item-btn"
+                variant="contained"
+              >
+                Add Item
+              </Button>
               <label htmlFor="search-bar">Filter Items</label>
               <br />
               <input
@@ -230,6 +245,3 @@ const List = ({ token }) => {
 };
 
 export default List;
-
-// Add Item button and icon appear above the filter items search box
-// Add Item button at top of page successfully reroutes user to the add view
