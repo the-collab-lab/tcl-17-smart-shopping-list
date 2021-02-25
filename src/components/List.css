@@ -43,6 +43,7 @@ section .add-item-link {
   font-size: 1.4rem;
   text-decoration: none;
   color: black;
+  border-bottom: 3px solid white;
 }
 
 .add-item-link:hover {
