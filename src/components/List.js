@@ -183,42 +183,37 @@ const List = ({ token }) => {
                         item.itemName
                       } ready to purchase ${backgroundColor(item)}`}
                     >
-                      <Checkbox
-                        type="checkbox"
-                        icon={
-                          <CircleUnchecked
-                            style={{
-                              color: checkboxColor[backgroundColor(item)],
-                            }}
+                      <div className="flex-container">
+                        <div>
+                          <Checkbox
+                            type="checkbox"
+                            icon={
+                              <CircleUnchecked
+                                style={{
+                                  color: checkboxColor[backgroundColor(item)],
+                                }}
+                              />
+                            }
+                            checkedIcon={
+                              <CircleCheckedFilled
+                                style={{
+                                  color: checkboxColor[backgroundColor(item)],
+                                }}
+                              />
+                            }
+                            aria-label="purchased-checkbox"
+                            name={item.itemName}
+                            id={item.id}
+                            onChange={handleCheckbox}
+                            checked={checkPurchasedDate(item.lastPurchased)}
+                            disabled={checkPurchasedDate(item.lastPurchased)}
                           />
-                        }
-                        checkedIcon={
-                          <CircleCheckedFilled
-                            style={{
-                              color: checkboxColor[backgroundColor(item)],
-                            }}
-                          />
-                        }
-                        aria-label="purchased-checkbox"
-                        name={item.itemName}
-                        id={item.id}
-                        onChange={handleCheckbox}
-                        checked={checkPurchasedDate(item.lastPurchased)}
-                        disabled={checkPurchasedDate(item.lastPurchased)}
-                      />
-                      {item.itemName}{' '}
-                      <button onClick={() => confirmDelete(item)}>
-                        Delete
-                      </button>
-                      {item.numberOfPurchases > 0 ? (
-                        <p>
-                          Time until next purchase:{' '}
-                          {getDaysUntilNextPurchase(item)} days. Purchased{' '}
-                          {item.numberOfPurchases} times.
-                        </p>
-                      ) : (
-                        <p>You haven't purchased {item.itemName} yet.</p>
-                      )}
+                          {item.itemName}{' '}
+                        </div>
+                        <button onClick={() => confirmDelete(item)}>
+                          Delete
+                        </button>
+                      </div>
                     </li>
                   );
                 })}

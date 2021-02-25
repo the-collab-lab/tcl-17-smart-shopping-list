@@ -13,3 +13,14 @@
 .inactive {
   border-left: 5px solid lightgrey;
 }
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  width: 385px;
+}
+
+li {
+  border-bottom: 1px solid lightgrey;
+}
