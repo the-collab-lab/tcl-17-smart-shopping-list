@@ -11,11 +11,11 @@ const Navigation = () => {
         <span>Home</span>
       </NavLink>
       <NavLink to="/list" activeClassName="active-link">
-        <i class="fas fa-list-ul"></i>
+        <i class="fas fa-list-ul fa-2x"></i>
         <span>Shopping List</span>
       </NavLink>
       <NavLink to="/add-item" activeClassName="active-link">
-        <i class="fas fa-cart-plus"></i>
+        <i class="fas fa-cart-plus fa-2x"></i>
         <span>Add Item</span>
       </NavLink>
     </nav>
