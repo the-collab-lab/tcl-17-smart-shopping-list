@@ -1,9 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Navigation = () => {
+const Navigation = ({ confirmDeleteUserToken }) => {
   return (
     <nav>
+      <NavLink exact to="/" activeClassName="active-link">
+        <div className="home-link-text" onClick={confirmDeleteUserToken}>
+          Home
+        </div>
+      </NavLink>
       <NavLink to="/list" activeClassName="active-link">
         <div className="list-link-text">List</div>
       </NavLink>
