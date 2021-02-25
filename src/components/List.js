@@ -211,7 +211,7 @@ const List = ({ token }) => {
                           {item.itemName}{' '}
                         </div>
                         <button onClick={() => confirmDelete(item)}>
-                          Delete
+                          <i class="fas fa-trash-alt"></i>
                         </button>
                       </div>
                     </li>
