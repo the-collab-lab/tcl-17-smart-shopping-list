@@ -14,7 +14,7 @@
   border-left: 5px solid lightgrey;
 }
 
-/* .flex-container {
+.flex-container {
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
@@ -22,4 +22,4 @@
 
 li {
   border-bottom: 1px solid lightgrey;
-} */
+}
