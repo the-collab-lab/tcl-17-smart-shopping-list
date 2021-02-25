@@ -38,3 +38,15 @@ nav a {
   background-color: lightgrey;
   font-weight: bold;
 }
+
+.textWithIcon span,
+.textWithIcon i,
+.textWithIcon img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.homeIcon {
+  height: 40px;
+}
