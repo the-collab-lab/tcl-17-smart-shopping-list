@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import useFirestore from '../hooks/useFirestore';
 import { db } from '../lib/firebase';
 import Error from './Error';
@@ -14,7 +13,6 @@ import Button from '@material-ui/core/Button';
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
-  const history = useHistory();
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
@@ -138,10 +136,6 @@ const List = ({ token }) => {
     'not-too-soon': 'yellow',
   };
 
-  const handleClick = () => {
-    history.push('/add-item');
-  };
-
   return (
     <div>
       <h1>List</h1>
@@ -153,18 +147,17 @@ const List = ({ token }) => {
           {docs.length === 0 ? (
             <section>
               <p>Your shopping list is currently empty.</p>
-              <a href="/add-item">Add an Item</a>
+              <a className="add-item-link" href="/add-item">
+                <i class="fas fa-cart-plus"></i>
+                Add Item
+              </a>
             </section>
           ) : (
             <div className="top-container">
-              <Button
-                startIcon={<i className="fas fa-cart-plus"></i>}
-                onClick={handleClick}
-                className="add-item-btn"
-                variant="contained"
-              >
+              <a className="add-item-link" href="/add-item">
+                <i class="fas fa-cart-plus"></i>
                 Add Item
-              </Button>
+              </a>
               <label htmlFor="search-bar">Filter Items</label>
               <br />
               <input
