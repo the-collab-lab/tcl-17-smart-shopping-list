@@ -1,25 +1,22 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import homeIcon from './../img/groceries.svg';
+import './../styles/Navigation.css';
 
 const Navigation = () => {
   return (
     <nav>
       <NavLink to="/" activeClassName="active-link">
-        <div className="textWithIcon">
-          <span>Home</span>{' '}
-          <img className="homeIcon" src={homeIcon} alt="logo and home link" />
-        </div>
+        <img className="homeIcon" src={homeIcon} alt="logo and home link" />
+        <span>Home</span>
       </NavLink>
       <NavLink to="/list" activeClassName="active-link">
-        <div className="textWithIcon">
-          <span>Shopping List</span> <i class="fas fa-list-ul"></i>
-        </div>
+        <i class="fas fa-list-ul"></i>
+        <span>Shopping List</span>
       </NavLink>
       <NavLink to="/add-item" activeClassName="active-link">
-        <span>
-          Add Item <i class="fas fa-cart-plus"></i>
-        </span>
+        <i class="fas fa-cart-plus"></i>
+        <span>Add Item</span>
       </NavLink>
     </nav>
   );
