@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const Navigation = ({ confirmDeleteUserToken }) => {
   return (
     <nav>
-      <NavLink to="/" activeClassName="active-link">
+      <NavLink exact to="/" activeClassName="active-link">
         <div className="home-link-text" onClick={confirmDeleteUserToken}>
           Home
         </div>
