@@ -214,15 +214,6 @@ const List = ({ token }) => {
                           Delete
                         </button>
                       </div>
-                      {/* {item.numberOfPurchases > 0 ? (
-                        <p>
-                          Time until next purchase:{' '}
-                          {getDaysUntilNextPurchase(item)} days. Purchased{' '}
-                          {item.numberOfPurchases} times.
-                        </p>
-                      ) : (
-                        <p>You haven't purchased {item.itemName} yet.</p>
-                      )} */}
                     </li>
                   );
                 })}
