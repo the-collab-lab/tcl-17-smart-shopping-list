@@ -230,3 +230,6 @@ const List = ({ token }) => {
 };
 
 export default List;
+
+// Add Item button and icon appear above the filter items search box
+// Add Item button at top of page successfully reroutes user to the add view
