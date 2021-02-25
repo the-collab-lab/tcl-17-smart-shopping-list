@@ -146,10 +146,17 @@ const List = ({ token }) => {
           {docs.length === 0 ? (
             <section>
               <p>Your shopping list is currently empty.</p>
-              <a href="/add-item">Add an Item</a>
+              <a className="add-item-link" href="/add-item">
+                <i class="fas fa-cart-plus"></i>
+                Add Item
+              </a>
             </section>
           ) : (
-            <div>
+            <div className="top-container">
+              <a className="add-item-link" href="/add-item">
+                <i class="fas fa-cart-plus"></i>
+                Add Item
+              </a>
               <label htmlFor="search-bar">Filter Items</label>
               <br />
               <input
