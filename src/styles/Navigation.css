@@ -1,0 +1,9 @@
+.homeIcon {
+  height: 30px;
+}
+
+@media (max-width: 800px) {
+  nav a {
+    padding: 3%;
+  }
+}
