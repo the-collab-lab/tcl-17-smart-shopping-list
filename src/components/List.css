@@ -17,7 +17,8 @@
 .flex-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  padding: 1rem 0;
+  width: 385px;
 }
 
 li {

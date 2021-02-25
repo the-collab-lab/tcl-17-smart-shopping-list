@@ -138,9 +138,7 @@ const List = ({ token }) => {
   return (
     <div>
       <h1>List</h1>
-      {/* <Typography variant="h1" component="h2">
-        List
-      </Typography> */}
+
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -216,7 +214,7 @@ const List = ({ token }) => {
                           Delete
                         </button>
                       </div>
-                      {item.numberOfPurchases > 0 ? (
+                      {/* {item.numberOfPurchases > 0 ? (
                         <p>
                           Time until next purchase:{' '}
                           {getDaysUntilNextPurchase(item)} days. Purchased{' '}
@@ -224,7 +222,7 @@ const List = ({ token }) => {
                         </p>
                       ) : (
                         <p>You haven't purchased {item.itemName} yet.</p>
-                      )}
+                      )} */}
                     </li>
                   );
                 })}
