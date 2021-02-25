@@ -13,3 +13,19 @@
 .inactive {
   border-left: 5px solid lightgrey;
 }
+
+.top-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-container button {
+  margin: 8px;
+}
+
+.top-container label {
+  width: 75%;
+}
