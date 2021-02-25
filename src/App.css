@@ -6,35 +6,3 @@
   align-items: center;
   height: 100vh;
 }
-
-nav {
-  width: 40%;
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 2%;
-}
-
-nav a {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  color: black;
-  font-size: 1rem;
-  padding: 2% 0;
-  margin: 2%;
-  width: 30%;
-  border-radius: 5px;
-}
-
-@media (max-width: 800px) {
-  nav a {
-    width: 50%;
-  }
-}
-
-.active-link {
-  background-color: lightgrey;
-  font-weight: bold;
-}
