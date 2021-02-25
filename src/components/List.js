@@ -5,6 +5,9 @@ import Error from './Error';
 import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
 import './List.css';
+import Checkbox from '@material-ui/core/Checkbox';
+import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
+import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
@@ -125,6 +128,13 @@ const List = ({ token }) => {
     if (daysUntilNextPurchase >= 30) return 'not-too-soon';
   };
 
+  const checkboxColor = {
+    inactive: 'lightgrey',
+    soon: 'red',
+    'kind-of-soon': 'orange',
+    'not-too-soon': 'yellow',
+  };
+
   return (
     <div>
       <h1>List</h1>
@@ -203,6 +213,59 @@ const List = ({ token }) => {
           </ul>
         </React.Fragment>
       )}
+
+      {errorMessage && <Error errorMessage={errorMessage} />}
+
+      <ul style={{ listStyleType: 'none' }}>
+        {sortedList &&
+          sortedList
+            ?.filter((item) =>
+              item?.itemName
+                ?.toLowerCase()
+                ?.includes(searchInput.toLowerCase().trim()),
+            )
+            ?.map((item) => {
+              return (
+                <li
+                  key={item.id}
+                  className={backgroundColor(item)}
+                  aria-label={`${
+                    item.itemName
+                  } ready to purchase ${backgroundColor(item)}`}
+                >
+                  <Checkbox
+                    type="checkbox"
+                    icon={
+                      <CircleUnchecked
+                        style={{ color: checkboxColor[backgroundColor(item)] }}
+                      />
+                    }
+                    checkedIcon={
+                      <CircleCheckedFilled
+                        style={{ color: checkboxColor[backgroundColor(item)] }}
+                      />
+                    }
+                    aria-label="purchased-checkbox"
+                    name={item.itemName}
+                    id={item.id}
+                    onChange={handleCheckbox}
+                    checked={checkPurchasedDate(item.lastPurchased)}
+                    disabled={checkPurchasedDate(item.lastPurchased)}
+                  />
+                  {item.itemName}{' '}
+                  <button onClick={() => confirmDelete(item)}>Delete</button>
+                  {item.numberOfPurchases > 0 ? (
+                    <p>
+                      Time until next purchase: {getDaysUntilNextPurchase(item)}{' '}
+                      days. Purchased {item.numberOfPurchases} times.
+                    </p>
+                  ) : (
+                    <p>You haven't purchased {item.itemName} yet.</p>
+                  )}
+                </li>
+              );
+            })}
+      </ul>
     </div>
   );
 };
