@@ -8,6 +8,13 @@ import './List.css';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = (theme) => ({
+  root: {
+    color: 'red',
+  },
+});
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
@@ -137,7 +144,7 @@ const List = ({ token }) => {
 
   return (
     <div>
-      <h1>List</h1>
+      <h1 color="ourblue">List</h1>
 
       {loading ? (
         <h1>Loading...</h1>
@@ -211,7 +218,7 @@ const List = ({ token }) => {
                           {item.itemName}{' '}
                         </div>
                         <button onClick={() => confirmDelete(item)}>
-                          <i class="fas fa-trash-alt"></i>
+                          <i className="fas fa-trash-alt"></i>
                         </button>
                       </div>
                     </li>
