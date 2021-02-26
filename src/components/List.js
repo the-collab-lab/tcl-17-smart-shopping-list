@@ -4,8 +4,8 @@ import { db } from '../lib/firebase';
 import Error from './Error';
 import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
-import './List.css';
-import Checkbox from '@material-ui/core/Checkbox';
+import '../styles/List.css';
+import { Box, Checkbox, TextField } from '@material-ui/core';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 
@@ -157,17 +157,17 @@ const List = ({ token }) => {
                 <i class="fas fa-cart-plus"></i>
                 Add Item
               </a>
-              <label htmlFor="search-bar">Filter Items</label>
-              <br />
-              <input
-                type="text"
-                name="search-bar"
-                id="search-bar"
-                placeholder="Start typing here..."
-                value={searchInput}
-                onChange={handleSearchChange}
-              />
-              <input type="reset" onClick={handleClear} />
+              <Box display="flex" alignItems="center">
+                <TextField
+                  name="search-bar"
+                  id="search-bar"
+                  label="Start typing here..."
+                  variant="outlined"
+                  value={searchInput}
+                  onChange={handleSearchChange}
+                />
+                <input type="reset" onClick={handleClear} id="reset-button" />
+              </Box>
             </div>
           )}
 
