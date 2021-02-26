@@ -1,0 +1,18 @@
+header {
+  width: 100%;
+  display: flex;
+  background-color: #a1dffb;
+  justify-content: center;
+  align-items: center;
+}
+
+header div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 70%;
+}
+
+p {
+  margin-right: 15px;
+}
