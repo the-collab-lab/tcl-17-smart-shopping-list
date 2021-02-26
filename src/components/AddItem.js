@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import Error from './Error';
+import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -65,17 +66,16 @@ const AddItem = ({ token }) => {
   return (
     <div className="container">
       <form className="form-container" onSubmit={handleSubmit}>
-        <label>
-          <input
-            type="text"
-            placeholder="Add New Item"
-            name="itemName"
-            required
-            value={formData.itemName}
-            onChange={handleFormChange}
-          />
-          {error && <Error errorMessage="That item is already in your list" />}
-        </label>
+        <TextField
+          id="outlined-basic"
+          name="itemName"
+          required
+          value={formData.itemName}
+          onChange={handleFormChange}
+          label="Add New Item"
+          variant="outlined"
+        />
+        {error && <Error errorMessage="That item is already in your list" />}
         <FormControl component="fieldset">
           <FormLabel component="legend" hidden>
             Time Frame
