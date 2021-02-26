@@ -93,6 +93,7 @@ const AddItem = ({ token }) => {
             Time Frame
           </FormLabel>
           <RadioGroup
+            defaultValue="7"
             aria-label="time frame"
             name="time frame"
             onChange={handleFormChange}
