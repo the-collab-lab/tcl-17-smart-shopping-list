@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import Error from './Error';
+import { Box } from '@material-ui/core';
+import './../styles/AddItem.css';
 
 const initialFormState = {
   itemName: '',
@@ -54,14 +56,12 @@ const AddItem = ({ token }) => {
   };
 
   return (
-    <div>
-      <h1>Add Item</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="container">
+      <form className="form-container" onSubmit={handleSubmit}>
         <label>
-          Item Name
           <input
             type="text"
-            placeholder="add your item here"
+            placeholder="Add New Item"
             name="itemName"
             required
             value={formData.itemName}

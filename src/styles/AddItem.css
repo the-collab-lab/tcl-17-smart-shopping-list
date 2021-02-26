@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 300px;
+  border: 0.25rem solid #d3d3d3;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-around;
+}
+
+label input {
+  height: 25px;
+  padding-left: 5px;
+}
+
+label input:focus {
+  outline-color: #a1dffb;
+  outline-width: 3px;
+}
