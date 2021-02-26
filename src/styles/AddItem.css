@@ -23,3 +23,12 @@ label input:focus {
   outline-color: #a1dffb;
   outline-width: 3px;
 }
+
+/* fieldset {
+    height: 100px;
+}
+
+.label-and-input {
+    display: flex;
+    flex-direction: column;
+} */

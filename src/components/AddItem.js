@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import Error from './Error';
-import { Box } from '@material-ui/core';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Button from '@material-ui/core/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import './../styles/AddItem.css';
 
 const initialFormState = {
@@ -69,45 +76,40 @@ const AddItem = ({ token }) => {
           />
           {error && <Error errorMessage="That item is already in your list" />}
         </label>
-
-        <fieldset className="fieldset">
-          <legend>Time Frame</legend>
-          <label htmlFor="timeFrame"> How soon will you buy this again?</label>
-          <br />
-          <input
-            type="radio"
-            id="soon"
-            name="timeFrame"
-            defaultChecked
-            value="7"
+        <FormControl component="fieldset">
+          <FormLabel component="legend" hidden>
+            Time Frame
+          </FormLabel>
+          <RadioGroup
+            aria-label="time frame"
+            name="time frame"
             onChange={handleFormChange}
-          />
-          <label htmlFor="soon"> Soon</label>
-          <br />
-          <input
-            type="radio"
-            id="kinda-soon"
-            name="timeFrame"
-            value="14"
-            onChange={handleFormChange}
-          />
-          <label htmlFor="kinda-soon"> Kinda Soon</label>
-          <br />
-          <input
-            type="radio"
-            id="not-soon"
-            name="timeFrame"
-            value="30"
-            onChange={handleFormChange}
-          />
-          <label htmlFor="not-soon">Not Soon</label>
-          <br />
-        </fieldset>
-        <button type="submit">
-          <span>
-            Add Item<i class="fas fa-cart-plus"></i>
-          </span>
-        </button>
+          >
+            <FormControlLabel
+              value="7"
+              control={<Radio id="soon" />}
+              label="Soon"
+            />
+            <FormControlLabel
+              value="14"
+              control={<Radio id="kinda-soon" />}
+              label="Kinda Soon"
+            />
+            <FormControlLabel
+              value="30"
+              control={<Radio id="not-soon" />}
+              label="Not Soon"
+            />
+          </RadioGroup>
+        </FormControl>
+        <Button
+          type="submit"
+          variant="contained"
+          color="#d3d3d3"
+          endIcon={<FontAwesomeIcon icon={faCartPlus} />}
+        >
+          Add Item
+        </Button>
       </form>
     </div>
   );
