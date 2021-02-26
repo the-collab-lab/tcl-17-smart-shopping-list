@@ -11,8 +11,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// There is a header element to separate the title and logo from main part of the app
-// There is a border to separate navigation elements from main part of the app
-// The header background color and border color should be the same
-// The List page and Add Item page will have the same styles applied
