@@ -8,6 +8,7 @@ import './List.css';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
+import Header from './Header';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
@@ -136,8 +137,8 @@ const List = ({ token }) => {
   };
 
   return (
-    <div>
-      <h1>List</h1>
+    <div className="list-container">
+      <Header />
 
       {loading ? (
         <h1>Loading...</h1>

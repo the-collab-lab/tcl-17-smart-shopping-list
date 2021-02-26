@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import Error from './Error';
+import Header from './Header';
+import '../styles/AddItem.css';
 
 const initialFormState = {
   itemName: '',
@@ -54,7 +56,8 @@ const AddItem = ({ token }) => {
   };
 
   return (
-    <div>
+    <div className="add-item-container">
+      <Header />
       <h1>Add Item</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -105,7 +108,7 @@ const AddItem = ({ token }) => {
         </fieldset>
         <button type="submit">
           <span>
-            Add Item<i class="fas fa-cart-plus"></i>
+            Add Item<i className="fas fa-cart-plus"></i>
           </span>
         </button>
       </form>
