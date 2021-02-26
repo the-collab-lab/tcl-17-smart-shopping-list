@@ -148,14 +148,14 @@ const List = ({ token }) => {
             <section>
               <p>Your shopping list is currently empty.</p>
               <a className="add-item-link" href="/add-item">
-                <i class="fas fa-cart-plus"></i>
+                <i className="fas fa-cart-plus"></i>
                 Add Item
               </a>
             </section>
           ) : (
             <div className="top-container">
               <a className="add-item-link" href="/add-item">
-                <i class="fas fa-cart-plus"></i>
+                <i className="fas fa-cart-plus"></i>
                 Add Item
               </a>
               <label htmlFor="search-bar">Filter Items</label>
@@ -219,7 +219,7 @@ const List = ({ token }) => {
                           {item.itemName}{' '}
                         </div>
                         <button onClick={() => confirmDelete(item)}>
-                          <i class="fas fa-trash-alt"></i>
+                          <i className="fas fa-trash-alt"></i>
                         </button>
                       </div>
                     </li>
