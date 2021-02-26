@@ -9,6 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 import { withStyles } from '@material-ui/core/styles';
+import Header from './Header';
 
 const styles = (theme) => ({
   root: {
@@ -143,8 +144,8 @@ const List = ({ token }) => {
   };
 
   return (
-    <div>
-      <h1 color="ourblue">List</h1>
+    <div className="list-container">
+      <Header />
 
       {loading ? (
         <h1>Loading...</h1>
@@ -153,10 +154,17 @@ const List = ({ token }) => {
           {docs.length === 0 ? (
             <section>
               <p>Your shopping list is currently empty.</p>
-              <a href="/add-item">Add an Item</a>
+              <a className="add-item-link" href="/add-item">
+                <i className="fas fa-cart-plus"></i>
+                Add Item
+              </a>
             </section>
           ) : (
-            <div>
+            <div className="top-container">
+              <a className="add-item-link" href="/add-item">
+                <i className="fas fa-cart-plus"></i>
+                Add Item
+              </a>
               <label htmlFor="search-bar">Filter Items</label>
               <br />
               <input
