@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import Error from './Error';
-import TextField from '@material-ui/core/TextField';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Button from '@material-ui/core/Button';
+import {
+  Box,
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+  Button,
+} from '@material-ui/core/';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import './../styles/AddItem.css';
@@ -64,7 +67,16 @@ const AddItem = ({ token }) => {
   };
 
   return (
-    <div className="container">
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      width={500}
+      height={300}
+      border={3}
+      borderColor="#d3d3d3"
+      borderRadius="borderRadius"
+    >
       <form className="form-container" onSubmit={handleSubmit}>
         <TextField
           id="outlined-basic"
@@ -111,7 +123,7 @@ const AddItem = ({ token }) => {
           Add Item
         </Button>
       </form>
-    </div>
+    </Box>
   );
 };
 
