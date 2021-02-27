@@ -152,9 +152,9 @@ const List = ({ token }) => {
 
   const checkboxColor = {
     inactive: 'lightgrey',
-    soon: 'red',
-    'kind-of-soon': 'orange',
-    'not-too-soon': 'yellow',
+    soon: `${classes.red}`,
+    'kind-of-soon': `${classes.red}`,
+    'not-too-soon': `${classes.red}`,
   };
 
   return (
