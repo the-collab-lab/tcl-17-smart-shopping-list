@@ -17,6 +17,8 @@ export const theme = createMuiTheme({
   },
 });
 
+console.log('theme file ', theme);
+
 // #F9de59 : yellow (not-too-soon)
 // #e8a628: orange (kind-of-soon)
 // #f98365: salmon (soon)

@@ -8,21 +8,21 @@ import './List.css';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Header from './Header';
 import './../styles/AddItem.css';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    red: {
-      color: '#c33124',
-    },
+    color: theme.palette.primary.main,
   },
-});
+}));
 
-const List = ({ token, withStyles }) => {
+const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
+  const classes = useStyles();
+  console.log(classes);
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
