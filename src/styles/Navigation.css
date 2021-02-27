@@ -1,8 +1,9 @@
 nav {
-  width: 40%;
+  width: 70%;
   display: flex;
   justify-content: space-around;
   margin-bottom: 2%;
+  border-top: 3px solid #a1dffb;
 }
 
 nav a {

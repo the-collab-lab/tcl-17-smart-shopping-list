@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import Error from './Error';
+import Header from './Header';
 import {
   Box,
   TextField,
@@ -67,64 +68,67 @@ const AddItem = ({ token }) => {
   };
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      width={500}
-      height={300}
-      border={3}
-      borderColor="#d3d3d3"
-      borderRadius="borderRadius"
-    >
-      <form className="form-container" onSubmit={handleSubmit}>
-        <TextField
-          id="outlined-basic"
-          name="itemName"
-          required
-          value={formData.itemName}
-          onChange={handleFormChange}
-          label="Add New Item"
-          variant="outlined"
-        />
-        {error && <Error errorMessage="That item is already in your list" />}
-        <FormControl component="fieldset">
-          <FormLabel component="legend" hidden>
-            Time Frame
-          </FormLabel>
-          <RadioGroup
-            defaultValue="7"
-            aria-label="time frame"
-            name="time frame"
+    <React.Fragment>
+      <Header />
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        width={500}
+        height={300}
+        border={3}
+        borderColor="#d3d3d3"
+        borderRadius="borderRadius"
+      >
+        <form className="form-container" onSubmit={handleSubmit}>
+          <TextField
+            id="outlined-basic"
+            name="itemName"
+            required
+            value={formData.itemName}
             onChange={handleFormChange}
+            label="Add New Item"
+            variant="outlined"
+          />
+          {error && <Error errorMessage="That item is already in your list" />}
+          <FormControl component="fieldset">
+            <FormLabel component="legend" hidden>
+              Time Frame
+            </FormLabel>
+            <RadioGroup
+              defaultValue="7"
+              aria-label="time frame"
+              name="time frame"
+              onChange={handleFormChange}
+            >
+              <FormControlLabel
+                value="7"
+                control={<Radio id="soon" />}
+                label="Soon"
+              />
+              <FormControlLabel
+                value="14"
+                control={<Radio id="kinda-soon" />}
+                label="Kinda Soon"
+              />
+              <FormControlLabel
+                value="30"
+                control={<Radio id="not-soon" />}
+                label="Not Soon"
+              />
+            </RadioGroup>
+          </FormControl>
+          <Button
+            type="submit"
+            variant="contained"
+            color="#d3d3d3"
+            endIcon={<FontAwesomeIcon icon={faCartPlus} />}
           >
-            <FormControlLabel
-              value="7"
-              control={<Radio id="soon" />}
-              label="Soon"
-            />
-            <FormControlLabel
-              value="14"
-              control={<Radio id="kinda-soon" />}
-              label="Kinda Soon"
-            />
-            <FormControlLabel
-              value="30"
-              control={<Radio id="not-soon" />}
-              label="Not Soon"
-            />
-          </RadioGroup>
-        </FormControl>
-        <Button
-          type="submit"
-          variant="contained"
-          color="#d3d3d3"
-          endIcon={<FontAwesomeIcon icon={faCartPlus} />}
-        >
-          Add Item
-        </Button>
-      </form>
-    </Box>
+            Add Item
+          </Button>
+        </form>
+      </Box>
+    </React.Fragment>
   );
 };
 
