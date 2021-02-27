@@ -163,13 +163,14 @@ const List = ({ token }) => {
             </section>
           ) : (
             <div className="top-container">
-              <h1>List</h1>
+              <h2>Here's your list</h2>
               <a className="add-item-link" href="/add-item">
                 <i class="fas fa-cart-plus"></i>
                 Add Item
               </a>
               <Box display="flex" alignItems="center">
                 <TextField
+                  size="small"
                   name="Filter items"
                   label="Filter items"
                   variant="outlined"
