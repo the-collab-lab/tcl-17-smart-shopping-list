@@ -177,16 +177,16 @@ const List = ({ token }) => {
           )}
 
           {errorMessage && <Error errorMessage={errorMessage} />}
-          {sortedList &&
-            sortedList
-              ?.filter((item) =>
-                item?.itemName
-                  ?.toLowerCase()
-                  ?.includes(searchInput.toLowerCase().trim()),
-              )
-              ?.map((item) => {
-                return (
-                  <MuiList>
+          <MuiList>
+            {sortedList &&
+              sortedList
+                ?.filter((item) =>
+                  item?.itemName
+                    ?.toLowerCase()
+                    ?.includes(searchInput.toLowerCase().trim()),
+                )
+                ?.map((item) => {
+                  return (
                     <ListItem
                       divider
                       key={item.id}
@@ -225,9 +225,9 @@ const List = ({ token }) => {
                         </button>
                       </div>
                     </ListItem>
-                  </MuiList>
-                );
-              })}
+                  );
+                })}
+          </MuiList>
         </React.Fragment>
       )}
     </div>
