@@ -1,0 +1,16 @@
+header {
+  width: 100%;
+  display: flex;
+  background-color: #a1dffb;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  width: 80%;
+  font-size: 2.4rem;
+}
+
+header .homeIcon {
+  height: 60px;
+}
