@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { db } from '../lib/firebase';
 import Error from './Error';
+import './../styles/TokenForm.css';
+import { Box, Button, TextField } from '@material-ui/core';
 
 const TokenForm = ({ setToken }) => {
   const [tokenInput, setTokenInput] = useState('');
@@ -23,14 +25,24 @@ const TokenForm = ({ setToken }) => {
 
   return (
     <React.Fragment>
-      <div>
-        <h3>Share Token</h3>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="space-around"
+      >
+        <h2 className="join-list-header">Join Existing List</h2>
         <form onSubmit={handleFormSubmit}>
-          <label htmlFor="token">
-            <input
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+          >
+            <TextField
+              variant="outlined"
               id="token"
               type="text"
-              placeholder="three word token"
+              label="three word token"
               name="token"
               value={tokenInput}
               onChange={(event) => {
@@ -39,13 +51,16 @@ const TokenForm = ({ setToken }) => {
               }}
               required
             />
-          </label>
-          <button type="submit">Join an existing list</button>
+
+            <Button variant="contained" id="join-button" type="submit">
+              Join List
+            </Button>
+          </Box>
         </form>
         {error && (
           <Error errorMessage="Hmmm... we couldn't find that list. Please try again or create a new list." />
         )}
-      </div>
+      </Box>
     </React.Fragment>
   );
 };
