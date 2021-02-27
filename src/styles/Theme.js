@@ -19,11 +19,3 @@ export const theme = createMuiTheme({
     },
   },
 });
-
-console.log('theme file ', theme);
-
-// #F9de59 : yellow (not-too-soon)
-// #e8a628: orange (kind-of-soon)
-// #f98365: salmon (soon)
-// #c33124: red (soon)
-// #a1dffb: blue (header/nav backgrounds)

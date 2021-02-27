@@ -38,5 +38,3 @@ Welcome.propTypes = {
 };
 
 export default Welcome;
-
-//change [hidden, setHidden] to [error, setError] ? check with Rachel and Viet
