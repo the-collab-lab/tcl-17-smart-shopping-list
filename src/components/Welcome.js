@@ -8,13 +8,13 @@ import welcomeHeader from './../img/header.png';
 const Welcome = ({ onClick, setToken }) => {
   return (
     <Box className="background">
-      <h1>
+      <h2>
         <img
-          id="welcome-header"
           src={welcomeHeader}
           alt="welcome to smart shopper"
+          id="welcome-header"
         ></img>
-      </h1>
+      </h2>
       <Container maxWidth="md">
         <Box
           display="flex"
