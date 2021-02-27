@@ -32,7 +32,7 @@ const TokenForm = ({ setToken }) => {
         justifyContent="space-around"
         className="join-list-container"
       >
-        <h3 className="join-list-header">Join an Existing List</h3>
+        <h2 className="join-list-header">Join Existing List</h2>
         <form onSubmit={handleFormSubmit}>
           <Box
             display="flex"
