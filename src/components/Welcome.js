@@ -13,7 +13,7 @@ const Welcome = ({ onClick, setToken }) => {
           src={welcomeHeader}
           alt="welcome to smart shopper"
           id="welcome-header"
-        ></img>
+        />
       </h2>
       <Container maxWidth="md">
         <Box
