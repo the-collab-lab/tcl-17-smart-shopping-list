@@ -20,20 +20,19 @@ const Welcome = ({ onClick, setToken }) => {
           display="flex"
           alignItems="center"
           justifyContent="space-evenly"
-          border={1}
-          borderColor="#a1dffb"
+          border={3}
+          borderColor="lightgrey"
           borderRadius="borderRadius"
           className="welcome-box"
         >
           <Box display="flex" flexDirection="column">
-            {/* <h1>Welcome</h1> */}
-            <h3 className="create-list-header">
+            <h2 className="create-list-header">
               Get Started! <br />
               Create a New List
-            </h3>
+            </h2>
             <Button
               variant="contained"
-              className="welcome-button"
+              className="create-button"
               onClick={onClick}
             >
               Create List
