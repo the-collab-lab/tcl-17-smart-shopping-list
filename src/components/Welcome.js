@@ -25,7 +25,7 @@ const Welcome = ({ onClick, setToken }) => {
           borderRadius="borderRadius"
           className="welcome-box"
         >
-          <Box display="flex" flexDirection="column">
+          <Box display="flex" flexDirection="column" className="create-list">
             <h2 className="create-list-header">
               Get Started! <br />
               Create a New List
