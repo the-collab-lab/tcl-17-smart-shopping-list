@@ -50,9 +50,3 @@ Welcome.propTypes = {
 };
 
 export default Welcome;
-
-//change [hidden, setHidden] to [error, setError] ? check with Rachel and Viet
-
-// <img className="groceryAisle" src={groceryAisle} alt="grocery aisle"></img>
-
-// style={{ backgroundImage: `url(${groceryAisle})
