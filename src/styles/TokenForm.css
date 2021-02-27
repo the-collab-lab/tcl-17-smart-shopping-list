@@ -1,5 +1,5 @@
 .join-list-header {
-  margin-bottom: 2%;
+  margin-bottom: 0.5rem;
 }
 
 #token {
@@ -7,5 +7,6 @@
 }
 
 #join-button {
-  margin-top: 2%;
+  margin-top: 0.5rem;
+  align-self: center;
 }
