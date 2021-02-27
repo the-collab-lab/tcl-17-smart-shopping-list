@@ -10,6 +10,9 @@ import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
+import { IconButton, Button } from '@material-ui/core/';
+import DeleteIcon from '@material-ui/icons/Delete';
+import './../styles/AddItem.css';
 
 const styles = (theme) => ({
   root: {
@@ -175,7 +178,16 @@ const List = ({ token }) => {
                 value={searchInput}
                 onChange={handleSearchChange}
               />
-              <input type="reset" onClick={handleClear} />
+
+              <Button
+                variant="contained"
+                color="default"
+                type="reset"
+                size="small"
+                onClick={handleClear}
+              >
+                Reset
+              </Button>
             </div>
           )}
 
@@ -225,9 +237,13 @@ const List = ({ token }) => {
                           />
                           {item.itemName}{' '}
                         </div>
-                        <button onClick={() => confirmDelete(item)}>
-                          <i className="fas fa-trash-alt"></i>
-                        </button>
+                        <IconButton
+                          // color="primary"
+                          aria-label="delete"
+                          onClick={() => confirmDelete(item)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
                       </div>
                     </li>
                   );
