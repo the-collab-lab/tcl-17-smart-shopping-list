@@ -28,3 +28,11 @@
 .create-button {
   align-self: center;
 }
+
+@media only screen and (max-width: 600px) {
+  .welcome-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
