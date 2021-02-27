@@ -6,18 +6,21 @@ import './../styles/Navigation.css';
 const Navigation = ({ confirmDeleteUserToken }) => {
   return (
     <nav>
-      <NavLink exact to="/" activeClassName="active-link">
+      <NavLink
+        exact
+        to="/"
+        activeClassName="active-link"
+        onClick={confirmDeleteUserToken}
+      >
         <img className="homeIcon" src={homeIcon} alt="logo and home link" />
-        <span className="home-link-text" onClick={confirmDeleteUserToken}>
-          Home
-        </span>
+        <span className="home-link-text">Home</span>
       </NavLink>
       <NavLink to="/list" activeClassName="active-link">
-        <i class="fas fa-list-ul fa-2x"></i>
+        <i className="fas fa-list-ul fa-2x"></i>
         <span>Shopping List</span>
       </NavLink>
       <NavLink to="/add-item" activeClassName="active-link">
-        <i class="fas fa-cart-plus fa-2x"></i>
+        <i className="fas fa-cart-plus fa-2x"></i>
         <span>Add Item</span>
       </NavLink>
     </nav>

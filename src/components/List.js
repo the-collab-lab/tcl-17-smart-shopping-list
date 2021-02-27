@@ -11,7 +11,9 @@ import {
   TextField,
   IconButton,
   Button,
-  Link,
+  List as MuiList,
+  ListItem,
+  ListItemText,
 } from '@material-ui/core';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
@@ -145,8 +147,6 @@ const List = ({ token }) => {
 
   return (
     <div>
-      <h1>List</h1>
-
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -161,6 +161,7 @@ const List = ({ token }) => {
             </section>
           ) : (
             <div className="top-container">
+              <h1>List</h1>
               <a className="add-item-link" href="/add-item">
                 <i class="fas fa-cart-plus"></i>
                 Add Item
@@ -188,8 +189,7 @@ const List = ({ token }) => {
           )}
 
           {errorMessage && <Error errorMessage={errorMessage} />}
-
-          <ul style={{ listStyleType: 'none' }}>
+          <MuiList>
             {sortedList &&
               sortedList
                 ?.filter((item) =>
@@ -199,7 +199,8 @@ const List = ({ token }) => {
                 )
                 ?.map((item) => {
                   return (
-                    <li
+                    <ListItem
+                      divider
                       key={item.id}
                       className={backgroundColor(item)}
                       aria-label={`${
@@ -207,32 +208,30 @@ const List = ({ token }) => {
                       } ready to purchase ${backgroundColor(item)}`}
                     >
                       <div className="flex-container">
-                        <div>
-                          <Checkbox
-                            type="checkbox"
-                            icon={
-                              <CircleUnchecked
-                                style={{
-                                  color: checkboxColor[backgroundColor(item)],
-                                }}
-                              />
-                            }
-                            checkedIcon={
-                              <CircleCheckedFilled
-                                style={{
-                                  color: checkboxColor[backgroundColor(item)],
-                                }}
-                              />
-                            }
-                            aria-label="purchased-checkbox"
-                            name={item.itemName}
-                            id={item.id}
-                            onChange={handleCheckbox}
-                            checked={checkPurchasedDate(item.lastPurchased)}
-                            disabled={checkPurchasedDate(item.lastPurchased)}
-                          />
-                          {item.itemName}{' '}
-                        </div>
+                        <Checkbox
+                          type="checkbox"
+                          icon={
+                            <CircleUnchecked
+                              style={{
+                                color: checkboxColor[backgroundColor(item)],
+                              }}
+                            />
+                          }
+                          checkedIcon={
+                            <CircleCheckedFilled
+                              style={{
+                                color: checkboxColor[backgroundColor(item)],
+                              }}
+                            />
+                          }
+                          aria-label="purchased-checkbox"
+                          name={item.itemName}
+                          id={item.id}
+                          onChange={handleCheckbox}
+                          checked={checkPurchasedDate(item.lastPurchased)}
+                          disabled={checkPurchasedDate(item.lastPurchased)}
+                        />
+                        <ListItemText primary={item.itemName} />
                         <IconButton
                           aria-label="delete"
                           onClick={() => confirmDelete(item)}
@@ -240,10 +239,10 @@ const List = ({ token }) => {
                           <DeleteIcon />
                         </IconButton>
                       </div>
-                    </li>
+                    </ListItem>
                   );
                 })}
-          </ul>
+          </MuiList>
         </React.Fragment>
       )}
     </div>
