@@ -30,7 +30,6 @@ const TokenForm = ({ setToken }) => {
         flexDirection="column"
         alignItems="center"
         justifyContent="space-around"
-        className="join-list-container"
       >
         <h2 className="join-list-header">Join Existing List</h2>
         <form onSubmit={handleFormSubmit}>
@@ -38,7 +37,6 @@ const TokenForm = ({ setToken }) => {
             display="flex"
             flexDirection="column"
             justifyContent="space-between"
-            className="join-form"
           >
             <TextField
               variant="outlined"
