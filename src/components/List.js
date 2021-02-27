@@ -14,11 +14,13 @@ import './../styles/AddItem.css';
 
 const styles = (theme) => ({
   root: {
-    color: 'red',
+    red: {
+      color: '#c33124',
+    },
   },
 });
 
-const List = ({ token }) => {
+const List = ({ token, withStyles }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
 

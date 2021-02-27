@@ -4,14 +4,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { theme } from './styles/Theme';
 
 ReactDOM.render(
   <Router>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <App />
   </Router>,
   document.getElementById('root'),
 );
