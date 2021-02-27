@@ -6,6 +6,7 @@ import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
 import '../styles/List.css';
 import {
+  Box,
   Checkbox,
   List as MuiList,
   ListItem,
@@ -142,8 +143,6 @@ const List = ({ token }) => {
 
   return (
     <div>
-      <h1>List</h1>
-
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -158,6 +157,7 @@ const List = ({ token }) => {
             </section>
           ) : (
             <div className="top-container">
+              <h1>List</h1>
               <a className="add-item-link" href="/add-item">
                 <i class="fas fa-cart-plus"></i>
                 Add Item
