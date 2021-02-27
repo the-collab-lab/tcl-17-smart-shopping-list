@@ -8,12 +8,18 @@ import '../styles/List.css';
 import {
   Box,
   Checkbox,
+  Container,
+  TextField,
+  IconButton,
+  Button,
   List as MuiList,
   ListItem,
   ListItemText,
 } from '@material-ui/core';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Header from './Header';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
@@ -142,7 +148,8 @@ const List = ({ token }) => {
   };
 
   return (
-    <div>
+    <div className="list-view-container">
+      <Header />
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -157,45 +164,55 @@ const List = ({ token }) => {
             </section>
           ) : (
             <div className="top-container">
-              <h1>List</h1>
+              <h2>Here's your list</h2>
               <a className="add-item-link" href="/add-item">
                 <i class="fas fa-cart-plus"></i>
-                Add Item
+                <p>Add Item</p>
               </a>
-              <label htmlFor="search-bar">Filter Items</label>
-              <br />
-              <input
-                type="text"
-                name="search-bar"
-                id="search-bar"
-                placeholder="Start typing here..."
-                value={searchInput}
-                onChange={handleSearchChange}
-              />
-              <input type="reset" onClick={handleClear} />
+              <Box display="flex" alignItems="center">
+                <TextField
+                  size="small"
+                  name="Filter items"
+                  label="Filter items"
+                  variant="outlined"
+                  value={searchInput}
+                  onChange={handleSearchChange}
+                />
+                <Button
+                  id="reset-button"
+                  variant="contained"
+                  color="default"
+                  type="reset"
+                  size="small"
+                  onClick={handleClear}
+                >
+                  Reset
+                </Button>
+              </Box>
             </div>
           )}
 
           {errorMessage && <Error errorMessage={errorMessage} />}
-          <MuiList>
-            {sortedList &&
-              sortedList
-                ?.filter((item) =>
-                  item?.itemName
-                    ?.toLowerCase()
-                    ?.includes(searchInput.toLowerCase().trim()),
-                )
-                ?.map((item) => {
-                  return (
-                    <ListItem
-                      divider
-                      key={item.id}
-                      className={backgroundColor(item)}
-                      aria-label={`${
-                        item.itemName
-                      } ready to purchase ${backgroundColor(item)}`}
-                    >
-                      <div className="flex-container">
+          <Container maxWidth="sm">
+            <MuiList>
+              {sortedList &&
+                sortedList
+                  ?.filter((item) =>
+                    item?.itemName
+                      ?.toLowerCase()
+                      ?.includes(searchInput.toLowerCase().trim()),
+                  )
+                  ?.map((item) => {
+                    return (
+                      <ListItem
+                        className="flex-container"
+                        divider
+                        key={item.id}
+                        className={backgroundColor(item)}
+                        aria-label={`${
+                          item.itemName
+                        } ready to purchase ${backgroundColor(item)}`}
+                      >
                         <Checkbox
                           type="checkbox"
                           icon={
@@ -220,14 +237,17 @@ const List = ({ token }) => {
                           disabled={checkPurchasedDate(item.lastPurchased)}
                         />
                         <ListItemText primary={item.itemName} />
-                        <button onClick={() => confirmDelete(item)}>
-                          <i class="fas fa-trash-alt"></i>
-                        </button>
-                      </div>
-                    </ListItem>
-                  );
-                })}
-          </MuiList>
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => confirmDelete(item)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </ListItem>
+                    );
+                  })}
+            </MuiList>
+          </Container>
         </React.Fragment>
       )}
     </div>

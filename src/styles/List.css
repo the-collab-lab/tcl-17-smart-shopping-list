@@ -1,3 +1,7 @@
+.list-view-container {
+  width: 100%;
+}
+
 .list-container {
   width: 100%;
   display: flex;
@@ -5,6 +9,14 @@
   justify-content: center;
   align-items: center;
 }
+
+/* .flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  width: 385px;
+} */
 
 .soon {
   border-left: 5px solid red;
@@ -35,19 +47,22 @@ section .add-item-link {
 
 .top-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.top-container h2 {
+  margin-bottom: 0px;
+}
+
 .add-item-link {
-  margin: 8px;
+  margin: 15px 8px;
   padding: 5px;
   width: 35%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   font-size: 1.4rem;
   text-decoration: none;
   color: black;
@@ -58,14 +73,20 @@ section .add-item-link {
   border-bottom: 3px solid #5bbdc8;
 }
 
+.add-item-link i,
+.add-item-link p {
+  margin: 0 1rem;
+}
+
 .top-container label {
   width: 75%;
+}
+
+#reset-button {
+  margin-left: 1rem;
 }
 
 .flex-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  width: 385px;
 }
