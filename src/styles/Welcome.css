@@ -1,37 +1,24 @@
 .background {
-  background: url(/img/grocery-aisle.svg) no-repeat center center fixed;
+  background: url(/img/grocery-aisle.svg) no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  width: 100vmax;
+  width: 100vw;
   height: 100vh;
 }
 
-.welcome-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.welcome-box {
   background-color: #f9de59;
   padding: 3rem;
-  /* margin-top: 25%; */
-}
-
-.create-list-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  padding-right: 1rem;
+  border-color: #a1dffb;
 }
 
 .create-list-header {
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
 }
 
-.welcome-button {
-  /* font-size: 1.4rem; */
-  /* border-radius: 6px; */
-  /* background-color: #a1dffb;
-    border-color: #a1dffb; */
+#welcome-header {
+  background-color: #ffffff;
+  margin: 1rem;
 }
