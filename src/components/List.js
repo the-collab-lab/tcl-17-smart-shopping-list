@@ -18,6 +18,7 @@ import {
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Header from './Header';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
