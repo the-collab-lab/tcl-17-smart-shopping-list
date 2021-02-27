@@ -5,9 +5,17 @@ import Error from './Error';
 import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
 import '../styles/List.css';
-import { Box, Checkbox, TextField } from '@material-ui/core';
+import {
+  Box,
+  Checkbox,
+  TextField,
+  IconButton,
+  Button,
+  Link,
+} from '@material-ui/core';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
@@ -166,7 +174,16 @@ const List = ({ token }) => {
                   value={searchInput}
                   onChange={handleSearchChange}
                 />
-                <input type="reset" onClick={handleClear} id="reset-button" />
+                <Button
+                  id="reset-button"
+                  variant="contained"
+                  color="default"
+                  type="reset"
+                  size="small"
+                  onClick={handleClear}
+                >
+                  Reset
+                </Button>
               </Box>
             </div>
           )}
@@ -217,9 +234,12 @@ const List = ({ token }) => {
                           />
                           {item.itemName}{' '}
                         </div>
-                        <button onClick={() => confirmDelete(item)}>
-                          <i class="fas fa-trash-alt"></i>
-                        </button>
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => confirmDelete(item)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
                       </div>
                     </li>
                   );
