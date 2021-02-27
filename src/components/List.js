@@ -148,6 +148,7 @@ const List = ({ token }) => {
 
   return (
     <div>
+      <Header />
       {loading ? (
         <h1>Loading...</h1>
       ) : (
