@@ -8,6 +8,7 @@ import '../styles/List.css';
 import {
   Box,
   Checkbox,
+  Container,
   TextField,
   IconButton,
   Button,
@@ -147,7 +148,7 @@ const List = ({ token }) => {
   };
 
   return (
-    <div>
+    <div className="list-view-container">
       <Header />
       {loading ? (
         <h1>Loading...</h1>
@@ -166,7 +167,7 @@ const List = ({ token }) => {
               <h2>Here's your list</h2>
               <a className="add-item-link" href="/add-item">
                 <i class="fas fa-cart-plus"></i>
-                Add Item
+                <p>Add Item</p>
               </a>
               <Box display="flex" alignItems="center">
                 <TextField
@@ -192,25 +193,26 @@ const List = ({ token }) => {
           )}
 
           {errorMessage && <Error errorMessage={errorMessage} />}
-          <MuiList>
-            {sortedList &&
-              sortedList
-                ?.filter((item) =>
-                  item?.itemName
-                    ?.toLowerCase()
-                    ?.includes(searchInput.toLowerCase().trim()),
-                )
-                ?.map((item) => {
-                  return (
-                    <ListItem
-                      divider
-                      key={item.id}
-                      className={backgroundColor(item)}
-                      aria-label={`${
-                        item.itemName
-                      } ready to purchase ${backgroundColor(item)}`}
-                    >
-                      <div className="flex-container">
+          <Container maxWidth="sm">
+            <MuiList>
+              {sortedList &&
+                sortedList
+                  ?.filter((item) =>
+                    item?.itemName
+                      ?.toLowerCase()
+                      ?.includes(searchInput.toLowerCase().trim()),
+                  )
+                  ?.map((item) => {
+                    return (
+                      <ListItem
+                        className="flex-container"
+                        divider
+                        key={item.id}
+                        className={backgroundColor(item)}
+                        aria-label={`${
+                          item.itemName
+                        } ready to purchase ${backgroundColor(item)}`}
+                      >
                         <Checkbox
                           type="checkbox"
                           icon={
@@ -241,11 +243,11 @@ const List = ({ token }) => {
                         >
                           <DeleteIcon />
                         </IconButton>
-                      </div>
-                    </ListItem>
-                  );
-                })}
-          </MuiList>
+                      </ListItem>
+                    );
+                  })}
+            </MuiList>
+          </Container>
         </React.Fragment>
       )}
     </div>
