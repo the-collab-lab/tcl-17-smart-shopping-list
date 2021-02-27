@@ -6,19 +6,26 @@
   background-size: cover;
   width: 100vw;
   height: 100vh;
+  min-height: 100%;
 }
 
 .welcome-box {
   background-color: #f9de59;
-  padding: 3rem;
-  border-color: #a1dffb;
+  padding: 2rem;
 }
 
 .create-list-header {
-  margin-bottom: 2rem;
+  margin-bottom: 2.75rem;
 }
 
 #welcome-header {
   background-color: #ffffff;
   margin: 1rem;
+  padding: 1.5rem;
+  border: lightgrey solid;
+  border-radius: 6px;
+}
+
+.create-button {
+  align-self: center;
 }
