@@ -4,11 +4,15 @@ import { db } from '../lib/firebase';
 import Error from './Error';
 import calculateEstimate from './../lib/estimates';
 import { differenceInDays, addDays } from 'date-fns';
-import './List.css';
-import Checkbox from '@material-ui/core/Checkbox';
+import '../styles/List.css';
+import {
+  Checkbox,
+  List as MuiList,
+  ListItem,
+  ListItemText,
+} from '@material-ui/core';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
-import Header from './Header';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
@@ -137,8 +141,8 @@ const List = ({ token }) => {
   };
 
   return (
-    <div className="list-container">
-      <Header />
+    <div>
+      <h1>List</h1>
 
       {loading ? (
         <h1>Loading...</h1>
@@ -148,14 +152,14 @@ const List = ({ token }) => {
             <section>
               <p>Your shopping list is currently empty.</p>
               <a className="add-item-link" href="/add-item">
-                <i className="fas fa-cart-plus"></i>
+                <i class="fas fa-cart-plus"></i>
                 Add Item
               </a>
             </section>
           ) : (
             <div className="top-container">
               <a className="add-item-link" href="/add-item">
-                <i className="fas fa-cart-plus"></i>
+                <i class="fas fa-cart-plus"></i>
                 Add Item
               </a>
               <label htmlFor="search-bar">Filter Items</label>
@@ -173,18 +177,18 @@ const List = ({ token }) => {
           )}
 
           {errorMessage && <Error errorMessage={errorMessage} />}
-
-          <ul style={{ listStyleType: 'none' }}>
-            {sortedList &&
-              sortedList
-                ?.filter((item) =>
-                  item?.itemName
-                    ?.toLowerCase()
-                    ?.includes(searchInput.toLowerCase().trim()),
-                )
-                ?.map((item) => {
-                  return (
-                    <li
+          {sortedList &&
+            sortedList
+              ?.filter((item) =>
+                item?.itemName
+                  ?.toLowerCase()
+                  ?.includes(searchInput.toLowerCase().trim()),
+              )
+              ?.map((item) => {
+                return (
+                  <MuiList>
+                    <ListItem
+                      divider
                       key={item.id}
                       className={backgroundColor(item)}
                       aria-label={`${
@@ -192,40 +196,38 @@ const List = ({ token }) => {
                       } ready to purchase ${backgroundColor(item)}`}
                     >
                       <div className="flex-container">
-                        <div>
-                          <Checkbox
-                            type="checkbox"
-                            icon={
-                              <CircleUnchecked
-                                style={{
-                                  color: checkboxColor[backgroundColor(item)],
-                                }}
-                              />
-                            }
-                            checkedIcon={
-                              <CircleCheckedFilled
-                                style={{
-                                  color: checkboxColor[backgroundColor(item)],
-                                }}
-                              />
-                            }
-                            aria-label="purchased-checkbox"
-                            name={item.itemName}
-                            id={item.id}
-                            onChange={handleCheckbox}
-                            checked={checkPurchasedDate(item.lastPurchased)}
-                            disabled={checkPurchasedDate(item.lastPurchased)}
-                          />
-                          {item.itemName}{' '}
-                        </div>
+                        <Checkbox
+                          type="checkbox"
+                          icon={
+                            <CircleUnchecked
+                              style={{
+                                color: checkboxColor[backgroundColor(item)],
+                              }}
+                            />
+                          }
+                          checkedIcon={
+                            <CircleCheckedFilled
+                              style={{
+                                color: checkboxColor[backgroundColor(item)],
+                              }}
+                            />
+                          }
+                          aria-label="purchased-checkbox"
+                          name={item.itemName}
+                          id={item.id}
+                          onChange={handleCheckbox}
+                          checked={checkPurchasedDate(item.lastPurchased)}
+                          disabled={checkPurchasedDate(item.lastPurchased)}
+                        />
+                        <ListItemText primary={item.itemName} />
                         <button onClick={() => confirmDelete(item)}>
-                          <i className="fas fa-trash-alt"></i>
+                          <i class="fas fa-trash-alt"></i>
                         </button>
                       </div>
-                    </li>
-                  );
-                })}
-          </ul>
+                    </ListItem>
+                  </MuiList>
+                );
+              })}
         </React.Fragment>
       )}
     </div>
