@@ -167,9 +167,8 @@ const List = ({ token }) => {
               </a>
               <Box display="flex" alignItems="center">
                 <TextField
-                  name="search-bar"
-                  id="search-bar"
-                  label="Start typing here..."
+                  name="Filter items"
+                  label="Filter items"
                   variant="outlined"
                   value={searchInput}
                   onChange={handleSearchChange}
