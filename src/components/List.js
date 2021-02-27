@@ -14,7 +14,7 @@ import './../styles/AddItem.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    color: theme.palette.primary.main,
+    color: theme.palette.ourblue.main,
   },
 }));
 
