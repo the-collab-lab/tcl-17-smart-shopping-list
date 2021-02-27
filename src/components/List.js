@@ -13,8 +13,20 @@ import Header from './Header';
 import './../styles/AddItem.css';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    color: theme.palette.ourblue.main,
+  blue: {
+    color: theme.palette.blue.main,
+  },
+  red: {
+    color: theme.palette.red.main,
+  },
+  orange: {
+    color: theme.palette.orange.main,
+  },
+  salmon: {
+    color: theme.palette.salmon.main,
+  },
+  yellow: {
+    color: theme.palette.yellow.main,
   },
 }));
 
@@ -22,7 +34,6 @@ const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
   const classes = useStyles();
-  console.log(classes);
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
@@ -149,7 +160,6 @@ const List = ({ token }) => {
   return (
     <div className="list-container">
       <Header />
-      <h2 className={classes.root}>Is this working?</h2>
 
       {loading ? (
         <h1>Loading...</h1>

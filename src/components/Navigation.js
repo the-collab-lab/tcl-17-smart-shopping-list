@@ -2,8 +2,29 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import homeIcon from './../img/groceries.svg';
 import './../styles/Navigation.css';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  blue: {
+    color: theme.palette.blue.main,
+  },
+  red: {
+    color: theme.palette.red.main,
+  },
+  orange: {
+    color: theme.palette.orange.main,
+  },
+  salmon: {
+    color: theme.palette.salmon.main,
+  },
+  yellow: {
+    color: theme.palette.yellow.main,
+  },
+}));
 
 const Navigation = ({ confirmDeleteUserToken }) => {
+  const classes = useStyles();
+
   return (
     <nav>
       <NavLink

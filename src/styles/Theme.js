@@ -2,7 +2,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 export const theme = createMuiTheme({
   palette: {
-    ourblue: {
+    blue: {
       main: '#a1dffb',
     },
     red: {
@@ -10,6 +10,9 @@ export const theme = createMuiTheme({
     },
     orange: {
       main: '#e8a628',
+    },
+    salmon: {
+      main: '#f98365',
     },
     yellow: {
       main: '#F9de59',
