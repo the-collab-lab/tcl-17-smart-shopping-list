@@ -149,6 +149,7 @@ const List = ({ token }) => {
   return (
     <div className="list-container">
       <Header />
+      <h2 className={classes.root}>Is this working?</h2>
 
       {loading ? (
         <h1>Loading...</h1>
