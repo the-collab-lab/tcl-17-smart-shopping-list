@@ -1,21 +1,11 @@
-.join-list-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.join-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-
 .join-list-header {
   margin-bottom: 2%;
 }
 
 #token {
-  margin-bottom: 2%;
+  background-color: #ffffff;
+}
+
+#join-button {
+  margin-top: 2%;
 }
