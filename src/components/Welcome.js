@@ -2,24 +2,47 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TokenForm from './TokenForm';
 import './../styles/Welcome.css';
+import { Box, Button, Container } from '@material-ui/core';
+import welcomeHeader from './../img/header.png';
 
 const Welcome = ({ onClick, setToken }) => {
   return (
-    <div className="background">
-      <div className="welcome-container">
-        <div className="create-list-container">
-          {/* <h1>Welcome</h1> */}
-          <h3 className="create-list-header">
-            Get Started! <br />
-            Create New List
-          </h3>
-          <button className="welcome-button" onClick={onClick}>
-            New List
-          </button>
-        </div>
-        <TokenForm setToken={setToken} />
-      </div>
-    </div>
+    <Box className="background">
+      <h1>
+        <img
+          id="welcome-header"
+          src={welcomeHeader}
+          alt="welcome to smart shopper"
+        ></img>
+      </h1>
+      <Container maxWidth="md">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-evenly"
+          border={1}
+          borderColor="#a1dffb"
+          borderRadius="borderRadius"
+          className="welcome-box"
+        >
+          <Box display="flex" flexDirection="column">
+            {/* <h1>Welcome</h1> */}
+            <h3 className="create-list-header">
+              Get Started! <br />
+              Create a New List
+            </h3>
+            <Button
+              variant="contained"
+              className="welcome-button"
+              onClick={onClick}
+            >
+              Create List
+            </Button>
+          </Box>
+          <TokenForm setToken={setToken} />
+        </Box>
+      </Container>
+    </Box>
   );
 };
 /* Checks that onClick is a function and is required as a prop */
