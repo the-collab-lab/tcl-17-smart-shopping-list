@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { db } from '../lib/firebase';
 import Error from './Error';
+import { useStyles } from './../styles/Theme';
 
 const TokenForm = ({ setToken }) => {
   const [tokenInput, setTokenInput] = useState('');
   const [error, setError] = useState(false);
+  const { blue, red, orange, salmon, yellow } = useStyles();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

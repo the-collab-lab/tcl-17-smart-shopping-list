@@ -1,25 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TokenForm from './TokenForm';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-  blue: {
-    color: theme.palette.blue.main,
-  },
-  red: {
-    color: theme.palette.red.main,
-  },
-  orange: {
-    color: theme.palette.orange.main,
-  },
-  salmon: {
-    color: theme.palette.salmon.main,
-  },
-  yellow: {
-    color: theme.palette.yellow.main,
-  },
-}));
+import { useStyles } from './../styles/Theme';
 
 const Welcome = ({ onClick, setToken }) => {
   const { blue, red, orange, salmon, yellow } = useStyles();

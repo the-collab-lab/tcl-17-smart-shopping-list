@@ -18,28 +18,10 @@ import {
 } from '@material-ui/core';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
-import { makeStyles } from '@material-ui/core/styles';
+import { useStyles } from './../styles/Theme';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Header from './Header';
 import './../styles/AddItem.css';
-
-const useStyles = makeStyles((theme) => ({
-  blue: {
-    color: theme.palette.blue.main,
-  },
-  red: {
-    color: theme.palette.red.main,
-  },
-  orange: {
-    color: theme.palette.orange.main,
-  },
-  salmon: {
-    color: theme.palette.salmon.main,
-  },
-  yellow: {
-    color: theme.palette.yellow.main,
-  },
-}));
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
