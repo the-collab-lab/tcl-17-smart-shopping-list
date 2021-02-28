@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Welcome = ({ onClick, setToken }) => {
-  const classes = useStyles();
+  const { blue, red, orange, salmon, yellow } = useStyles();
 
   return (
     <div>

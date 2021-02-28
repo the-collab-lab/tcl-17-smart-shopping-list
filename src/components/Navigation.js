@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Navigation = ({ confirmDeleteUserToken }) => {
-  const classes = useStyles();
+  const { blue, red, orange, salmon, yellow } = useStyles();
 
   return (
     <nav>

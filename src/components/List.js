@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
-  const classes = useStyles();
+  const { blue, red, orange, salmon, yellow } = useStyles();
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
@@ -163,9 +163,9 @@ const List = ({ token }) => {
 
   const checkboxColor = {
     inactive: 'lightgrey',
-    soon: `${classes.red}`,
-    'kind-of-soon': `${classes.red}`,
-    'not-too-soon': `${classes.red}`,
+    soon: 'red',
+    'kind-of-soon': 'orange',
+    'not-too-soon': 'yellow',
   };
 
   return (
@@ -185,7 +185,7 @@ const List = ({ token }) => {
             </section>
           ) : (
             <div className="top-container">
-              <h2>Here's your list</h2>
+              <h2 className={red}>Here's your list</h2>
               <a className="add-item-link" href="/add-item">
                 <i class="fas fa-cart-plus"></i>
                 <p>Add Item</p>

@@ -47,7 +47,7 @@ const AddItem = ({ token }) => {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormState);
   const [error, setError] = useState(false);
-  const classes = useStyles();
+  const { blue, red, orange, salmon, yellow } = useStyles();
 
   const handleFormChange = (event) => {
     setError(false);
