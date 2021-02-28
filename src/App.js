@@ -10,6 +10,9 @@ import { db } from './lib/firebase';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { theme } from './styles/Theme';
 
+import Footer from './components/Footer';
+
+
 function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken') || '');
 
@@ -33,32 +36,33 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <Switch>
-          <Route path="/list">
-            {/* Go to list view if token exists otherwise redirected to home */}
-            {token ? <List token={token} /> : <Redirect to="/" />}
-          </Route>
+   <ThemeProvider theme={theme}>
+    <div className="App">
+      <Switch>
+        <Route path="/list">
+          {/* Go to list view if token exists otherwise redirected to home */}
+          {token ? <List token={token} /> : <Redirect to="/" />}
+        </Route>
 
-          <Route path="/add-item">
-            {/* Go to add item view if token exists otherwise redirected to home */}
-            {token ? <AddItem token={token} /> : <Redirect to="/" />}
-          </Route>
+        <Route path="/add-item">
+          {/* Go to add item view if token exists otherwise redirected to home */}
+          {token ? <AddItem token={token} /> : <Redirect to="/" />}
+        </Route>
 
-          <Route path="/">
-            {/* Redirect to list view if token exists otherwise render Welcome */}
-            {token ? (
-              <Redirect to="/list" />
-            ) : (
-              <Welcome onClick={handleClick} setToken={setToken} />
-            )}
-          </Route>
-        </Switch>
+        <Route path="/">
+          {/* Redirect to list view if token exists otherwise render Welcome */}
+          {token ? (
+            <Redirect to="/list" />
+          ) : (
+            <Welcome onClick={handleClick} setToken={setToken} />
+          )}
+        </Route>
+      </Switch>
 
-        <Navigation confirmDeleteUserToken={confirmDeleteUserToken} />
-      </div>
-    </ThemeProvider>
+      <Navigation confirmDeleteUserToken={confirmDeleteUserToken} />
+      <Footer />
+    </div>
+   </ThemeProvider>
   );
 }
 

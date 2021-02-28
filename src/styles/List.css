@@ -10,14 +10,6 @@
   align-items: center;
 }
 
-/* .flex-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  width: 385px;
-} */
-
 .soon {
   border-left: 5px solid red;
 }
@@ -76,10 +68,6 @@ section .add-item-link {
 .add-item-link i,
 .add-item-link p {
   margin: 0 1rem;
-}
-
-.top-container label {
-  width: 75%;
 }
 
 #reset-button {
