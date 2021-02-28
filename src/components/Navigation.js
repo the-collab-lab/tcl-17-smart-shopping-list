@@ -5,7 +5,7 @@ import './../styles/Navigation.css';
 import { useStyles } from './../styles/Theme';
 
 const Navigation = ({ confirmDeleteUserToken }) => {
-  const { blue, red, orange, salmon, yellow } = useStyles();
+  const classes = useStyles();
 
   return (
     <nav>

@@ -16,25 +16,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import './../styles/AddItem.css';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-  blue: {
-    color: theme.palette.blue.main,
-  },
-  red: {
-    color: theme.palette.red.main,
-  },
-  orange: {
-    color: theme.palette.orange.main,
-  },
-  salmon: {
-    color: theme.palette.salmon.main,
-  },
-  yellow: {
-    color: theme.palette.yellow.main,
-  },
-}));
+import { useStyles } from './../styles/Theme';
 
 const initialFormState = {
   itemName: '',
@@ -47,7 +29,7 @@ const AddItem = ({ token }) => {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormState);
   const [error, setError] = useState(false);
-  const { blue, red, orange, salmon, yellow } = useStyles();
+  const classes = useStyles();
 
   const handleFormChange = (event) => {
     setError(false);

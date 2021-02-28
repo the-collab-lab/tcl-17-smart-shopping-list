@@ -4,7 +4,7 @@ import homeIcon from './../img/groceries.svg';
 import { useStyles } from './../styles/Theme';
 
 const Header = () => {
-  const { blue, red, orange, salmon, yellow } = useStyles();
+  const classes = useStyles();
   return (
     <header>
       <img

@@ -7,7 +7,7 @@ import { Box, Button, Container } from '@material-ui/core';
 import welcomeHeader from './../img/header.png';
 
 const Welcome = ({ onClick, setToken }) => {
-  const { blue, red, orange, salmon, yellow } = useStyles();
+  const classes = useStyles();
 
   return (
     <Box className="background">

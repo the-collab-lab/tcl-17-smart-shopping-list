@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { useStyles } from './../styles/Theme';
 
 const Error = ({ errorMessage }) => {
-  const { blue, red, orange, salmon, yellow } = useStyles();
+  const classes = useStyles();
   return (
     <div>
-      <p className={red}>
+      <p className={classes.red}>
         <span role="img" aria-label="red X">
           ❌
         </span>{' '}

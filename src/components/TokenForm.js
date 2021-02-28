@@ -8,7 +8,7 @@ import { Box, Button, TextField } from '@material-ui/core';
 const TokenForm = ({ setToken }) => {
   const [tokenInput, setTokenInput] = useState('');
   const [error, setError] = useState(false);
-  const { blue, red, orange, salmon, yellow } = useStyles();
+  const classes = useStyles();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
