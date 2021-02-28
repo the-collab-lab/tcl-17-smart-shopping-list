@@ -15,6 +15,7 @@ import {
   List as MuiList,
   ListItem,
   ListItemText,
+  CircularProgress,
 } from '@material-ui/core';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
@@ -151,7 +152,7 @@ const List = ({ token }) => {
     <div className="list-view-container">
       <Header />
       {loading ? (
-        <h1>Loading...</h1>
+        <CircularProgress size={160} />
       ) : (
         <React.Fragment>
           {docs.length === 0 ? (
