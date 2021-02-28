@@ -19,12 +19,15 @@ import {
 } from '@material-ui/core';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
+import { useStyles } from './../styles/Theme';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Header from './Header';
+import './../styles/AddItem.css';
 
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
+  const { blue, red, orange, salmon, yellow } = useStyles();
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
@@ -165,7 +168,7 @@ const List = ({ token }) => {
             </section>
           ) : (
             <div className="top-container">
-              <h2>Here's your list</h2>
+              <h2 className={red}>Here's your list</h2>
               <a className="add-item-link" href="/add-item">
                 <i class="fas fa-cart-plus"></i>
                 <p>Add Item</p>
@@ -206,10 +209,9 @@ const List = ({ token }) => {
                   ?.map((item) => {
                     return (
                       <ListItem
-                        className="flex-container"
+                        className={`flex-container ${backgroundColor(item)}`}
                         divider
                         key={item.id}
-                        className={backgroundColor(item)}
                         aria-label={`${
                           item.itemName
                         } ready to purchase ${backgroundColor(item)}`}

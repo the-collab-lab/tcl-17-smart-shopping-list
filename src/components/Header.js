@@ -1,8 +1,10 @@
 import React from 'react';
 import '../styles/Header.css';
 import homeIcon from './../img/groceries.svg';
+import { useStyles } from './../styles/Theme';
 
 const Header = () => {
+  const classes = useStyles();
   return (
     <header>
       <img

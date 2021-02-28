@@ -7,7 +7,11 @@ import List from './components/List';
 import Welcome from './components/Welcome';
 import getToken from './lib/tokens';
 import { db } from './lib/firebase';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { theme } from './styles/Theme';
+
 import Footer from './components/Footer';
+
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken') || '');
@@ -32,6 +36,7 @@ function App() {
   };
 
   return (
+   <ThemeProvider theme={theme}>
     <div className="App">
       <Switch>
         <Route path="/list">
@@ -57,6 +62,7 @@ function App() {
       <Navigation confirmDeleteUserToken={confirmDeleteUserToken} />
       <Footer />
     </div>
+   </ThemeProvider>
   );
 }
 

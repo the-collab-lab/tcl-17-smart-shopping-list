@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TokenForm from './TokenForm';
+import { useStyles } from './../styles/Theme';
 import './../styles/Welcome.css';
 import { Box, Button, Container } from '@material-ui/core';
 import welcomeHeader from './../img/header.png';
 
 const Welcome = ({ onClick, setToken }) => {
+  const classes = useStyles();
+
   return (
     <Box className="background">
       <h2>

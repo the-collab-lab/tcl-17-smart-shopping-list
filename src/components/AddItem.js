@@ -16,6 +16,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import './../styles/AddItem.css';
+import { useStyles } from './../styles/Theme';
 
 const initialFormState = {
   itemName: '',
@@ -28,6 +29,7 @@ const AddItem = ({ token }) => {
   const history = useHistory();
   const [formData, setFormData] = useState(initialFormState);
   const [error, setError] = useState(false);
+  const classes = useStyles();
 
   const handleFormChange = (event) => {
     setError(false);
