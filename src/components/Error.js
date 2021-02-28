@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Error = ({ errorMessage }) => {
   return (
     <div>
-      <p style={{ color: 'red' }}>
+      <p style={{ color: '#B30000', fontWeight: 'bold' }}>
         <span role="img" aria-label="red X">
           ❌
         </span>{' '}
