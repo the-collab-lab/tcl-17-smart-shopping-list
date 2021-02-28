@@ -1,0 +1,24 @@
+footer {
+  width: 100%;
+  display: flex;
+  background-color: #a1dffb;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid #f98365;
+}
+
+.flex-box {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 550px) {
+  .flex-box {
+    flex-direction: column;
+  }
+
+  #mui-box {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}
