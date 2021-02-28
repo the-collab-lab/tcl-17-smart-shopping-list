@@ -1,0 +1,46 @@
+.background {
+  background: url(/img/grocery-aisle.svg) no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+.welcome-box {
+  background-color: #f9de59;
+  padding: 2%;
+}
+
+.create-list-header {
+  margin-bottom: 18%;
+}
+
+#welcome-header {
+  background-color: #ffffff;
+  margin: 2%;
+  padding: 2%;
+  border: lightgrey solid;
+  border-radius: 6px;
+}
+
+.create-button {
+  align-self: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .welcome-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .create-list-header {
+    margin-bottom: 0.5rem;
+  }
+
+  .create-list {
+    margin-bottom: 1rem;
+  }
+}
