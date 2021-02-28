@@ -70,10 +70,6 @@ section .add-item-link {
   margin: 0 1rem;
 }
 
-.top-container label {
-  width: 75%;
-}
-
 #reset-button {
   margin-left: 1rem;
 }
