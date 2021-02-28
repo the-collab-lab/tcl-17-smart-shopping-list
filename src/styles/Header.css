@@ -4,6 +4,7 @@ header {
   background-color: #a1dffb;
   justify-content: center;
   align-items: center;
+  border-bottom: 2px solid #f98365;
 }
 
 h1 {
