@@ -155,7 +155,7 @@ const List = ({ token }) => {
     <div className="list-view-container">
       <Header />
       {loading ? (
-        <CircularProgress size={160} />
+        <CircularProgress size={160} color={'secondary'} />
       ) : (
         <React.Fragment>
           {docs.length === 0 ? (
@@ -168,7 +168,7 @@ const List = ({ token }) => {
             </section>
           ) : (
             <div className="top-container">
-              <h2 className={red}>Here's your list</h2>
+              <h2>Here's your list</h2>
               <a className="add-item-link" href="/add-item">
                 <i class="fas fa-cart-plus"></i>
                 <p>Add Item</p>
