@@ -6,7 +6,7 @@ const Error = ({ errorMessage }) => {
   const classes = useStyles();
   return (
     <div>
-      <p className={classes.red}>
+      <p style={{ color: '#B30000', fontWeight: 'bold' }}>
         <span role="img" aria-label="red X">
           ❌
         </span>{' '}
