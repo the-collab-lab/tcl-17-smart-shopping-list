@@ -50,7 +50,3 @@ Welcome.propTypes = {
 };
 
 export default Welcome;
-
-// Definition of done :
-
-// No contrast errors on the welcome page
