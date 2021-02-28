@@ -7,6 +7,7 @@ import List from './components/List';
 import Welcome from './components/Welcome';
 import getToken from './lib/tokens';
 import { db } from './lib/firebase';
+import Footer from './components/Footer';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('userToken') || '');
@@ -54,6 +55,7 @@ function App() {
       </Switch>
 
       <Navigation confirmDeleteUserToken={confirmDeleteUserToken} />
+      <Footer />
     </div>
   );
 }

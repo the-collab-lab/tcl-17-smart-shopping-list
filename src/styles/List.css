@@ -10,14 +10,6 @@
   align-items: center;
 }
 
-/* .flex-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  width: 385px;
-} */
-
 .soon {
   border-left: 5px solid red;
 }
