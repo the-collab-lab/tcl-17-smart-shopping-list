@@ -159,10 +159,18 @@ const List = ({ token }) => {
         <CircularProgress size={160} color={'secondary'} />
       ) : (
         <React.Fragment>
-          {/* <p>
+          <p>
             Invite a friend to join your list by sharing this three word token:{' '}
             <span className={red}>{token}</span>
-          </p> */}
+            <IconButton
+              aria-label="copy to clipboard"
+              onClick={() => {
+                navigator.clipboard.writeText(token);
+              }}
+            >
+              <AssignmentIcon />
+            </IconButton>
+          </p>
           {docs.length === 0 ? (
             <section>
               <p>Your shopping list is currently empty.</p>
