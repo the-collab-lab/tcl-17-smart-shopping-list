@@ -21,6 +21,7 @@ import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 import { useStyles } from './../styles/Theme';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import Header from './Header';
 import './../styles/AddItem.css';
 
@@ -158,15 +159,15 @@ const List = ({ token }) => {
         <CircularProgress size={160} color={'secondary'} />
       ) : (
         <React.Fragment>
-          <p>
+          {/* <p>
             Invite a friend to join your list by sharing this three word token:{' '}
             <span className={red}>{token}</span>
-          </p>
+          </p> */}
           {docs.length === 0 ? (
             <section>
               <p>Your shopping list is currently empty.</p>
               <a className="add-item-link" href="/add-item">
-                <i class="fas fa-cart-plus"></i>
+                <i className="fas fa-cart-plus"></i>
                 Add Item
               </a>
             </section>
