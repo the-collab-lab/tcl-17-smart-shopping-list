@@ -2,11 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import homeIcon from './../img/groceries.svg';
 import './../styles/Navigation.css';
-import { useStyles } from './../styles/Theme';
 
 const Navigation = ({ confirmDeleteUserToken }) => {
-  const classes = useStyles();
-
   return (
     <nav>
       <NavLink

@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useStyles } from './../styles/Theme';
 
 const Error = ({ errorMessage }) => {
-  const classes = useStyles();
   return (
     <div>
       <p style={{ color: '#B30000', fontWeight: 'bold' }}>

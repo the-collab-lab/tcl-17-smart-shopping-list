@@ -28,7 +28,7 @@ import './../styles/AddItem.css';
 const List = ({ token }) => {
   const { docs, errorMessage, deleteDoc, loading } = useFirestore(token);
   const [searchInput, setSearchInput] = useState('');
-  const { blue, red, orange, salmon, yellow } = useStyles();
+  const { red } = useStyles();
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
