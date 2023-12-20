@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TokenForm from './TokenForm';
 import './../styles/Welcome.css';
@@ -6,6 +6,13 @@ import { Box, Button, Container } from '@material-ui/core';
 import welcomeHeader from './../img/header.png';
 
 const Welcome = ({ onClick, setToken }) => {
+  /** Using this alert instead of the ArchivalNoticeModal due to legacy deps */
+  useEffect(() => {
+    alert(
+      'This Smart Shopping List App was made by early-career developers at The Collab Lab. This project has now been archived. To view the demo shopping list, enter the three word token: the collab lab. The following features are no longer supported: creating new lists, adding & deleting items from the list, and marking items on the list as purchased.',
+    );
+  }, []);
+
   return (
     <Box className="background">
       <h2>

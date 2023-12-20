@@ -4,13 +4,13 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 // Initalize Firebase.
-var firebaseConfig = {
-  apiKey: 'AIzaSyDptx_fw3yF8lWAPyJSYuX4a5HZeokJjAM',
-  authDomain: 'smart-shopper-e95d9.firebaseapp.com',
-  projectId: 'smart-shopper-e95d9',
-  storageBucket: 'smart-shopper-e95d9.appspot.com',
-  messagingSenderId: '817342068797',
-  appId: '1:817342068797:web:6437e4b48a58fcec9b1254',
+const firebaseConfig = {
+  apiKey: 'AIzaSyCJm5g2o5BWepS8NaomcE95w3r1isLuUyU',
+  authDomain: 'tcl-17-shopping-list.firebaseapp.com',
+  projectId: 'tcl-17-shopping-list',
+  storageBucket: 'tcl-17-shopping-list.appspot.com',
+  messagingSenderId: '221649145784',
+  appId: '1:221649145784:web:d7b96955cec8dba51e894d',
 };
 
 let fb = firebase.initializeApp(firebaseConfig);
